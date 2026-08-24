@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('writing', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const recent = posts.slice(0, 6);
+const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<Base>
+  <p class="lede" style="margin-bottom:2.6rem">
+    I get curious about things and then read too much about them. This is where
+    that ends up — mostly physics and infrastructure at the moment, but the
+    subject drifts.
+  </p>
+
+  <p class="section-label">Writing</p>
+  {posts.length === 0 && (
+    <p style="color:var(--fg-muted)">Nothing published yet — first piece is in progress.</p>
+  )}
+  <ul class="entry-list">
+    {recent.map(p => (
+      <li class="entry">
+        <a class="entry-title" href={`/writing/${p.id}/`}>{p.data.title}</a>
+        <div class="entry-date">
+          {fmt(p.data.date)}{p.data.series ? ` · ${p.data.series}` : ''}
+        </div>
+        {p.data.description && <p>{p.data.description}</p>}
+      </li>
+    ))}
+  </ul>
+
+  {posts.length > recent.length && (
+    <p style="margin-top:1.6rem"><a href="/writing/">All writing →</a></p>
+  )}
+</Base>
