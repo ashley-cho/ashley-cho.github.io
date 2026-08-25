@@ -182,7 +182,6 @@ tbody tr:last-child td { border-bottom: none; }
   flex-wrap: wrap;
   align-items: center;
 }
-.post-meta .dot { color: var(--rule); }
 .series-tag {
   font-family: var(--sans);
   font-size: 0.75rem;

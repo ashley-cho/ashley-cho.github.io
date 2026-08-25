@@ -69,3 +69,7 @@ Astro, static. New post = a `.md` file in `src/content/writing/`; filename
 becomes the URL. Frontmatter: title, description, date, series, seriesPart,
 draft. Math via `$...$` and `$$...$$`. Push to `main` and GitHub Actions
 deploys to https://ashley-cho.github.io.
+
+Run `npm test` before pushing — it builds the site, validates every post's
+frontmatter against the schema, and checks that internal links resolve. CI runs
+the same thing on every PR. How the repo is wired up: `docs/repo-setup.md`.

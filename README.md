@@ -21,7 +21,9 @@ draft: false                       # set true to hide it
 Body goes here.
 ```
 
-3. Commit and push. Vercel rebuilds automatically.
+3. Commit and push to `main`. The GitHub Actions workflow in
+   `.github/workflows/deploy.yml` builds the site and publishes it to GitHub
+   Pages. Takes about a minute; watch it under the repo's Actions tab.
 
 ## What you can use in a post
 
@@ -29,6 +31,14 @@ Body goes here.
 - Math: `$E = mc^2$` inline, or `$$ ... $$` on its own lines for a centered block.
 - Code blocks with syntax highlighting (triple backticks).
 - Wide tables scroll sideways on phones automatically — you don't need to do anything.
+- Callout boxes, for an aside you want set apart from the body text:
+
+  ```html
+  <div class="note">
+    <span class="note-label">Caveat</span>
+    The debris flux here rests on measurements that stopped in 2011.
+  </div>
+  ```
 
 ## Running it locally
 
@@ -36,7 +46,14 @@ Body goes here.
 npm install
 npm run dev      # http://localhost:4321
 npm run build    # writes dist/
+npm test         # build + check every internal link resolves
 ```
+
+`npm test` is what CI runs on every pull request. Run it before you push and
+you'll almost never see a red build.
+
+How the repo is wired up — CI, branch rules, deploys — is written down in
+[`docs/repo-setup.md`](docs/repo-setup.md).
 
 ## Changing things
 
@@ -48,5 +65,12 @@ npm run build    # writes dist/
 
 ## Attaching a custom domain later
 
-Buy the domain, add it in the Vercel project settings under Domains, update
-`site:` in `astro.config.mjs`. Nothing else changes and old links keep working.
+1. Buy the domain.
+2. Point it at GitHub Pages with your registrar's DNS: an `ALIAS`/`ANAME` record
+   for the apex domain to `ashley-cho.github.io`, or a `CNAME` record for a
+   `www.` subdomain to the same.
+3. Add it under the repo's Settings → Pages → Custom domain, and tick "Enforce
+   HTTPS" once the certificate is issued.
+4. Update `site:` in `astro.config.mjs` to the new URL.
+
+Nothing else changes and old links keep working.
