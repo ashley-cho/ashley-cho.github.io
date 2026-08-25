@@ -2,8 +2,8 @@
 import '../styles/global.css';
 import 'katex/dist/katex.min.css';
 
-const { title, description = 'Ashley Cho — notes, essays, and things I got curious about.' } = Astro.props;
-const full = title ? `${title} — Ashley Cho` : 'Ashley Cho';
+const { title, description = 'Stream of Random Thoughts — notes, essays, and things I got curious about.' } = Astro.props;
+const full = title ? `${title} — Stream of Random Thoughts` : 'Stream of Random Thoughts';
 const path = Astro.url.pathname;
 const nav = [
   { href: '/writing/', label: 'Writing' },
@@ -21,14 +21,14 @@ const nav = [
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="alternate" type="application/rss+xml" title="Ashley Cho" href="/rss.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Stream of Random Thoughts" href="/rss.xml" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛰️</text></svg>" />
 </head>
 <body>
   <header class="site-head">
     <div class="wrap">
       <nav>
-        <span class="brand"><a href="/">Ashley Cho</a></span>
+        <span class="brand"><a href="/">Stream of Random Thoughts</a></span>
         {nav.map(i => (
           <a href={i.href} style={path.startsWith(i.href) ? 'color:var(--fg)' : ''}>{i.label}</a>
         ))}
