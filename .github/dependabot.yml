@@ -1,0 +1,19 @@
+# Opens a PR when a dependency has a new version. Because CI runs on every PR,
+# each of these arrives already tested — if the build and link check pass, it's
+# usually a one-click merge.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    groups:
+      # One PR for all the small stuff instead of five separate ones.
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

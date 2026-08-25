@@ -1,0 +1,37 @@
+# Runs on every pull request. This is the check you'll make required on `main`,
+# so a PR can't merge unless the site builds and every internal link resolves.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# If you push twice in a row, cancel the older run — no point testing a commit
+# that's already been superseded.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: build and check links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      # `npm ci` installs exactly what package-lock.json pins, and fails if the
+      # lockfile is out of sync with package.json. `npm install` would quietly
+      # resolve new versions instead — which is how a build passes locally and
+      # breaks in CI.
+      - run: npm ci
+
+      # `npm test` = astro build + the internal link checker.
+      # The build also validates every post's frontmatter against the schema in
+      # src/content.config.ts, so a typo'd date or a missing title fails here.
+      - run: npm test

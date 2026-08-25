@@ -1,7 +1,7 @@
 ---
 title: "What it would actually take to put a data center in orbit"
 description: "Sixteen problems between a working GPU in orbit and a hyperscale data center. This is the map."
-date: 2026-08-24
+date: 2026-08-23
 series: "Data centers in orbit"
 seriesPart: 1
 draft: true
@@ -80,7 +80,7 @@ which problems bind.
 | 50 kW | Heat rejection stops being trivial |
 | 100 kW | You need a pumped loop, and you hit the largest panel that unfolds without robots |
 | 1 MW | The array overtakes the radiator; you need a second satellite, so coordination begins |
-| 13 MW | Micrometeoroid exposure passes the ISS's entire lifetime |
+| 3 MW | Micrometeoroid exposure passes the ISS's entire lifetime |
 | 30 MW | Graceful degradation stops being elegant and becomes mandatory |
 | 100 MW | You measurably worsen the debris environment you're flying in |
 
@@ -110,4 +110,4 @@ If you know this material and I've got something wrong, tell me.
 
 ---
 
-**Next:** space is cold, and it's the least relevant fact about cooling a data center.
+**Next:** [space is cold, and it's the least relevant fact about cooling a data center](/writing/space-is-cold/).
