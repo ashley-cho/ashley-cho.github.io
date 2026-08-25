@@ -1,4 +1,4 @@
-# ashley-cho-site
+# Stream of Random Thoughts
 
 Personal site. Astro, static, no database, no CMS.
 
