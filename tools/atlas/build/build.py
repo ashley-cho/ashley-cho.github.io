@@ -6,6 +6,10 @@ from sites import EPOCH, METROS
 # Geocoding runs off committed caches so a rebuild needs nothing but Python.
 # The zipcodes / geonamescache packages are only imported if a lookup misses,
 # which happens only when a new site with an unseen ZIP is added to sites.py.
+AVERT = json.load(open(os.path.join(ROOT, 'avert.json')))
+AV_G = {k: v * 0.45359237 for k, v in AVERT['rates_lb'].items()}  # lb/MWh -> g/kWh
+SELFGEN_CI = 506.25   # 3 parts simple-cycle/engines (550) to 1 part CCGT (375)
+SELFGEN_SHARE = 0.48  # observed share of new US capacity arriving with its own generation
 ZIPCACHE = json.load(open(os.path.join(ROOT, 'zipcache.json')))
 _iso = json.load(open(os.path.join(ROOT, 'isocache.json')))
 num2iso3, iso3info = _iso['num2iso3'], _iso['iso3info']
@@ -57,7 +61,7 @@ def geo(z):
     return r[0], r[1], r[2], r[3]
 
 sites=[]
-miss=[]
+miss=[]; miss_av=[]
 for name,mw,op,iso,z,ll,pmw,pyr in EPOCH:
     city=state=None
     if z:
@@ -67,11 +71,18 @@ for name,mw,op,iso,z,ll,pmw,pyr in EPOCH:
     else:
         lat,lon = ll
     ci = CI.get(iso,450); ci_lbl = iso3info.get(iso,{}).get('name',iso)
+    av = avg = avc = None
     if iso=='USA' and state in EG:
         ci, sub = EG[state]; ci_lbl = f"{state} · eGRID {sub}"
+        ent = AVERT['map'].get(f"{state}·{sub}")
+        if ent:
+            av, avc = ent[0], ent[1]
+            avg = round(SELFGEN_SHARE*SELFGEN_CI + (1-SELFGEN_SHARE)*AV_G[av])
+        else:
+            miss_av.append(f"{state}·{sub}")
     status = 'operational' if mw>0 else 'pipeline'
     sites.append(dict(t='site',n=name,o=op,c=iso,lat=round(lat,3),lon=round(lon,3),
-                      mw=mw,pmw=pmw,py=pyr,st=status,ci=ci,cil=ci_lbl,
+                      mw=mw,pmw=pmw,py=pyr,st=status,ci=ci,cil=ci_lbl,av=av,avc=avc,nci=avg,
                       loc=(f"{city}, {state}" if city else None),yr='Sep 2026',src='Epoch AI Frontier Data Centers'))
 metros=[]
 for name,iso,lat,lon,mw,pmw,yr,src in METROS:
@@ -80,6 +91,7 @@ for name,iso,lat,lon,mw,pmw,yr,src in METROS:
                        st='operational',ci=ci,cil=cil,loc=None,src=src,yr=yr))
 
 print('sites',len(sites),'miss',miss)
+print('AVERT unmapped US state/subregion:', sorted(set(miss_av)) or 'none')
 print('metros',len(metros),'metro MW',sum(m['mw'] for m in metros))
 print('site MW',sum(s['mw'] for s in sites))
 json.dump({'sites':sites,'metros':metros}, open(os.path.join(ROOT,'entities.json'),'w'))

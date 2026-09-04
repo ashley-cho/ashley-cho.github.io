@@ -57,7 +57,11 @@ function newCi(iso, fallback){
   const n = st.marg && NEWLOAD[iso] ? NEWLOAD[iso].ci*(1-st.cut) : null;
   return n!=null ? n : fallback;
 }
-function blendCi(m){ return newCi(m.c, ciOf(m)); }
+function blendCi(m){
+  // US campuses carry their own AVERT marginal rate; everything else falls back to the country figure
+  if(st.marg && m.nci) return m.nci*(1-st.cut);
+  return newCi(m.c, ciOf(m));
+}
 function emitOf(m){
   const cap=capOf(m), base=Math.min(cap,m.mw), extra=Math.max(0,cap-m.mw);
   return (twhOf(m,base)*ciOf(m) + twhOf(m,extra)*blendCi(m))/1000;
@@ -381,6 +385,7 @@ const SRC = {
   owidgen:{n:'Our World in Data — electricity generation',u:'https://ourworldindata.org/grapher/electricity-generation',w:'National generation, the denominator for share'},
   owidco2:{n:'Our World in Data — annual CO₂',u:'https://ourworldindata.org/grapher/annual-co2-emissions-per-country',w:'National total CO₂, the denominator for share'},
   egrid:{n:'EPA — eGRID2023',u:'https://www.epa.gov/egrid',w:'US subregion grid emission rates'},
+  avert:{n:'EPA — AVERT v4.3 avoided emission rates',u:'https://www.epa.gov/avert/avoided-emission-rates-generated-avert',w:'US regional marginal emission rates, 2023 — what ramps to serve new load'},
   lbnl:{n:'Berkeley Lab — US Data Center Energy Usage',u:'https://newscenter.lbl.gov/2025/01/15/berkeley-lab-report-evaluates-increase-in-electricity-demand-from-data-centers/',w:'Measured US consumption, 176 TWh in 2023'},
   cso:{n:'CSO Ireland — Data Centres Metered Electricity',u:'https://www.cso.ie/en/releasesandpublications/ep/p-dcmec/datacentresmeteredelectricityconsumption2025/keyfindings/',w:'Measured Irish consumption, 7.66 TWh in 2025'},
   cbs:{n:'CBS Netherlands — data centre electricity',u:'https://www.cbs.nl/en-gb/news/2025/51/data-centres-consume-4-6-percent-of-the-netherlands-electricity',w:'Measured Dutch consumption, 5.10 TWh in 2024'},
@@ -423,6 +428,9 @@ function tabData(){
       '<div class="kv"><span>Grid intensity</span><b>'+Math.round(ciOf(m))+' g/kWh</b></div>'+
       '<div class="kv"><span>CO₂</span><b>'+fmtP(emitOf(m))+' Mt/yr</b></div>'+
       '<div class="kv"><span>Grid</span><b style="font-weight:500">'+m.cil+'</b></div>'+
+      (m.av?'<div class="kv"><span>New load at margin</span><b>'+m.nci+' g/kWh</b></div>'+
+            '<div class="kv"><span>AVERT region</span><b style="font-weight:500">'+m.av+
+            (m.avc==='split'?' <span style="color:var(--s3)">· split state</span>':'')+'</b></div>':'')+
       (site&&m.inm?'<p class="note">Inside the '+m.inm+' market — already counted in that market\'s capacity, and not double-counted in country totals.</p>':'');
   }
   if(st.country!=='all'){
@@ -478,6 +486,7 @@ function tabSrc(){
     const m=st.sel, k=srcKeyFor(m.src), stale=!/2026/.test(m.yr||'');
     out+=item(k, 'figure dated '+(m.yr||'unknown')+(stale?' · superseded where newer data exists':''), null, stale);
     out+= m.c==='USA'&&m.kind==='site' ? item('egrid','subregion '+(m.cil||''),null) : item('owidci',null,null);
+    if(m.av) out+=item('avert','AVERT region '+m.av+(m.avc==='split'?' · split state, assigned by eGRID subregion':''),null);
   } else if(st.country!=='all'){
     const c=countryStats(st.country);
     out += c.basis==='complete' ? item('iea','national installed capacity, 2024') : '';
@@ -487,12 +496,13 @@ function tabSrc(){
       out+=item(k,'figures dated '+yrs, null, !/2026/.test(yrs)); });
     if(countryMarks(st.country).some(m=>m.kind==='site')) out+=item('epoch','campus power');
     out+=item('owidci'); out+=item('owidgen','latest year available'); out+=item('owidco2','latest year available');
+    if(st.country==='USA') out+=item('avert','marginal rates for new load');
     if(MEAS[st.country]){ const kk={IRL:'cso',NLD:'cbs',USA:'lbnl'}[st.country]; if(kk) out+=item(kk,'independent check, not an input'); }
     if(DISP[st.country]) out+=DISP[st.country].vals.slice(1).map(v=>'<a class="item stale" href="'+v.url+'" target="_blank" rel="noopener">'+
       '<span class="itemHead">'+v.src+'</span><span class="itemBody">Competing estimate: '+fmtP(v.twh)+' TWh, '+nf(v.pct,1)+'% of national electricity</span>'+
       '<span class="itemMeta">'+v.yr+' · not used, shown for contrast</span></a>').join('');
   } else {
-    out+=item('iea','capacity and demand, 2024')+item('kf','Q2 2026')+item('cbre','Q1 2026')+item('epoch','continuously updated')+item('owidci')+item('owidgen')+item('owidco2')+item('egrid');
+    out+=item('iea','capacity and demand, 2024')+item('kf','Q2 2026')+item('cbre','Q1 2026')+item('epoch','continuously updated')+item('owidci')+item('owidgen')+item('owidco2')+item('egrid')+item('avert','US new load at margin');
     out+=item('lbnl','validation anchor')+item('cso','validation anchor')+item('cbs','validation anchor');
   }
   return out || '<p class="empty">No distinct sources for this selection.</p>';
@@ -541,7 +551,7 @@ function tabAcc(){
       '<td class="num" style="color:'+(Math.abs(x.d)<10?'var(--ink2)':'var(--s3)')+'">'+(x.d>=0?'+':'')+nf(x.d,0)+'%</td></tr>').join('')+
     '</tbody></table>'+
     '<p class="note">Five places measure data centre electricity rather than estimate it. Every parameter here is set from these, not from judgement. They split by which capacity dataset they divide into — IEA-basis implies 0.388–0.408, metro-basis 0.658–0.702 — which is why each layer carries its own factor. France was added after the factors were fixed, so it is an out-of-sample check rather than an input.</p>'+
-    polBlock()+ vintBlock()+
+    polBlock()+ vintBlock()+ avertBlock()+
     '<p class="note warn">The world row above is the IEA-basis check. The headline world total is higher than the IEA&rsquo;s 415 TWh because China is counted on its own national statistics (260 TWh) rather than the IEA&rsquo;s 100 TWh. That is deliberate: China&rsquo;s own number is better evidenced, at the cost of comparability.</p>'+
     '<p class="note">The load factor is the well-constrained part. The remaining error is capacity coverage: how much of a country&#39;s estate the mapped metros contain. Trust the world and US figures to roughly ±10%; treat other countries as floors.</p>';
 }
@@ -565,6 +575,27 @@ function vintBlock(){
     fmtP(VINT.staleMw)+' MW across '+VINT.n+' markets ('+VINT.names.slice(0,6).join(', ')+
     (VINT.names.length>6?' and '+(VINT.names.length-6)+' more':'')+'). '+
     'Cushman &amp; Wakefield stopped printing per-market operational MW after the 2023 edition, and the successor tables sit behind gated reports. Where a current figure exists it has been used; where none does, the 2023 value is carried and dated rather than quietly extrapolated.</p>';
+}
+function avertBlock(){
+  const n = NEWLOAD.USA, a = n && n.avert;
+  if(!a) return '';
+  const rows = Object.entries(a.rates).sort((x,y)=>y[1]-x[1]).map(([k,v])=>
+    '<tr><td>'+k+'</td><td class="num">'+Math.round(v)+'</td><td class="num">'+
+    Math.round(0.48*506.25+0.52*v)+'</td></tr>').join('');
+  return '<h4 style="margin-top:18px">US new load is priced at the margin</h4>'+
+    '<p class="note">Average grid intensity answers &ldquo;what does the fleet emit?&rdquo;. The question a new data centre poses is &ldquo;which generator ramps to serve it?&rdquo;, and the answer is almost always gas. '+
+    'Each US campus now uses the EPA AVERT marginal rate for its region ('+a.year+', '+a.profile+' profile) for the '+
+    Math.round((1-0.48)*100)+'% of new capacity that draws on the ordinary grid. The other 48% arrives with its own generation and is priced as built. '+
+    'Site values run <b>'+a.lo+'&ndash;'+a.hi+' g/kWh</b> across '+a.sites+' campuses, against the single <b>'+n.flat+' g/kWh</b> used before.</p>'+
+    '<table class="mini"><thead><tr><th>AVERT region</th><th class="num">marginal</th><th class="num">new load</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+    '<p class="note">Weighting: the country figure is '+a.wpipe+' g/kWh, the mean across sites weighted by announced pipeline MW. Weighting by operational MW instead gives '+a.wop+
+    ' g/kWh, a '+nf(Math.abs(a.wpipe-a.wop)/a.wpipe*100,1)+'% difference, so the choice of weight is not load-bearing.</p>'+
+    '<p class="note warn"><b>Three limits, stated plainly.</b> '+
+    'AVERT regions do not follow state lines. '+a.split+' of '+a.sites+' campuses sit in split states, '+fmtP(a.splitmw)+' MW of the '+fmtP(a.pipemw)+
+    ' MW US pipeline; each is assigned by its eGRID subregion, and reassigning every one of them to its alternative region moves the US figure by 0.3%. '+
+    'AVERT reports CO&#8322;, not CO&#8322;e, while the grid-average rates here are CO&#8322;e, so the marginal side is understated by a low single-digit percentage. '+
+    'And AVERT is calibrated for modest load changes relative to system size: a multi-GW campus may sit outside the range where its regression holds, which makes this better evidenced than a national average but still not a dispatch model.</p>'+
+    '<p class="note">Outside the US the grid average still stands, because no comparable free marginal dataset exists. A mixed basis is only defensible if it is declared, so it is declared here.</p>';
 }
 function tabRank(){
   const list=listForCharts().slice(0,14);

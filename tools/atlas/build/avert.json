@@ -1,0 +1,188 @@
+{
+  "meta": {
+    "src": "EPA AVERT v4.3, Avoided Emission Rates 2017-2023",
+    "url": "https://www.epa.gov/avert/avoided-emission-rates-generated-avert",
+    "file": "avert_emission_rates_04-11-24_0.xlsx",
+    "year": "2023",
+    "profile": "Uniform EE",
+    "unit_src": "lb CO2 / MWh",
+    "note": "Uniform EE is AVERT's flat, around-the-clock load profile. A data centre is a flat load addition, so this is its mirror image; the wind and solar profiles are shaped and would be the wrong instrument. AVERT reports CO2 only, not CO2e.",
+    "regiondef": "AVERT v4.2 User Manual, Table 1, p.17",
+    "regiondef_url": "https://www.epa.gov/system/files/documents/2023-10/avert-user-manual-v4.2.pdf"
+  },
+  "rates_lb": {
+    "California": 1037.0,
+    "Carolinas": 1511.4,
+    "Central": 1739.8,
+    "Florida": 1043.9,
+    "Mid-Atlantic": 1363.2,
+    "Midwest": 1711.8,
+    "New England": 1064.9,
+    "New York": 1048.0,
+    "Northwest": 1604.0,
+    "Rocky Mountains": 1839.9,
+    "Southeast": 1445.9,
+    "Southwest": 1342.2,
+    "Tennessee": 1337.7,
+    "Texas": 1293.7
+  },
+  "national_lb": 1429.5,
+  "map": {
+    "TX·ERCT": [
+      "Texas",
+      "clear",
+      "ERCOT is AVERT Texas one to one"
+    ],
+    "VA·SRVC": [
+      "Mid-Atlantic",
+      "clear",
+      "Virginia listed as a full state in Mid-Atlantic"
+    ],
+    "OH·RFCW": [
+      "Mid-Atlantic",
+      "clear",
+      "Ohio listed as a full state in Mid-Atlantic"
+    ],
+    "PA·RFCE": [
+      "Mid-Atlantic",
+      "clear",
+      "Pennsylvania listed as a full state"
+    ],
+    "NJ·RFCE": [
+      "Mid-Atlantic",
+      "clear",
+      "New Jersey listed as a full state"
+    ],
+    "NY·NYUP": [
+      "New York",
+      "clear",
+      "NYISO is AVERT New York one to one"
+    ],
+    "WI·MROE": [
+      "Midwest",
+      "clear",
+      "Wisconsin listed as a full state in Midwest"
+    ],
+    "KS·SPNO": [
+      "Central",
+      "clear",
+      "Kansas listed as a full state in Central"
+    ],
+    "AZ·AZNM": [
+      "Southwest",
+      "clear",
+      "Arizona listed as a full state in Southwest"
+    ],
+    "NM·AZNM": [
+      "Southwest",
+      "split",
+      "New Mexico is split across Central, Rocky Mountains and Southwest; the eGRID AZNM subregion places these sites in the Southwest half",
+      "Central"
+    ],
+    "OR·NWPP": [
+      "Northwest",
+      "clear",
+      "Oregon listed as a full state"
+    ],
+    "ID·NWPP": [
+      "Northwest",
+      "clear",
+      "Idaho listed as a full state"
+    ],
+    "NV·NWPP": [
+      "Northwest",
+      "clear",
+      "Nevada listed as a full state"
+    ],
+    "UT·NWPP": [
+      "Northwest",
+      "split",
+      "Utah is split between Northwest and Rocky Mountains; assigned by its eGRID NWPP subregion",
+      "Rocky Mountains"
+    ],
+    "WY·RMPA": [
+      "Rocky Mountains",
+      "clear",
+      "eGRID RMPA is the Rocky Mountain power area"
+    ],
+    "SC·SRVC": [
+      "Carolinas",
+      "clear",
+      "South Carolina listed as a full state in Carolinas"
+    ],
+    "NC·SRVC": [
+      "Carolinas",
+      "split",
+      "North Carolina is split between Carolinas and Mid-Atlantic; Duke territory sits in Carolinas",
+      "Mid-Atlantic"
+    ],
+    "TN·SRTV": [
+      "Tennessee",
+      "clear",
+      "TVA is AVERT Tennessee"
+    ],
+    "GA·SRSO": [
+      "Southeast",
+      "clear",
+      "Southern Company territory sits in Southeast"
+    ],
+    "AL·SRSO": [
+      "Southeast",
+      "clear",
+      "Southern Company territory sits in Southeast"
+    ],
+    "OK·SPSO": [
+      "Central",
+      "clear",
+      "SPP South sits in Central"
+    ],
+    "NE·MROW": [
+      "Central",
+      "split",
+      "Nebraska is split between Central and Rocky Mountains; Nebraska public power is in SPP, which is Central",
+      "Rocky Mountains"
+    ],
+    "IA·MROW": [
+      "Midwest",
+      "split",
+      "Iowa is split between Central and Midwest; most Iowa load is MISO, which is Midwest",
+      "Central"
+    ],
+    "MN·MROW": [
+      "Midwest",
+      "split",
+      "Minnesota is split between Central and Midwest; MISO North is Midwest",
+      "Central"
+    ],
+    "ND·MROW": [
+      "Midwest",
+      "split",
+      "North Dakota is split three ways; MRO West and MISO place it in Midwest",
+      "Central"
+    ],
+    "MI·RFCM": [
+      "Midwest",
+      "split",
+      "Michigan is split between Mid-Atlantic and Midwest; eGRID RFCM is the MISO Michigan zone",
+      "Mid-Atlantic"
+    ],
+    "IN·RFCW": [
+      "Midwest",
+      "split",
+      "Indiana is split between Mid-Atlantic and Midwest; the alternative assignment is Mid-Atlantic via AEP",
+      "Mid-Atlantic"
+    ],
+    "MS·SRMV": [
+      "Midwest",
+      "split",
+      "Mississippi is split between Midwest and Southeast; Entergy sits in MISO South, which AVERT counts as Midwest",
+      "Southeast"
+    ],
+    "LA·SRMV": [
+      "Midwest",
+      "split",
+      "Louisiana is split between Central and Midwest; Entergy sits in MISO South, which AVERT counts as Midwest",
+      "Central"
+    ]
+  }
+}
