@@ -92,3 +92,30 @@ lock files but not delete them. Every git write therefore leaves a stale
 - Never run `npm test` / `npm ci` / `npm install` there either: `node_modules`
   holds macOS-native binaries and the sandbox is Linux. CI validates the Astro
   build on push; that is the gate.
+
+## AVERT (US marginal emission rates)
+
+`build/avert.json` is a committed static table: the 14 AVERT regional avoided
+CO2 rates (Uniform EE profile, 2023) from EPA AVERT v4.3, plus the state and
+eGRID-subregion to AVERT-region map, each entry marked `clear` or `split` with
+the alternative region recorded for the split ones.
+
+Do NOT refresh this daily. EPA republishes the workbook roughly once a year
+(v4.3 was April 2024, covering 2017-2023). Check it annually at
+https://www.epa.gov/avert/avoided-emission-rates-generated-avert and, if a newer
+edition exists, replace `rates_lb` and bump `meta.year` / `meta.src`.
+
+Rules that hold when editing it:
+
+1. Use the Uniform EE profile. It is AVERT's flat, around-the-clock shape, which
+   is the mirror image of a flat load addition. The wind and solar profiles are
+   shaped and are the wrong instrument for a data centre.
+2. A new state or subregion added to sites.py must get a `map` entry, or the
+   build prints it under "AVERT unmapped US state/subregion" and that site
+   silently falls back to the country figure. Treat that print as an error.
+3. If a mapping is genuinely ambiguous, mark it `split` and record the
+   alternative. The sensitivity claim on the Accuracy tab (flipping every split
+   assignment moves the US figure by 0.3%) has to be recomputed if the site list
+   changes materially.
+4. AVERT reports CO2, the grid averages here are CO2e. Do not silently mix them
+   without keeping the caveat on the page.

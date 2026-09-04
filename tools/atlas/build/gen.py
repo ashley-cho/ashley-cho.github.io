@@ -76,6 +76,35 @@ DISP=json.load(open(os.path.join(ROOT,'disputed.json')))
 OVR=json.load(open(os.path.join(ROOT,'override.json')))
 NL=json.load(open(os.path.join(ROOT,'newload.json')))
 POL=json.load(open(os.path.join(ROOT,'policy.json')))
+AVERT=json.load(open(os.path.join(ROOT,'avert.json')))
+AV_G={k:round(v*0.45359237,1) for k,v in AVERT['rates_lb'].items()}
+# US new-load intensity is now per site (build.py). The country layer needs one
+# number, so weight the site values by the new capacity they actually represent:
+# announced pipeline MW. Robustness of that choice is reported below.
+_us=[x for x in ent['sites'] if x['c']=='USA' and x.get('nci')]
+_pipe=lambda x: max(0,(x.get('pmw') or 0)-x['mw'])
+_wp=sum(_pipe(x) for x in _us) or 1
+_wo=sum(x['mw'] for x in _us) or 1
+_avg=round(sum(x['nci']*_pipe(x) for x in _us)/_wp)
+_alt_avg=round(sum(x['nci']*x['mw'] for x in _us)/_wo)
+NL['USA']=dict(NL['USA'], ci=_avg, flat=440,
+  head='48% of new US capacity arrives with its own power station; the rest draws at the grid margin',
+  note=("Of ~17 GW under construction, 36% is behind-the-meter and 12% is a utility building a "
+        "dedicated plant; the other 52% draws on the ordinary grid. The dedicated half is weighted "
+        "three parts on-site engines and simple-cycle turbines (~550 g) to one part combined-cycle "
+        "(~375 g). The grid half is no longer the US average: each campus now uses the EPA AVERT "
+        "marginal rate for its region, because the question is which generator ramps to serve the "
+        "extra load, not what the average fleet emits. Site values run "
+        f"{min(x['nci'] for x in _us)}-{max(x['nci'] for x in _us)} g/kWh; the country figure is the "
+        f"pipeline-weighted mean, {_avg}."),
+  avert=dict(AVERT['meta'], rates=AV_G,
+             sites=len(_us), lo=min(x['nci'] for x in _us), hi=max(x['nci'] for x in _us),
+             wpipe=_avg, wop=_alt_avg,
+             split=sum(1 for x in _us if x['avc']=='split'),
+             splitmw=round(sum(_pipe(x) for x in _us if x['avc']=='split')),
+             pipemw=round(_wp),
+             map={k:v for k,v in AVERT['map'].items()}))
+print('US new-load CI: pipeline-weighted %d, operational-weighted %d (was flat 440)'%(_avg,_alt_avg))
 _st=[m for m in ent['metros'] if m['yr']=='2023']
 _tot=sum(m['mw'] for m in ent['metros'])
 VINT=dict(staleMw=sum(m['mw'] for m in _st), totMw=_tot, n=len(_st),
