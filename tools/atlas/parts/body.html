@@ -1,0 +1,159 @@
+<div class="wrap">
+
+<header class="mast">
+  <div class="mastL">
+    <h1>Data Center Power Atlas</h1>
+    <p class="freshness" id="freshness"></p>
+  </div>
+  <div class="mastR">
+    <button class="chip" id="assumeBtn" type="button" aria-expanded="false">Assumptions</button>
+    <button class="chip" id="methodBtn" type="button" aria-expanded="false">Method</button>
+    <button class="chip" id="themeBtn" type="button">◑</button>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="seg" role="group" aria-label="Scenario">
+    <button type="button" data-sc="now" aria-pressed="true">Today</button>
+    <button type="button" data-sc="2030" aria-pressed="false">2030 · IEA</button>
+    <button type="button" data-sc="all" aria-pressed="false">Announced</button>
+  </div>
+  <select id="fCountry" aria-label="Country"><option value="all">Everywhere</option></select>
+  <select id="fOp" aria-label="Operator"><option value="all">All operators</option></select>
+  <select id="fStatus" aria-label="Status">
+    <option value="all">Live &amp; announced</option>
+    <option value="operational">Drawing power now</option>
+    <option value="pipeline">Announced only</option>
+  </select>
+  <input type="search" id="fSearch" placeholder="Find a site or market…">
+  <span class="spacer"></span>
+  <label class="tog" title="Individual named campuses"><input type="checkbox" id="lySites" checked> Campuses</label>
+  <label class="tog" title="All operators' capacity summed across a metro"><input type="checkbox" id="lyMetros" checked> Markets</label>
+  <label class="tog" title="Shades countries by gCO2 per kWh"><input type="checkbox" id="lyGrid" checked> Grid CO₂</label>
+</div>
+
+<div class="tiles">
+  <div class="tile"><div class="k">Capacity</div><div class="v" id="tCap">122.3<small>GW</small></div><div class="sub" id="tCapSub">energized today</div></div>
+  <div class="tile accent"><div class="k">Electricity</div><div class="v" id="tTwh">408<small>TWh / yr</small></div><div class="sub" id="tTwhSub">at the current assumptions</div></div>
+  <div class="tile"><div class="k">CO₂</div><div class="v" id="tMt">171<small>Mt / yr</small></div><div class="sub" id="tMtSub">0.4% of all CO₂ emitted worldwide</div></div>
+  <div class="tile"><div class="k">Share of world electricity</div><div class="v" id="tShare">1.3<small>%</small></div><div class="sub" id="tShareSub">of 31,772 TWh generated worldwide</div></div>
+</div>
+
+<div class="stage">
+  <div class="mapcard">
+    <svg id="map" viewBox="0 0 1000 487" role="img" aria-label="World map of data center campuses and metro markets, shaded by grid carbon intensity">
+      <rect x="0" y="0" width="1000" height="487" fill="var(--sea)"></rect>
+      <g id="gWorld"></g>
+      <g id="gMarks"></g>
+    </svg>
+    <div class="maplegend">
+      <span><i class="sw" style="background:var(--s1)"></i>live campus</span>
+      <span><i class="sw" style="background:var(--s3)"></i>announced</span>
+      <span><i class="sw" style="background:transparent;border:1.5px solid var(--ink2)"></i>market</span>
+      <span class="rampmini"><i style="background:var(--q1)"></i><i style="background:var(--q3)"></i><i style="background:var(--q5)"></i><i style="background:var(--q7)"></i> dirtier grid →</span>
+    </div>
+    <div class="mapctl">
+      <button type="button" id="zIn" aria-label="Zoom in">+</button>
+      <button type="button" id="zOut" aria-label="Zoom out">−</button>
+      <button type="button" id="zRst" class="wide">RESET</button>
+    </div>
+    <div class="tip" id="tip"></div>
+  </div>
+
+  <aside class="rail">
+    <div class="railHead">
+      <div class="scopeName" id="scopeName">The world</div>
+      <button class="chip sm" id="resetScope" type="button" hidden>clear</button>
+    </div>
+    <div class="tabs" role="tablist">
+      <button role="tab" data-tab="data" aria-selected="true">Data</button>
+      <button role="tab" data-tab="src" aria-selected="false">Sources</button>
+      <button role="tab" data-tab="reg" aria-selected="false">Rules</button>
+      <button role="tab" data-tab="acc" aria-selected="false">Accuracy</button>
+      <button role="tab" data-tab="rank" aria-selected="false">Ranking</button>
+    </div>
+    <div class="tabBody" id="tabBody"></div>
+  </aside>
+</div>
+
+<div class="drawer" id="assumeDrawer" hidden>
+  <div class="drawerHead"><h3>Assumptions</h3><button class="chip sm" id="resetAssume" type="button">reset</button><button class="chip sm close" data-close="assumeDrawer" type="button">✕</button></div>
+  <div class="assume">
+    <div class="sl">
+      <label for="sKIea">Energy factor · IEA capacity <b id="vKIea">0.381</b></label>
+      <input type="range" id="sKIea" min="0.25" max="0.55" step="0.001" value="0.381">
+      <div class="hint">Annual energy per MW of IEA capacity, as a fraction of 8,760 full-load hours. Pinned by two measurements: IEA global implies 0.388, Berkeley Lab&#39;s US figure implies 0.374.</div>
+    </div>
+    <div class="sl">
+      <label for="sKMetro">Energy factor · metro live IT <b id="vKMetro">0.60</b></label>
+      <input type="range" id="sKMetro" min="0.35" max="0.75" step="0.01" value="0.60">
+      <div class="hint">Drives metro readouts only. Ceiling is 0.70 — above that a single metro would consume its whole country. 0.60 assumes the flagship metro is ~85% of the national estate.</div>
+    </div>
+    <div class="sl">
+      <label for="sKNat">Metro &rarr; national <b id="vKNat">0.70</b></label>
+      <input type="range" id="sKNat" min="0.45" max="0.90" step="0.01" value="0.70">
+      <div class="hint">For country estimates outside the five the IEA reports directly. CSO Ireland implies 0.698, CBS Netherlands 0.702 — agreeing to 0.6%, the best-measured parameter here.</div>
+    </div>
+    <div class="sl">
+      <label for="sKAi">Energy factor · AI campuses <b id="vKAi">0.70</b></label>
+      <input type="range" id="sKAi" min="0.35" max="0.95" step="0.01" value="0.70">
+      <div class="hint">Epoch&#39;s figures are facility power, so PUE is already inside. No independent measurement checks this one.</div>
+    </div>
+    <div class="sl">
+      <label for="sGrow">Grid grows by <b id="vGrow">+21%</b></label>
+      <input type="range" id="sGrow" min="0" max="45" step="1" value="21">
+      <div class="hint">Future scenarios only. Dividing 2030 load by today&#39;s generation is the wrong sum. IEA&#39;s base case implies about +21% globally.</div>
+    </div>
+    <div class="sl">
+      <div class="slRow">
+        <label class="tog" for="mMarg"><input type="checkbox" id="mMarg" checked> Price new load by country</label>
+      </div>
+      <div class="hint">Capacity above today gets the intensity that country&#39;s own evidence supports, instead of its grid average. On where evidence exists, grid average everywhere else — the four we know are in Method.</div>
+    </div>
+    <div class="sl">
+      <label for="sGrid">Grid decarbonization <b id="vGrid">0%</b></label>
+      <input type="range" id="sGrid" min="0" max="60" step="1" value="0">
+      <div class="hint">Cuts every grid&#39;s intensity by this much. IEA expects the mix serving data centers to go from ~40% to ~60% clean by 2035.</div>
+    </div>
+  </div>
+</div>
+
+<div class="drawer" id="methodDrawer" hidden>
+  <div class="drawerHead"><h3>Method</h3><button class="chip sm close" data-close="methodDrawer" type="button">✕</button></div>
+  <div class="methodCols">
+    <div>
+      <h4>The arithmetic</h4>
+      <span class="formula">TWh/yr = MW × 8760 h × energy factor ÷ 10⁶</span>
+      <span class="formula">MtCO₂/yr = TWh × gCO₂/kWh ÷ 1000</span>
+      <p>Each layer has its own energy factor because each quotes capacity on a different basis. Two of the three are pinned by independent national measurements; the third is not, and says so.</p>
+      <p>No PUE slider: PUE is already inside every anchored factor, because the measurements are of electricity at the meter.</p>
+    </div>
+    <div>
+      <h4>Three layers, not additive</h4>
+      <p><b>Campuses</b> — 86 named sites with measured facility power. <b>Markets</b> — every operator&#39;s live capacity across a metro; a campus inside one is already counted in it. <b>Countries</b> — the IEA&#39;s complete accounting, 122 GW worldwide.</p>
+      <p>Country totals de-duplicate: a campus within 110 km of a mapped metro in the same country is not counted twice.</p>
+    </div>
+    <div>
+      <h4>What powers new load, by country</h4>
+      <p>One global marginal number was wrong — the evidence points in opposite directions. The US is the only major market where new load is <em>dirtier</em> than its grid.</p>
+      <table class="mini"><thead><tr><th>Country</th><th class="num">grid</th><th class="num">new load</th><th>basis</th></tr></thead><tbody>
+        <tr><td>United States</td><td class="num">384</td><td class="num" style="color:var(--s3)">440</td><td>48% arrives with its own power station</td></tr>
+        <tr><td>Singapore</td><td class="num">497</td><td class="num" style="color:var(--s1)">266</td><td>≥50% green required per allocation</td></tr>
+        <tr><td>China</td><td class="num">525</td><td class="num" style="color:var(--s1)">133</td><td>80% renewables mandated for new sites</td></tr>
+        <tr><td>Ireland</td><td class="num">257</td><td class="num" style="color:var(--s1)">79</td><td>own generation + 80% additional renewables</td></tr>
+      </tbody></table>
+      <p>Everywhere else falls back to grid average, because no comparable evidence exists. The US figure is observed construction; the other three are mandates, so they depend on enforcement and on whether green supply is physical or certificated.</p>
+
+      <h4>Carbon intensity</h4>
+      <p>US campuses use their EPA eGRID2023 subregion rate — which is why Wisconsin (637 g) and upstate New York (110 g) diverge. Everywhere else uses national lifecycle intensity from Our World in Data.</p>
+      <p>Grid-average accounting by default: it ignores renewable PPAs, and also ignores new load arriving with its own gas turbine. The margin toggle prices the second effect.</p>
+    </div>
+    <div>
+      <h4>What this is not</h4>
+      <p>Not a facility census — roughly 11,000 data centers exist; this maps those with public capacity figures. Not embodied carbon — no chips, concrete or water. Not live telemetry; a scheduled job re-pulls every source weekly.</p>
+      <p>&ldquo;Announced&rdquo; is a ceiling of claims, not a forecast. Interconnection queues run five to ten times the actual build rate.</p>
+    </div>
+  </div>
+</div>
+
+</div>
