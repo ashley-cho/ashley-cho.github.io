@@ -43,7 +43,7 @@ body{
   font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   font-size:14px; line-height:1.55; -webkit-font-smoothing:antialiased;
 }
-.wrap{max-width:1400px;margin:0 auto;padding:20px 20px 34px}
+.wrap{max-width:1400px;margin:0 auto;padding:clamp(26px,5vh,60px) 20px 34px}
 h1,h2,h3{font-family:Archivo,"Helvetica Neue",Arial,sans-serif;text-wrap:balance;margin:0}
 .mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
 .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
@@ -157,10 +157,10 @@ table.mini td.num{text-align:right;font-family:"IBM Plex Mono",monospace;font-va
 .sl input[type=range]{width:100%;accent-color:var(--s1);margin-top:5px}
 .sl .hint{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.5}
 .why{margin:13px 0 0;padding:0}
-.whyCols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:9px 32px}
-.whyCols p{margin:0}
+.whyCols{max-width:calc(50% - 0.5px)}
+.whyCols p{margin:0 0 7px}
 .why h4{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin:0 0 7px}
-.why p{font-size:clamp(12.5px,.86vw,15.5px);color:var(--ink2);margin:0 0 8px;line-height:1.65}
+.why p{font-size:clamp(13px,.92vw,15px);color:var(--ink2);margin:0 0 8px;line-height:1.65}
 .why a{color:var(--ink2);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:.5px}
 .why a:hover{color:var(--ink)}
 .why .sig{margin:8px 0 0;text-align:left;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--muted)}
@@ -169,7 +169,7 @@ table.mini td.num{text-align:right;font-family:"IBM Plex Mono",monospace;font-va
 .methodCols p{font-size:12.5px;color:var(--ink2);margin:0 0 8px;line-height:1.6}
 .formula{font-family:"IBM Plex Mono",monospace;font-size:11.5px;background:var(--sunk);border:1px solid var(--line-soft);border-radius:2px;padding:8px 10px;color:var(--ink);display:block;overflow-x:auto;white-space:nowrap;margin:0 0 7px}
 a{color:var(--s2)}
-@media (max-width:1040px){ .stage{grid-template-columns:1fr} .tiles{grid-template-columns:repeat(2,1fr)} .tabBody{max-height:none} }
+@media (max-width:1040px){ .stage{grid-template-columns:1fr} .tiles{grid-template-columns:repeat(2,1fr)} .tabBody{max-height:none} .whyCols{max-width:none} }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 <style>
