@@ -1,0 +1,102 @@
+{
+ "rule": [
+  "A national statistical source replaces the IEA estimate for its own country when it passes two tests.",
+  "TEST 1 - PROVENANCE. The figure must come from a national statistics office, energy regulator, grid operator or ministry, and be measured rather than modelled. Consultancy estimates, industry-commissioned models and government projections do not qualify, however widely they are cited.",
+  "TEST 2 - PHYSICAL PLAUSIBILITY. Divide the measured electricity by the mapped capacity times 8,760 hours. The result is the load factor the two datasets jointly imply. Real facilities run between roughly 0.3 and 0.85. A result inside that band means both sources are describing the same fleet, so the measurement is admitted as an anchor and used to calibrate the model. A result outside it means they are counting different facilities, so the measurement is used for that country's own total and the scope mismatch is declared.",
+  "The test is what separates a defensible override from cherry-picking. China is the only case so far that fails Test 2, and it fails it decisively."
+ ],
+ "admitted": [
+  {
+   "place": "World",
+   "body": "IEA",
+   "fig": "415 TWh (2024)",
+   "lf": 0.388,
+   "role": "anchor",
+   "basis": "IEA capacity basis",
+   "why": "Sets the global capacity-basis load factor."
+  },
+  {
+   "place": "United States",
+   "body": "Berkeley Lab (LBNL), 2025 Update",
+   "fig": "192 TWh (2024)",
+   "lf": 0.408,
+   "role": "anchor",
+   "basis": "IEA capacity basis",
+   "why": "Independent confirmation of the global factor on the same basis."
+  },
+  {
+   "place": "Ireland",
+   "body": "CSO Ireland",
+   "fig": "7.66 TWh (2025)",
+   "lf": 0.697,
+   "role": "anchor",
+   "basis": "metro basis",
+   "why": "Metered, from the electricity network. Sets the metro-basis factor."
+  },
+  {
+   "place": "Netherlands",
+   "body": "CBS Netherlands",
+   "fig": "5.10 TWh (2024)",
+   "lf": 0.702,
+   "role": "anchor",
+   "basis": "metro basis",
+   "why": "Second metered national series; agrees with Ireland to within half a percent."
+  },
+  {
+   "place": "France",
+   "body": "SDES",
+   "fig": "4.3 TWh (2024)",
+   "lf": 0.658,
+   "role": "anchor",
+   "basis": "metro basis",
+   "why": "Grid-metered, 471 sites above 1 GWh/yr. Nothing was fitted to it, so it is a genuine out-of-sample check - and it lands 6% under the fitted factor. Both known biases close that gap: the capacity reading is 18 months later than the consumption, and SDES excludes 200-odd sites below its threshold (its own full range is 4.3-6 TWh)."
+  },
+  {
+   "place": "China",
+   "body": "China NBS / China Electricity Council, via Frontiers in Energy Research",
+   "fig": "260 TWh (2024)",
+   "lf": 0.93,
+   "role": "override",
+   "basis": "scope mismatch declared",
+   "why": "Fails Test 2. Nothing draws 93% of nameplate every hour of the year, so the Chinese figure must cover facilities the IEA capacity count excludes - most likely telecom and 5G network rooms. Used for China's own total; cross-country comparison against China is looser as a result."
+  }
+ ],
+ "rejected": [
+  {
+   "place": "Japan",
+   "fig": "no national series",
+   "test": "Test 1",
+   "why": "METI only began requiring data centre operators to report electricity use in 2026, so no measured aggregate exists yet. Published national numbers are forward projections."
+  },
+  {
+   "place": "Germany",
+   "fig": "21.3 TWh (2025), Borderstep Institut",
+   "test": "Test 1",
+   "why": "Modelled by a research institute under commission from Bitkom, the industry association. Reproduced in a federal ministry report, which is not the same as being measured by one."
+  },
+  {
+   "place": "South Korea",
+   "fig": "5 TWh (2023), MOTIE 11th Basic Plan",
+   "test": "Test 1",
+   "why": "A planning baseline inside an electricity supply plan, modelled rather than metered, with no published methodology or scope. Would have passed Test 2 at a load factor of 0.77."
+  },
+  {
+   "place": "Singapore",
+   "fig": "3.40 TWh (2020), EMA via parliamentary reply",
+   "test": "Test 1",
+   "why": "Genuinely official, but five years stale with no stated scope, and EMA's live statistics fold data centres into 'Commerce and Services'. Too old to test against current capacity."
+  },
+  {
+   "place": "Australia",
+   "fig": "3.9 TWh (FY25), AEMO",
+   "test": "Test 1, and an open question",
+   "why": "Built on AEMO site-level metering, which is the right kind of data, but authored by a consultancy and back-cast where metering was incomplete. It also implies a load factor near 0.36 against mapped Australian capacity - roughly half the Irish, Dutch and French readings. Either its scope is narrower than it appears or the Sydney and Melbourne capacity figures overstate what actually draws power. Left out rather than absorbed, because absorbing it would hide the discrepancy."
+  },
+  {
+   "place": "Denmark",
+   "fig": "projections only",
+   "test": "Test 1",
+   "why": "The Danish Energy Agency has published a methodology memo identifying sites and a set of 2030-2050 projections, but no measured consumption series."
+  }
+ ]
+}

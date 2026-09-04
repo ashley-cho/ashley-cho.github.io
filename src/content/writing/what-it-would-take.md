@@ -1,57 +1,33 @@
 ---
-title: "A Hard Problem"
-description: "Sixteen problems to solve to have a data center in space."
-date: 2026-08-24
+title: "What it would actually take to put a data center in orbit"
+description: "Sixteen problems between a working GPU in orbit and a hyperscale data center. This is the map."
+date: 2026-08-23
 series: "Data centers in orbit"
 seriesPart: 1
 draft: true
 ---
 
-No one wants a data center in their backyard, whether the argument is legitimate
-or false. Climate change and disasters from it are threatening people's lives,
-while the clean energy transition is no longer the most important issue for
-humanity to solve. Instead, all eyes are on compute.
-
-So why not put data centers in space, where the space is abundant (literally)
-and the sunlight is stronger?
-
-To run a data center you need energy, semiconductors, and a cooling system.
 Every watt of electricity a computer uses comes back out as heat. All of it. On
-Earth we move that heat with air and water. In vacuum there is no air and no
-water. Only radiation works.
+Earth you move that heat with air and water. In vacuum there is no air and no
+water. There is one way out, and it is radiation.
 
-And in orbit there is no atmosphere overhead to absorb what the universe throws
-at you — micrometeoroids, debris, cosmic rays. You protect yourself or you don't
-get protected. So is there a way to put that damn thing in space and make it
-useful?
+That fact shapes everything about putting a data center in orbit. It is not the
+hardest part, though, and I only worked that out by doing the arithmetic.
 
-## But first, how big are we talking?
+One Nvidia H100 is running in low Earth orbit today — roughly a kilowatt. A
+hyperscale data center is 100 megawatts. Some of the AI campuses being built now
+are heading toward a gigawatt. The gap between what flies and what is being
+promised is five to six orders of magnitude, and most writing about it is either
+a press release or a dismissal.
 
-This has to come first, because "data center in space" isn't one problem. It's a
-different problem at every size. Some of what follows doesn't exist at all below
-a megawatt, and some of it only turns nasty above thirty.
+So I worked it out from the constants. This post is the map. The ones after it
+take each problem in turn.
 
-I size everything against **100 MW** — one hyperscale data center. Big enough
-that every problem below actually bites; at 1 MW you can wave half of them away.
-It's also roughly what the people building this say they're aiming at, so it
-argues with the actual claim rather than a strawman.
+## The one number
 
-Concretely, 100 MW buys you about **70,000 H100s**, or 55,000 Blackwells. Not
-70,000 × 700 W — a 700 W chip costs you roughly 1.4 kW of facility power once
-you count its share of CPU, memory, networking and power conversion. Sanity
-check: xAI's Colossus runs ~100,000 H100s on ~150 MW, which is the same ratio.
-
-That's 69 exaFLOPS peak, or about 28 effective once you allow for the fact that
-real training never keeps the chips fed:
-
-| Training run | Time at 100 MW |
-|---|---|
-| GPT-4 class (~2×10²⁵ FLOP) | 8 days |
-| Llama 3 405B | 16 days |
-| 10²⁶ FLOP frontier run | 42 days |
-| 10²⁷ FLOP | 14 months |
-
-So: one orbital facility is roughly one frontier training run per month.
+I size everything against **100 MW** — one hyperscale data center. It's big
+enough that every problem below actually bites. At 1 MW you can wave half of
+them away.
 
 The per-unit physics doesn't change with scale:
 
@@ -65,11 +41,6 @@ Want a gigawatt, multiply by ten. What changes with size isn't the physics. It's
 which problems bind.
 
 ## The sixteen problems
-
-Follow one electron. It starts as sunlight, gets caught by a panel, crosses a
-bus, does its work in a chip, and leaves as heat through a radiator. Every step
-of that journey is a problem. Then the answer has to get to the ground, and the
-whole thing has to survive up there while it happens.
 
 **Power in**
 
@@ -92,7 +63,7 @@ whole thing has to survive up there while it happens.
 
 **Data**
 
-11. **Ground bandwidth.** Laser downlinks have hit 200 Gbps, but you're in view of a station only about 20% of the time and clouds end the link rather than weaken it. Sustained, that's 7–14 Gbps *per terminal* — so the ceiling isn't the laser, it's how many ground stations can see you at once. And the traffic is lopsided: 28 million output tokens a second is under 1 Gbps going down, while the prompts and context feeding it run ten to fifty times that going up, in the direction that's physically harder.
+11. **Ground bandwidth.** Laser downlinks have hit 200 Gbps. You're in view of a station 20% of the time, and clouds end the link rather than weaken it. Sustained: 7–14 Gbps. That number decides which workloads can go up at all.
 12. **Links between satellites.** Lasers aimed with microradian precision between platforms drifting 100–200 m apart.
 13. **One job across many.** Training is lockstep — every chip trades gradients with every other chip, every step. One dropped link stalls the cluster, and you can't walk to the rack and swap a dead node.
 
@@ -109,11 +80,11 @@ whole thing has to survive up there while it happens.
 | 50 kW | Heat rejection stops being trivial |
 | 100 kW | You need a pumped loop, and you hit the largest panel that unfolds without robots |
 | 1 MW | The array overtakes the radiator; you need a second satellite, so coordination begins |
-| 13 MW | Micrometeoroid exposure passes the ISS's entire lifetime |
+| 3 MW | Micrometeoroid exposure passes the ISS's entire lifetime |
 | 30 MW | Graceful degradation stops being elegant and becomes mandatory |
 | 100 MW | You measurably worsen the debris environment you're flying in |
 
-One kilowatt is flying today. Almost nothing on this list applies to it yet.
+One kilowatt is flying. Almost nothing on this list applies to it yet.
 
 ## What I think everyone gets wrong
 
@@ -139,4 +110,4 @@ If you know this material and I've got something wrong, tell me.
 
 ---
 
-**Next:** space is cold, and it's the least relevant fact about cooling a data center.
+**Next:** [space is cold, and it's the least relevant fact about cooling a data center](/writing/space-is-cold/).

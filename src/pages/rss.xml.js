@@ -5,7 +5,7 @@ export async function GET(context) {
   const posts = (await getCollection('writing', ({ data }) => !data.draft))
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   return rss({
-    title: 'Stream of Random Thoughts',
+    title: 'Ashley Cho',
     description: 'Notes, essays, and things I got curious about.',
     site: context.site,
     items: posts.map((p) => ({
