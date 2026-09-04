@@ -156,12 +156,14 @@ table.mini td.num{text-align:right;font-family:"IBM Plex Mono",monospace;font-va
 .slRow b{font-size:12.5px;color:var(--ink)}
 .sl input[type=range]{width:100%;accent-color:var(--s1);margin-top:5px}
 .sl .hint{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.5}
-.why{max-width:62ch;margin:0 0 16px;padding-bottom:14px;border-bottom:1px solid var(--line-soft)}
+.why{margin:13px 0 0;padding:0}
+.whyCols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:9px 32px}
+.whyCols p{margin:0}
 .why h4{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin:0 0 7px}
-.why p{font-size:12.5px;color:var(--ink2);margin:0 0 8px;line-height:1.65}
+.why p{font-size:clamp(12.5px,.86vw,15.5px);color:var(--ink2);margin:0 0 8px;line-height:1.65}
 .why a{color:var(--ink2);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:.5px}
 .why a:hover{color:var(--ink)}
-.why .sig{margin:10px 0 0;text-align:right;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--muted)}
+.why .sig{margin:8px 0 0;text-align:left;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--muted)}
 .methodCols{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px 26px}
 .methodCols h4{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin:0 0 7px}
 .methodCols p{font-size:12.5px;color:var(--ink2);margin:0 0 8px;line-height:1.6}

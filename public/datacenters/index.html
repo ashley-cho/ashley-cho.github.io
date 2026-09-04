@@ -156,12 +156,14 @@ table.mini td.num{text-align:right;font-family:"IBM Plex Mono",monospace;font-va
 .slRow b{font-size:12.5px;color:var(--ink)}
 .sl input[type=range]{width:100%;accent-color:var(--s1);margin-top:5px}
 .sl .hint{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.5}
-.why{max-width:62ch;margin:0 0 16px;padding-bottom:14px;border-bottom:1px solid var(--line-soft)}
+.why{margin:13px 0 0;padding:0}
+.whyCols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:9px 32px}
+.whyCols p{margin:0}
 .why h4{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin:0 0 7px}
-.why p{font-size:12.5px;color:var(--ink2);margin:0 0 8px;line-height:1.65}
+.why p{font-size:clamp(12.5px,.86vw,15.5px);color:var(--ink2);margin:0 0 8px;line-height:1.65}
 .why a{color:var(--ink2);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:.5px}
 .why a:hover{color:var(--ink)}
-.why .sig{margin:10px 0 0;text-align:right;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--muted)}
+.why .sig{margin:8px 0 0;text-align:left;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--muted)}
 .methodCols{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px 26px}
 .methodCols h4{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin:0 0 7px}
 .methodCols p{font-size:12.5px;color:var(--ink2);margin:0 0 8px;line-height:1.6}
@@ -196,6 +198,15 @@ a{color:var(--s2)}
     <button class="chip" id="themeBtn" type="button">◑</button>
   </div>
 </header>
+
+  <div class="why">
+    <h4>Why this exists</h4>
+    <div class="whyCols">
+    <p>We&#39;re pouring an extraordinary amount of power into compute while climate change gets deprioritized. Heat waves and floods keep getting worse, and heat alone now kills <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(25)01919-1/abstract" target="_blank" rel="noopener">546,000 people a year</a>. That bothered me enough to go count.</p>
+    <p>Everything here is sourced, and the parts that don&#39;t hold up are marked as not holding up.</p>
+    </div>
+    <p class="sig">&mdash; Ag</p>
+  </div>
 
 <div class="controls">
   <div class="seg" role="group" aria-label="Scenario">
@@ -305,12 +316,6 @@ a{color:var(--s2)}
 
 <div class="drawer" id="methodDrawer" hidden>
   <div class="drawerHead"><h3>Method</h3><button class="chip sm close" data-close="methodDrawer" type="button">✕</button></div>
-  <div class="why">
-    <h4>Why this exists</h4>
-    <p>We&#39;re pouring an extraordinary amount of power into compute while climate change gets deprioritized. Heat waves and floods keep getting worse, and heat alone now kills <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(25)01919-1/abstract" target="_blank" rel="noopener">546,000 people a year</a>. That bothered me enough to go count.</p>
-    <p>Everything here is sourced, and the parts that don&#39;t hold up are marked as not holding up.</p>
-    <p class="sig">&mdash; Ag</p>
-  </div>
   <div class="methodCols">
     <div>
       <h4>The arithmetic</h4>
