@@ -33,4 +33,18 @@ const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long
   {posts.length > recent.length && (
     <p style="margin-top:1.6rem"><a href="/writing/">All writing →</a></p>
   )}
+
+  <p class="section-label" style="margin-top:2.6rem">Built</p>
+  <ul class="entry-list">
+    <li class="entry">
+      <a class="entry-title" href="/datacenters/">Data Center Power Atlas</a>
+      <div class="entry-date">Updated daily</div>
+      <p>
+        Where the world's data centers are, how much electricity they draw, and
+        what that does to emissions. Every parameter is fitted to a national
+        statistics office that measured the thing, rather than to my judgement —
+        and the page says which sources it refuses to use, and why.
+      </p>
+    </li>
+  </ul>
 </Base>
