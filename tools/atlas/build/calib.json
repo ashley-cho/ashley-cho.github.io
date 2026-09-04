@@ -7,10 +7,10 @@
    "url": "https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai"
   },
   "USA": {
-   "twh": 176,
-   "yr": "2023",
-   "src": "Berkeley Lab (LBNL)",
-   "url": "https://newscenter.lbl.gov/2025/01/15/berkeley-lab-report-evaluates-increase-in-electricity-demand-from-data-centers/"
+   "twh": 192,
+   "yr": "2024",
+   "src": "Berkeley Lab (LBNL), 2025 Update",
+   "url": "https://eta-publications.lbl.gov/publications/united-states-data-center-energy-2025"
   },
   "IRL": {
    "twh": 7.663,
@@ -43,13 +43,13 @@
   },
   {
    "place": "United States",
-   "meas": 176,
-   "myr": "2023",
+   "meas": 192,
+   "myr": "2024",
    "msrc": "Berkeley Lab",
    "cap": 53700,
    "csrc": "IEA installed capacity, 2024",
    "basis": "iea",
-   "implied": 0.374
+   "implied": 0.408
   },
   {
    "place": "Ireland",

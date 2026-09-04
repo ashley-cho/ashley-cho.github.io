@@ -36,7 +36,7 @@ D.regions.forEach(r=>r.iso.forEach(i=>iso2reg[i]=r));
 const st = {
   scenario:'now', sites:true, metros:true, grid:true,
   status:'all', op:'all', country:'all', q:'',
-  kIea:0.381, kMetro:0.60, kNat:0.70, kAi:0.70, cut:0, grow:0.21, marg:true,
+  kIea:0.398, kMetro:0.60, kNat:0.70, kAi:0.70, cut:0, grow:0.21, marg:true,
   sel:null, selRegion:null, tab:'data'
 };
 
@@ -540,7 +540,7 @@ function tabAcc(){
       '<td class="num">'+nf(K[x.a.basis],3)+'</td>'+
       '<td class="num" style="color:'+(Math.abs(x.d)<10?'var(--ink2)':'var(--s3)')+'">'+(x.d>=0?'+':'')+nf(x.d,0)+'%</td></tr>').join('')+
     '</tbody></table>'+
-    '<p class="note">Five places measure data centre electricity rather than estimate it. Every parameter here is set from these, not from judgement. They split by which capacity dataset they divide into — IEA-basis implies 0.374–0.388, metro-basis 0.658–0.702 — which is why each layer carries its own factor. France was added after the factors were fixed, so it is an out-of-sample check rather than an input.</p>'+
+    '<p class="note">Five places measure data centre electricity rather than estimate it. Every parameter here is set from these, not from judgement. They split by which capacity dataset they divide into — IEA-basis implies 0.388–0.408, metro-basis 0.658–0.702 — which is why each layer carries its own factor. France was added after the factors were fixed, so it is an out-of-sample check rather than an input.</p>'+
     polBlock()+ vintBlock()+
     '<p class="note warn">The world row above is the IEA-basis check. The headline world total is higher than the IEA&rsquo;s 415 TWh because China is counted on its own national statistics (260 TWh) rather than the IEA&rsquo;s 100 TWh. That is deliberate: China&rsquo;s own number is better evidenced, at the cost of comparability.</p>'+
     '<p class="note">The load factor is the well-constrained part. The remaining error is capacity coverage: how much of a country&#39;s estate the mapped metros contain. Trust the world and US figures to roughly ±10%; treat other countries as floors.</p>';
@@ -622,9 +622,9 @@ sl('sGrid','vGrid',x=>st.cut=x/100, x=>x+'%');
 sl('sGrow','vGrow',x=>st.grow=x/100, x=>'+'+x+'%');
 document.getElementById('mMarg').addEventListener('change',e=>{ st.marg=e.target.checked; render(); });
 document.getElementById('resetAssume').onclick=()=>{
-  st.kIea=.381; st.kMetro=.60; st.kNat=.70; st.kAi=.70; st.cut=0; st.grow=.21; st.marg=true;
-  sKIea.value=.381; sKMetro.value=.60; sKNat.value=.70; sKAi.value=.70; sGrid.value=0; sGrow.value=21; mMarg.checked=true;
-  vKIea.textContent='0.381'; vKMetro.textContent='0.60'; vKNat.textContent='0.70'; vKAi.textContent='0.70'; vGrid.textContent='0%';
+  st.kIea=.398; st.kMetro=.60; st.kNat=.70; st.kAi=.70; st.cut=0; st.grow=.21; st.marg=true;
+  sKIea.value=.398; sKMetro.value=.60; sKNat.value=.70; sKAi.value=.70; sGrid.value=0; sGrow.value=21; mMarg.checked=true;
+  vKIea.textContent='0.398'; vKMetro.textContent='0.60'; vKNat.textContent='0.70'; vKAi.textContent='0.70'; vGrid.textContent='0%';
   vGrow.textContent='+21%';
   render();
 };
