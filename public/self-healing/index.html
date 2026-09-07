@@ -43,11 +43,15 @@
     font-family:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
     font-size:16px;line-height:1.62;margin:0;-webkit-font-smoothing:antialiased}
   .page{--gutter:clamp(20px,4vw,64px);
+    /* one reading measure, in rem so every block lands on the same width
+       whatever its own font size */
+    --measure:min(100%,46rem);
+    --rail:clamp(96px,9vw,140px);
     width:100%;max-width:1320px;margin:0 auto;
     padding:0 var(--gutter) clamp(64px,10vh,104px)}
   .wrap,.wide,main.wide{width:100%;max-width:none;margin-left:0;margin-right:0}
   /* prose keeps a readable measure inside the full-width column */
-  .wrap > p,.wrap > ul,.wrap > ol,section.dive > p{max-width:74ch}
+  .wrap > p,.wrap > ul,.wrap > ol,section.dive > p{max-width:var(--measure)}
 
   .label{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.7rem;
     letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
@@ -58,7 +62,7 @@
     font-size:clamp(2.5rem,6vw,4rem);line-height:1.02;letter-spacing:-.015em;
     text-wrap:balance;margin:.28em 0 0;max-width:14ch}
   .standfirst{font-family:"Newsreader",Georgia,serif;font-size:1.24rem;line-height:1.5;
-    font-weight:300;color:var(--ink-2);max-width:58ch;margin:22px 0 0}
+    font-weight:300;color:var(--ink-2);max-width:var(--measure);margin:22px 0 0}
   .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
     gap:0 34px;margin:40px 0 0;border-top:1px solid var(--rule);
     border-bottom:1px solid var(--rule)}
@@ -73,9 +77,9 @@
   h2{font-family:"Newsreader",Georgia,serif;font-weight:400;font-size:2rem;
     line-height:1.15;letter-spacing:-.01em;margin:10px 0 0;text-wrap:balance}
   h3{font-family:"IBM Plex Sans",sans-serif;font-weight:600;font-size:1.02rem;margin:0}
-  p{margin:1em 0;max-width:74ch}
+  p{margin:1em 0;max-width:var(--measure)}
   .lede{font-size:1.06rem;color:var(--ink-2)}
-  ul{margin:1em 0;padding-left:1.1em;max-width:74ch}
+  ul{margin:1em 0;padding-left:1.1em;max-width:var(--measure)}
   li{margin:.4em 0}
   li::marker{color:var(--accent)}
   a{color:var(--accent);text-underline-offset:3px}
@@ -85,7 +89,7 @@
     border:1px solid var(--rule-soft);overflow-x:auto}
   figure > svg{display:block;width:100%;height:auto;min-width:540px;color:var(--ink-2)}
   figcaption{margin-top:14px;padding-top:12px;border-top:1px solid var(--rule-soft);
-    font-size:.86rem;line-height:1.5;color:var(--muted);max-width:78ch}
+    font-size:.86rem;line-height:1.5;color:var(--muted);max-width:var(--measure)}
   figcaption b{color:var(--ink-2);font-weight:600}
   .svg-fill-accent{fill:var(--accent)}
   .svg-stroke-accent{stroke:var(--accent)}
@@ -118,7 +122,7 @@
     color:#5A6462;text-align:center;line-height:1.4}
   .arrow .big{font-size:1.5rem;font-family:"IBM Plex Sans",sans-serif;color:#3B4644;line-height:1}
   .arrow.plus{transform:none!important}
-  .rxncap{font-size:.86rem;color:var(--muted);margin-top:12px;max-width:78ch;line-height:1.5}
+  .rxncap{font-size:.86rem;color:var(--muted);margin-top:12px;max-width:var(--measure);line-height:1.5}
   @media (max-width:720px){
     .rxn{grid-template-columns:1fr;gap:10px}
     .arrow{transform:rotate(90deg);margin:2px 0}
@@ -130,9 +134,9 @@
   ol.vectors > li:last-child{border-bottom:1px solid var(--rule)}
   .rank{font-family:"IBM Plex Mono",monospace;font-size:1.05rem;color:var(--accent);
     font-variant-numeric:tabular-nums;padding-top:1px}
-  .vec-body > p{margin:.5em 0 0;max-width:62ch;font-size:.95rem}
+  .vec-body > p{margin:.5em 0 0;max-width:var(--measure);font-size:.95rem}
   .rows{margin:14px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 16px;
-    font-size:.9rem;max-width:62ch}
+    font-size:.9rem;max-width:var(--measure)}
   .rows dt{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.1em;
     text-transform:uppercase;color:var(--muted);padding-top:5px}
   .rows dd{margin:0;color:var(--ink-2)}
@@ -153,11 +157,11 @@
   .dot.y{background:var(--accent)} .dot.n{background:var(--damage)} .dot.m{background:var(--muted)}
 
   .callout{margin:32px 0;padding:20px 24px;background:var(--raised);
-    border-left:3px solid var(--accent);box-shadow:var(--shadow);max-width:82ch}
-  .callout p{margin:.4em 0;max-width:64ch}
+    border-left:3px solid var(--accent);box-shadow:var(--shadow);max-width:var(--measure)}
+  .callout p{margin:.4em 0;max-width:none}
   .callout .label{color:var(--accent)}
 
-  .caveats{margin:28px 0 0;padding:0;list-style:none;max-width:80ch}
+  .caveats{margin:28px 0 0;padding:0;list-style:none;max-width:var(--measure)}
   .caveats li{padding:14px 0;border-top:1px dashed var(--rule);font-size:.94rem;color:var(--ink-2)}
   .caveats li:last-child{border-bottom:1px dashed var(--rule)}
   .caveats b{color:var(--ink)}
@@ -165,9 +169,10 @@
   footer{margin-top:clamp(56px,9vh,88px);padding-top:22px;border-top:1px solid var(--rule);
     font-size:.82rem;color:var(--muted);max-width:none;width:100%}
   footer a{color:var(--muted)}
-  footer p{max-width:96ch}
+  footer p{max-width:var(--measure)}
 
-  .summaryblock{margin:26px 0 0;border:1px solid var(--rule);background:var(--surface)}
+  .summaryblock{margin:26px 0 0;border:1px solid var(--rule);background:var(--surface);
+    max-width:var(--measure)}
   ol.nine{list-style:none;margin:0;padding:0;max-width:none}
   ol.nine li{display:grid;grid-template-columns:38px minmax(210px,1fr) 2fr 92px;
     gap:0 14px;align-items:baseline;padding:12px 20px;border-bottom:1px solid var(--rule-soft)}
@@ -189,20 +194,21 @@
   }
 
   .tl{margin:32px 0 30px}
-  .tl-item,.tl-break{display:grid;grid-template-columns:clamp(96px,9vw,140px) 1fr;gap:0}
+  .tl-item,.tl-break{display:grid;grid-template-columns:var(--rail) 1fr;gap:0}
   .tl-rail{text-align:right;padding-right:22px}
   .tl-year{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.79rem;
     color:var(--accent);letter-spacing:.02em;padding-top:16px;white-space:nowrap}
-  .tl-card{position:relative;border-left:1px solid var(--rule);padding:14px 0 18px 28px}
+  .tl-card{position:relative;border-left:1px solid var(--rule);padding:14px 0 18px 28px;
+    max-width:calc(var(--measure) - var(--rail))}
   .tl-card::before{content:"";position:absolute;left:-5px;top:20px;width:9px;height:9px;
     border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--ground)}
   .tl-card h3{font-family:"Newsreader",Georgia,serif;font-weight:600;font-size:1.18rem;
     letter-spacing:-.005em;margin:0 0 5px;line-height:1.25}
   .tl-card h3 a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent}
   .tl-card h3 a:hover{border-bottom-color:var(--accent);color:var(--accent)}
-  .tl-out{margin:0;font-size:.93rem;color:var(--ink-2);line-height:1.55;max-width:88ch}
+  .tl-out{margin:0;font-size:.93rem;color:var(--ink-2);line-height:1.55;max-width:none}
   .tl-break .b{border-left:1px dashed var(--rule);padding:8px 0 18px 28px;
-    font-size:.85rem;color:var(--muted);max-width:86ch;display:block}
+    font-size:.85rem;color:var(--muted);max-width:calc(var(--measure) - var(--rail));display:block}
 
   .ty{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.62rem;
     letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--rule);
@@ -217,7 +223,7 @@
     letter-spacing:-.008em;margin:0 0 4px;line-height:1.2}
   section.dive{margin-top:56px;scroll-margin-top:24px}
   .divehead{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;
-    padding-bottom:10px;border-bottom:1px solid var(--rule)}
+    padding-bottom:10px;border-bottom:1px solid var(--rule);max-width:var(--measure)}
   .dyr{font-family:"IBM Plex Mono",monospace;font-size:.82rem;color:var(--accent);
     min-width:86px;letter-spacing:.02em}
   .divehead h3{font-family:"Newsreader",Georgia,serif;font-weight:600;font-size:1.3rem;
@@ -226,24 +232,25 @@
 
   .pays{margin:16px 0 0;padding:12px 16px;background:var(--surface);
     border-left:3px solid var(--accent);display:grid;grid-template-columns:auto 1fr;
-    gap:4px 14px;align-items:baseline;max-width:70ch}
+    gap:4px 14px;align-items:baseline;max-width:var(--measure)}
   .pays .pl{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.11em;
     text-transform:uppercase;color:var(--accent);white-space:nowrap;
     border:1px solid var(--accent);padding:2px 6px}
   .pays span:last-child{font-size:.9rem;color:var(--ink-2);line-height:1.5}
   @media (max-width:600px){.pays{grid-template-columns:1fr}.pays .pl{justify-self:start}}
 
-  ol{max-width:66ch;padding-left:1.25em;margin:1em 0}
+  ol{max-width:var(--measure);padding-left:1.25em;margin:1em 0}
   ol li{margin:.6em 0;padding-left:.2em}
   ol li::marker{color:var(--accent);font-family:"IBM Plex Mono",monospace;font-size:.85em}
 
   .aside{margin:32px 0;padding:20px 24px;background:var(--surface);
-    border:1px solid var(--rule);border-left:3px solid var(--muted);max-width:82ch}
+    border:1px solid var(--rule);border-left:3px solid var(--muted);max-width:var(--measure)}
   .aside h4{margin:6px 0 4px;font-family:"Newsreader",Georgia,serif;font-weight:600;
     font-size:1.12rem;letter-spacing:0;text-transform:none;color:var(--ink)}
-  .aside p{margin:.55em 0;font-size:.92rem;max-width:64ch;color:var(--ink-2)}
+  .aside p{margin:.55em 0;font-size:.92rem;max-width:none;color:var(--ink-2)}
 
-  .uses{margin:22px 0 0;border:1px solid var(--rule-soft);background:var(--surface)}
+  .uses{margin:22px 0 0;border:1px solid var(--rule-soft);background:var(--surface);
+    max-width:var(--measure)}
   .uses h5{font-family:"IBM Plex Mono",monospace;font-size:.65rem;letter-spacing:.12em;
     text-transform:uppercase;color:var(--muted);font-weight:500;margin:0;padding:11px 18px;
     background:var(--raised);border-bottom:1px solid var(--rule)}
@@ -261,6 +268,7 @@
   .ud{color:var(--ink-2);font-size:.875rem;line-height:1.48}
 
   .refs{margin:0 0 6px;padding:12px 18px;border:1px solid var(--rule-soft);border-top:0;
+    max-width:var(--measure);
     background:var(--raised);font-size:.83rem;line-height:1.7;color:var(--muted)}
   .refs .rl{font-family:"IBM Plex Mono",monospace;font-size:.58rem;letter-spacing:.12em;
     text-transform:uppercase;color:var(--muted);border:1px solid var(--rule);
@@ -276,7 +284,7 @@
   .lic.pd{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
   .lic.cc{border-color:var(--warn);color:var(--warn)}
   .lic.arr{border-style:dashed}
-  ul.revs{max-width:98ch;font-size:.92rem}
+  ul.revs{max-width:var(--measure);font-size:.92rem}
   ul.revs li{margin:.55em 0;color:var(--ink-2)}
 
   @media (max-width:700px){
@@ -298,11 +306,17 @@
     .fact{border-right:0;border-bottom:1px solid var(--rule-soft)}
   }
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  .themebtn{margin-left:auto;border:1px solid var(--rule);background:var(--surface);
+    color:var(--muted);border-radius:999px;padding:4px 11px;cursor:pointer;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;line-height:1.4}
+  .themebtn:hover{border-color:var(--muted);color:var(--ink)}
+  .themebtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .backlink{text-decoration:none;color:var(--muted);border-bottom:1px solid transparent}
   .backlink:hover{color:var(--accent);border-bottom-color:var(--accent)}
 </style>
 </head>
 <body>
+<script>try{var t=localStorage.getItem('sh-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <div class="page">
 
 <header class="masthead">
@@ -310,6 +324,7 @@
     <a class="label backlink" href="/">← ashley-cho.github.io</a>
     <span class="label">Notes, part one</span>
     <span class="label">September 2026</span>
+    <button class="themebtn" id="themeBtn" type="button" aria-label="Switch between light and dark">&#9681;</button>
   </div>
   <h1>Two thousand years of self-healing</h1>
   <p class="standfirst">Every maintenance visit, every truck roll, every replacement costs money (and I hate waste). So why can't we just make things repair themselves, the way an organism does (reverse entropy by opening the system)? This is my note on what has been tried across two thousand years, and where it actually proves valuable.</p>
@@ -2884,5 +2899,18 @@ L 122.3 109.7
 </main>
 </div>
 
+<script>
+(function(){
+  var btn=document.getElementById('themeBtn');
+  if(!btn) return;
+  btn.onclick=function(){
+    var cur=document.documentElement.getAttribute('data-theme');
+    var sysDark=window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var next=cur?(cur==='dark'?'light':'dark'):(sysDark?'light':'dark');
+    document.documentElement.setAttribute('data-theme',next);
+    try{localStorage.setItem('sh-theme',next)}catch(e){}
+  };
+})();
+</script>
 </body>
 </html>
