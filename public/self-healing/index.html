@@ -42,12 +42,11 @@
   body{background:var(--ground);color:var(--ink);
     font-family:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
     font-size:16px;line-height:1.62;margin:0;-webkit-font-smoothing:antialiased}
-  .page{--gutter:clamp(20px,4vw,64px);
-    /* one reading measure, in rem so every block lands on the same width
-       whatever its own font size */
-    --measure:min(100%,46rem);
+  .page{--gutter:clamp(20px,4vw,56px);
+    /* one column: every block, text or figure, is exactly this wide */
+    --measure:100%;
     --rail:clamp(96px,9vw,140px);
-    width:100%;max-width:1320px;margin:0 auto;
+    width:100%;max-width:calc(52rem + 2*var(--gutter));margin:0 auto;
     padding:0 var(--gutter) clamp(64px,10vh,104px)}
   .wrap,.wide,main.wide{width:100%;max-width:none;margin-left:0;margin-right:0}
   /* prose keeps a readable measure inside the full-width column */
@@ -63,10 +62,10 @@
     text-wrap:balance;margin:.28em 0 0;max-width:14ch}
   .standfirst{font-family:"Newsreader",Georgia,serif;font-size:1.24rem;line-height:1.5;
     font-weight:300;color:var(--ink-2);max-width:var(--measure);margin:22px 0 0}
-  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-    gap:0 34px;margin:40px 0 0;border-top:1px solid var(--rule);
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));
+    gap:0 26px;margin:40px 0 0;border-top:1px solid var(--rule);
     border-bottom:1px solid var(--rule)}
-  .fact{padding:20px 34px 20px 0;border-right:1px solid var(--rule-soft)}
+  .fact{padding:20px 26px 20px 0;border-right:1px solid var(--rule-soft)}
   .fact:last-child{border-right:0;padding-right:0}
   .fact b{display:block;font-family:"IBM Plex Mono",monospace;font-weight:500;
     font-size:1.5rem;color:var(--accent);letter-spacing:-.02em;
@@ -199,7 +198,7 @@
   .tl-year{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.79rem;
     color:var(--accent);letter-spacing:.02em;padding-top:16px;white-space:nowrap}
   .tl-card{position:relative;border-left:1px solid var(--rule);padding:14px 0 18px 28px;
-    max-width:calc(var(--measure) - var(--rail))}
+    max-width:calc(100% - var(--rail))}
   .tl-card::before{content:"";position:absolute;left:-5px;top:20px;width:9px;height:9px;
     border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--ground)}
   .tl-card h3{font-family:"Newsreader",Georgia,serif;font-weight:600;font-size:1.18rem;
@@ -208,7 +207,7 @@
   .tl-card h3 a:hover{border-bottom-color:var(--accent);color:var(--accent)}
   .tl-out{margin:0;font-size:.93rem;color:var(--ink-2);line-height:1.55;max-width:none}
   .tl-break .b{border-left:1px dashed var(--rule);padding:8px 0 18px 28px;
-    font-size:.85rem;color:var(--muted);max-width:calc(var(--measure) - var(--rail));display:block}
+    font-size:.85rem;color:var(--muted);max-width:none;display:block}
 
   .ty{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.62rem;
     letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--rule);
@@ -922,7 +921,7 @@
     <line x1="856" y1="140" x2="926" y2="150" marker-end="url(#car)"/>
   </g>
   <text x="762" y="186" font-size="11.5" class="svg-fill-accent" text-anchor="end">capillary flow, ~10⁵ Pa</text>
-  <text x="932" y="186" font-size="11.5" class="svg-fill-accent">flows both ways along the gap</text>
+  <text x="922" y="186" font-size="11.5" class="svg-fill-accent">flows both ways along the gap</text>
   <text x="596" y="236" font-size="11.5" fill="currentColor">monomer meets a catalyst particle on the crack face and polymerises</text>
   <text x="596" y="252" font-size="11.5" fill="currentColor" fill-opacity=".6">solid polyDCPD bonds both faces, 50 to 90 % of virgin toughness</text>
   <text x="596" y="290" font-size="11.5" fill="var(--damage)">That capsule is now empty. This site never heals again.</text>
