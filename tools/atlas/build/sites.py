@@ -98,7 +98,7 @@ METROS = [
 ("Chicago","USA",41.88,-87.63,1123,9074,"Q2 2026","Knight Frank Data Centre Atlas 2026"),
 ("Silicon Valley","USA",37.37,-121.92,825,637,"Q2 2026","Knight Frank Data Centre Atlas 2026"),
 ("Toronto","CAN",43.65,-79.38,427,538,"Q2 2026","Knight Frank Data Centre Atlas 2026"),
-("Hillsboro / Portland","USA",45.52,-122.98,430,None,"H2 2025","CBRE North America Data Center Trends"),
+("Hillsboro / Portland","USA",45.52,-122.98,491,None,"H1 2026","CBRE North America Data Center Trends"),
 ("New York - N. New Jersey","USA",40.73,-74.17,392,None,"2023","Cushman & Wakefield Global Comparison"),
 ("Los Angeles","USA",34.05,-118.24,206,None,"2023","Cushman & Wakefield Global Comparison"),
 ("Salt Lake City","USA",40.76,-111.89,203,None,"2023","Cushman & Wakefield Global Comparison"),
