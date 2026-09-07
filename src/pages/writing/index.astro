@@ -14,7 +14,7 @@ const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long
   <ul class="entry-list">
     {posts.map(p => (
       <li class="entry">
-        <a class="entry-title" href={`/writing/${p.id}/`}>{p.data.title}</a>
+        <a class="entry-title" href={p.data.url ?? `/writing/${p.id}/`}>{p.data.title}</a>
         <div class="entry-date">
           {fmt(p.data.date)}{p.data.series ? ` · ${p.data.series}` : ''}
         </div>
