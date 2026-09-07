@@ -95,7 +95,7 @@ function regionStats(r){
   const mt = (Math.min(twh,baseTwh)*gci + extraTwh*bci)/1000;
   return {mw:gw*1000, twh, mt, ov:!!ov};
 }
-const NAT=D.nat||{}, NAMES=D.names||{}, COMPLETE=D.complete||{}, BENCH=D.bench||{}, MEAS=D.meas||{}, ANCH=D.anchors||[], DISP=D.disp||{}, OVR=D.ovr||{}, NEWLOAD=D.newload||{}
+const NEWS=D.news||null, NAT=D.nat||{}, NAMES=D.names||{}, COMPLETE=D.complete||{}, BENCH=D.bench||{}, MEAS=D.meas||{}, ANCH=D.anchors||[], DISP=D.disp||{}, OVR=D.ovr||{}, NEWLOAD=D.newload||{}
 const POLICY=D.policy||{}, VINT=D.vint||null;
 function countryMarks(iso){
   return marks.filter(m=> m.c===iso && (m.kind==='metro' || !m.inm));
@@ -414,6 +414,29 @@ function regsFor(){
   if(st.selRegion) return REGS.filter(r=>st.selRegion.iso.indexOf(r.iso)>=0);
   return REGS;
 }
+function newsBlock(){
+  if(!NEWS||!NEWS.items) return '';
+  const built = new Date(D.meta.built+'T00:00:00Z');
+  const win = NEWS.window_days||14;
+  const live = NEWS.items
+    .filter(function(i){ return (built - new Date(i.date+'T00:00:00Z'))/864e5 <= win; })
+    .sort(function(a,b){ return a.date<b.date?1:-1; })
+    .slice(0, NEWS.max_items||4);
+  const head = '<h4>Last '+win+' days</h4>';
+  if(!live.length) return '<div class="news">'+head+
+    '<p class="newsEmpty">Nothing published in the last '+win+' days that bears on these numbers. An empty list is a finding, not a gap.</p></div>';
+  const fmt = function(d){ const x=new Date(d+'T00:00:00Z');
+    return x.toLocaleDateString('en-GB',{day:'numeric',month:'short',timeZone:'UTC'}); };
+  return '<div class="news">'+head+'<ul class="newsList">'+live.map(function(i){
+    return '<li'+(i.moved?' class="moved"':'')+'>'+
+      '<span class="newsDate">'+fmt(i.date)+'</span>'+
+      '<span class="newsTag '+(i.kind==='data'?'tagData':'tagAnn')+'">'+
+        (i.kind==='data'?'data':'announced')+'</span>'+
+      '<span class="newsBody"><b>'+i.title+'</b> '+i.detail+
+      ' <a href="'+i.url+'" target="_blank" rel="noopener">'+i.src+'</a>'+
+      '<span class="newsEffect">'+(i.moved?'&#9679; ':'')+i.effect+'</span></span></li>';
+  }).join('')+'</ul></div>';
+}
 function tabData(){
   if(st.sel){
     const m=st.sel, site=m.kind==='site', cp=capPair(capOf(m));
@@ -704,6 +727,7 @@ try{ const t=localStorage.getItem('dcpa-theme'); if(t) document.documentElement.
     ' · checked daily · sources and vintages under Sources';
 })();
 svg.addEventListener('click',e=>{ if(e.target===svg && !(drag&&drag.moved)) clearScope(); });
+(function(){ const n=document.getElementById('newsSlot'); if(n) n.innerHTML=newsBlock(); })();
 render();
 })();
 
