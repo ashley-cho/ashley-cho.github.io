@@ -182,6 +182,7 @@ tbody tr:last-child td { border-bottom: none; }
   flex-wrap: wrap;
   align-items: center;
 }
+.post-meta .dot { color: var(--rule); }
 .series-tag {
   font-family: var(--sans);
   font-size: 0.75rem;
@@ -253,4 +254,16 @@ img, svg, video { max-width: 100%; height: auto; }
   h1 { font-size: 1.72rem; }
   main { padding-top: 2.4rem; }
   body { font-size: 1.0rem; }
+}
+
+/* ---------- post subtitle ---------- */
+.post-subtitle {
+  font-size: 1.2rem;
+  line-height: 1.45;
+  color: var(--fg-muted);
+  margin: 0.1rem 0 0.9rem;
+  text-wrap: balance;
+}
+@media (max-width: 640px) {
+  .post-subtitle { font-size: 1.08rem; }
 }
