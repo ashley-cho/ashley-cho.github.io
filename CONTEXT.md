@@ -20,6 +20,10 @@ helping with the physics and the drafts.
   bare gap.
 - **Verify numbers before writing.** Run the arithmetic; don't inherit figures
   from articles.
+- **Always cite, inline and hyperlinked.** Every factual claim, number, or
+  external assertion gets a markdown link on the claim itself — not a source
+  list at the bottom. If a claim can't be sourced, either cut it or say in the
+  text that it's an estimate.
 
 ## Anchor numbers (100 MW = one hyperscale data center)
 
@@ -69,7 +73,3 @@ Astro, static. New post = a `.md` file in `src/content/writing/`; filename
 becomes the URL. Frontmatter: title, description, date, series, seriesPart,
 draft. Math via `$...$` and `$$...$$`. Push to `main` and GitHub Actions
 deploys to https://ashley-cho.github.io.
-
-Run `npm test` before pushing — it builds the site, validates every post's
-frontmatter against the schema, and checks that internal links resolve. CI runs
-the same thing on every PR. How the repo is wired up: `docs/repo-setup.md`.
