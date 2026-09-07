@@ -10,6 +10,8 @@ const writing = defineCollection({
     date: z.coerce.date(),
     series: z.string().optional(),
     seriesPart: z.number().optional(),
+    // Set when the piece lives at its own path instead of /writing/<id>/
+    url: z.string().optional(),
     draft: z.boolean().default(false),
   }),
 });
