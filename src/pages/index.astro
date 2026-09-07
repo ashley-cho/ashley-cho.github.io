@@ -4,8 +4,10 @@ import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('writing', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const recent = posts.slice(0, 6);
 const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const kindOf = (d) => d.kind ?? (d.url ? 'reference' : 'essay');
+const meta = (d) => [fmt(d.date), d.series, kindOf(d)].filter(Boolean).join(' · ');
+const shown = posts.slice(0, 12);
 ---
 <Base>
   <p class="lede" style="margin-bottom:2.6rem">
@@ -14,58 +16,20 @@ const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long
     subject drifts.
   </p>
 
-  <p class="section-label">Writing</p>
   {posts.length === 0 && (
     <p style="color:var(--fg-muted)">Nothing published yet — first piece is in progress.</p>
   )}
   <ul class="entry-list">
-    {recent.map(p => (
+    {shown.map(p => (
       <li class="entry">
         <a class="entry-title" href={p.data.url ?? `/writing/${p.id}/`}>{p.data.title}</a>
-        <div class="entry-date">
-          {fmt(p.data.date)}{p.data.series ? ` · ${p.data.series}` : ''}
-        </div>
+        <div class="entry-date">{meta(p.data)}</div>
         {p.data.description && <p>{p.data.description}</p>}
       </li>
     ))}
   </ul>
 
-  {posts.length > recent.length && (
-    <p style="margin-top:1.6rem"><a href="/writing/">All writing →</a></p>
+  {posts.length > shown.length && (
+    <p style="margin-top:1.6rem"><a href="/writing/">All notes →</a></p>
   )}
-
-  <p class="section-label" style="margin-top:2.6rem">Built</p>
-  <ul class="entry-list">
-    <li class="entry">
-      <a class="entry-title" href="/datacenters/">Data Center Power Atlas</a>
-      <div class="entry-date">Updated daily</div>
-      <p>
-        Where the world's data centers are, how much electricity they draw, and
-        what that does to emissions. Every parameter is fitted to a national
-        statistics office that measured the thing, rather than to my judgement —
-        and the page says which sources it refuses to use, and why.
-      </p>
-    </li>
-    <li class="entry">
-      <a class="entry-title" href="/units/">Every Unit Still in Use</a>
-      <div class="entry-date">342 units, 30 domains</div>
-      <p>
-        The units people actually write down today, each tagged by where it came
-        from: a body part, a trade practice, a measurement of the natural world,
-        a physical constant, or a committee decision. Includes who chose it and
-        what it displaced, and says so plainly where the record is simply lost.
-      </p>
-    </li>
-    <li class="entry">
-      <a class="entry-title" href="/symbols/">Reading the Equation</a>
-      <div class="entry-date">222 symbols</div>
-      <p>
-        Where each mathematical and physical symbol came from, who chose the
-        glyph, and the other three things it means in somebody else's field.
-        Sigma is a standard deviation, a stress, a conductivity, a surface
-        tension and a Pauli matrix, and nobody is confused until they change
-        rooms.
-      </p>
-    </li>
-  </ul>
 </Base>
