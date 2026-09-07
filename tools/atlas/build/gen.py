@@ -76,6 +76,7 @@ DISP=json.load(open(os.path.join(ROOT,'disputed.json')))
 OVR=json.load(open(os.path.join(ROOT,'override.json')))
 NL=json.load(open(os.path.join(ROOT,'newload.json')))
 POL=json.load(open(os.path.join(ROOT,'policy.json')))
+NEWS=json.load(open(os.path.join(ROOT,'news.json')))
 AVERT=json.load(open(os.path.join(ROOT,'avert.json')))
 AV_G={k:round(v*0.45359237,1) for k,v in AVERT['rates_lb'].items()}
 # US new-load intensity is now per site (build.py). The country layer needs one
@@ -109,7 +110,7 @@ _st=[m for m in ent['metros'] if m['yr']=='2023']
 _tot=sum(m['mw'] for m in ent['metros'])
 VINT=dict(staleMw=sum(m['mw'] for m in _st), totMw=_tot, n=len(_st),
           names=[m['n'] for m in sorted(_st,key=lambda x:-x['mw'])])
-data=dict(regs=REGS, disp=DISP, ovr=OVR, newload=NL, policy=POL, vint=VINT, meas=CAL['meas'], anchors=CAL['anchors'], meta=meta, geo=geo, sites=ent['sites'], metros=ent['metros'], regions=REG, ci=CIFULL, nat=NAT, names=names, complete=COMPLETE, bench=BENCH)
+data=dict(news=NEWS, regs=REGS, disp=DISP, ovr=OVR, newload=NL, policy=POL, vint=VINT, meas=CAL['meas'], anchors=CAL['anchors'], meta=meta, geo=geo, sites=ent['sites'], metros=ent['metros'], regions=REG, ci=CIFULL, nat=NAT, names=names, complete=COMPLETE, bench=BENCH)
 open(os.path.join(ROOT,'data.json'),'w').write(json.dumps(data,separators=(',',':')))
 
 inside=sum(1 for s in ent['sites'] if s['inm'])

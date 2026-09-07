@@ -1,0 +1,36 @@
+{
+  "window_days": 14,
+  "max_items": 4,
+  "items": [
+    {
+      "date": "2026-08-27",
+      "kind": "data",
+      "title": "CBRE, North America Data Center Trends H1 2026",
+      "detail": "7,481 MW under construction across the eight US primary markets, up 24.8%. Vacancy 1.4%, net absorption 1,456 MW, over 80% of construction preleased.",
+      "effect": "Hillsboro / Portland updated 430 to 491 MW, same source, newer vintage. The other seven markets keep their Knight Frank figures: CBRE counts primary-market colocation inventory, Knight Frank counts every operator's live IT capacity, so the gap is a population difference, not a discrepancy.",
+      "moved": true,
+      "src": "CBRE",
+      "url": "https://www.cbre.com/press-releases/north-american-data-center-demand-continues-to-outpace-supply-despite-record-construction-activity"
+    },
+    {
+      "date": "2026-09-05",
+      "kind": "announce",
+      "title": "TCS / HyperVault, up to 1 GW in Telangana",
+      "detail": "Up to Rs 70,000 crore, roughly $8.4bn, on 264 acres near Hyderabad, built in phases against customer demand. No completion date given.",
+      "effect": "No change to today's figures. Announced capacity with no energization date is a claim, not load.",
+      "moved": false,
+      "src": "TCS",
+      "url": "https://www.tcs.com/who-we-are/newsroom/press-release/tcs-hypervault-establish-large-scale-ai-data-center-campus-telangana"
+    },
+    {
+      "date": "2026-09-03",
+      "kind": "announce",
+      "title": "Vantage, Project Latigo, Laramie County, Wyoming",
+      "detail": "Zone change approved unanimously. 480 MW across 1,835 acres, up to $20bn, with onsite generation, 12 miles south of Cheyenne.",
+      "effect": "Not added. The campus layer comes from Epoch AI's dataset; a site enters when Epoch picks it up, because mixing news-sourced sites into a single-source layer breaks its provenance. A zoning approval is also permission, not load.",
+      "moved": false,
+      "src": "Wyoming Tribune Eagle",
+      "url": "https://www.wyomingnews.com/news/local_news/commissioners-approve-zone-change-for-vantage-data-center-south-of-cheyenne/article_ee336047-ce8e-4c25-8300-3af52862357c.html"
+    }
+  ]
+}
