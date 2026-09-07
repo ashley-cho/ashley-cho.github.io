@@ -119,3 +119,37 @@ Rules that hold when editing it:
    changes materially.
 4. AVERT reports CO2, the grid averages here are CO2e. Do not silently mix them
    without keeping the caveat on the page.
+
+## The "Last 14 days" block
+
+`build/news.json` drives the block under the author's note. The daily job owns
+it. Rules, in order of how often they get broken:
+
+1. **Primary sources only.** A company press release, a regulator or council
+   record, a statistics office, or the report itself. Aggregator briefings and
+   newsletters are leads, not sources: chase the number to its origin. A
+   secondary briefing on the Vantage Wyoming item said "capacity not disclosed";
+   the county newspaper covering the vote gave 480 MW.
+2. **Every item carries `date`, `kind`, `title`, `detail`, `effect`, `moved`,
+   `src`, `url`.** `kind` is `data` (a measurement was published) or `announce`
+   (someone said they intend to build something).
+3. **`effect` is the point of the block.** It says what the item did to this
+   page, including "nothing", and why. An item with no stated effect is noise.
+   Set `moved: true` only when a figure on the page actually changed, and name
+   the before and after in `effect`.
+4. **Items expire on their own.** The renderer drops anything older than
+   `window_days` (14) measured against the build date, and caps the list at
+   `max_items` (4). Do not prune by hand; do not raise the cap to fit a slow
+   fortnight.
+5. **An empty list is a valid result.** If nothing in 14 days bears on these
+   numbers, leave `items` as they are and let them age out. The block says so
+   itself. Never pad it with items that do not touch the data.
+6. **A new source does not silently replace an existing one.** Same source,
+   newer vintage is a straight update (CBRE H1 2026 over CBRE H2 2025 for
+   Hillsboro). A different source measuring a different population is not: CBRE
+   counts primary-market colocation inventory, Knight Frank counts every
+   operator's live IT capacity, which is why CBRE's Phoenix figure is far below
+   Knight Frank's. Declare the basis; do not average them.
+7. **Sites enter the campus layer only through Epoch AI.** A news-sourced site
+   dropped into an Epoch-sourced layer destroys that layer's provenance. Note it
+   in the block and wait.
