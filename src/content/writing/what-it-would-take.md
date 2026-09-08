@@ -123,7 +123,7 @@ Most of what I read about this was about cooling. Cooling is hard, and it's
 where I'll start, because the standard explanation of it is wrong in an
 interesting way.
 
-But it isn't the answer. When I worked the numbers, this came out as a
+But it isn't the answer. The arithmetic points somewhere else — this is a
 **mass-per-kilowatt problem**. Every item
 above turns into kilograms you have to lift, and they trade against each other.
 Run the radiator hotter and it shrinks, but the chips have to change. Go modular
@@ -134,10 +134,10 @@ Cooling is one term in that budget. It isn't even the biggest. The solar array i
 
 ## Where I'm unsure
 
-Two numbers I haven't pinned down. The debris flux at the sizes that matter rests
+Two numbers here aren't pinned down. The debris flux at the sizes that matter rests
 on [Space Shuttle measurements that stopped in 2011](https://orbitaldebris.jsc.nasa.gov/modeling/ordem.html), so the error bars are wider
-than the literature sounds. And I've sketched the concentrator trade for solar
-arrays without working the mass side properly.
+than the literature sounds. And the concentrator trade for solar arrays
+is sketched but not worked through on the mass side.
 
 If you know this material and I've got something wrong, tell me.
 
