@@ -23,7 +23,7 @@ const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long
       )}
       <h1>{post.data.title}</h1>
       {post.data.subtitle && <p class="post-subtitle">{post.data.subtitle}</p>}
-      <div class="post-meta"><span>{fmt(post.data.date)}</span></div>
+      <div class="post-meta"><span class="entry-field">{post.data.field}</span><span class="dot">·</span><span>{fmt(post.data.date)}</span></div>
     </div>
     <Content />
   </article>
