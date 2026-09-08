@@ -10,17 +10,7 @@ const writing = defineCollection({
     date: z.coerce.date(),
     series: z.string().optional(),
     seriesPart: z.number().optional(),
-    // Set when the piece lives at its own path instead of /writing/<id>/
-    url: z.string().optional(),
-    // The field of study this note sits in. Required, so a new note has to say
-    // what it is about. Add to the list when a note opens a new field.
-    field: z.enum([
-      'Energy',
-      'Materials science',
-      'Mathematics',
-      'Metrology',
-      'Spaceflight',
-    ]),
+    problem: z.number().min(1).max(16).optional(),
     draft: z.boolean().default(false),
   }),
 });
