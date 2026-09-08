@@ -60,7 +60,7 @@ The per-unit physics doesn't change with scale:
 ```
   748 m² of radiator      per MW
 2,296 m² of solar array   per MW
- ~40 tonnes               per MW
+ ~30 tonnes               per MW
 ```
 
 Want a gigawatt, multiply by ten. What changes with size isn't the physics. It's
@@ -102,7 +102,9 @@ whole thing has to survive up there while it happens.
 
 14. **Unfolding it.** Stowed volume isn't the constraint. Folded panels radiating into each other is, and so is the fact that every hinge on a coolant loop is a leak path that has to work first time.
 15. **Pointing it.** Arrays want the sun. Radiators want cold sky, away from the sun and away from Earth. Comms want a ground station that's moving. Three subsystems, one orientation.
-16. **Mass.** [34–59 kg per kW](https://arxiv.org/pdf/2604.27197). Every problem above ends up here.
+16. **Mass.** The literature puts it at [34–59 kg per kW](https://arxiv.org/pdf/2604.27197). Clustering modules onto a shared bus gets it to about 30 — below the published range, and my own arithmetic rather than anyone's paper, so treat it as an estimate. Every problem above ends up here.
+
+    Lighter is better, but only up to a point, because most of the mass you could remove *is* margin: radiator thickness buys puncture tolerance, shielding buys dose tolerance, propellant buys years. So the figure of merit isn't kilograms per kilowatt, it's **kilograms per kilowatt-year delivered** — and by that measure 40 kg/kW beats 30 as soon as the heavier build keeps a third more capacity alive, which is a gap you can easily cross.
 
 ## Which ones exist at which size
 
