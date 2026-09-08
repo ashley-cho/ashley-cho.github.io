@@ -2,6 +2,7 @@
 title: "Space is cold, and it's the least relevant fact about cooling a data center"
 description: "Everyone reaches for the 3-kelvin background when they explain orbital data centers. It contributes about five parts in a billion."
 date: 2026-08-24
+field: Spaceflight
 series: "Data centers in orbit"
 seriesPart: 2
 problem: 4

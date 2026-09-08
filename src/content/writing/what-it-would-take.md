@@ -3,6 +3,7 @@ title: "A Hard Problem"
 subtitle: "Sixteen problems between one GPU in orbit and a hyperscale data center"
 description: "Sixteen problems to solve to have a data center in space."
 date: 2026-08-24
+field: Spaceflight
 series: "Data centers in orbit"
 seriesPart: 1
 draft: true
