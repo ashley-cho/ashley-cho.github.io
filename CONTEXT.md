@@ -96,6 +96,12 @@ over it.
 - **No servicing.** 5-year life, graceful degradation, replaced by launch,
   active deorbit at end of life.
 - ~30 kg/kW after clustering. ~3,000 t and ~30 Starship launches for 100 MW.
+  This is below the published 34-59 kg/kW range and is our own estimate, not a
+  source — say so wherever it appears.
+- **Optimise kg per kilowatt-YEAR, not kg per kilowatt.** Most removable mass is
+  margin (radiator thickness, shielding, propellant), so stripping it shortens
+  life and comes back as replacement launches. 40 kg/kW beats 30 once the
+  heavier build keeps a third more capacity alive.
 
 Drawn up at the artifact "Orbital Data Center, Drawn to Scale", which includes
 an audit of the design against all sixteen problems.
