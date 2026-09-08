@@ -2,17 +2,26 @@
 title: "Space is cold, and it's the least relevant fact about cooling a data center"
 description: "Everyone reaches for the 3-kelvin background when they explain orbital data centers. It contributes about five parts in a billion."
 date: 2026-08-24
-field: Spaceflight
 series: "Data centers in orbit"
 seriesPart: 2
+problem: 4
 draft: true
 ---
 
-[The map](/writing/what-it-would-take/) listed sixteen problems between a
-kilowatt in orbit and a hundred megawatts. This post takes the first of them.
+There is an Nvidia H100 running in low Earth orbit right now. It went up on
+Starcloud-1 in November 2025 — one GPU, roughly a kilowatt, orbiting the planet
+while it works.
 
-Heat, because heat is where every explanation of this idea goes first — and
-where almost every explanation goes wrong in the same way.
+A hyperscale data center on the ground is about 100 megawatts. Some of the AI
+training campuses being built today are heading toward a gigawatt.
+
+So the gap between what is flying and what is being promised is five to six
+orders of magnitude. That gap is the subject of this series: not whether anyone
+*wants* orbital compute, but what physics demands from anyone who tries. I want
+to work it out from the constants rather than from the press releases.
+
+We start with heat, because heat is where every explanation of this idea goes
+first — and where almost every explanation goes wrong in the same way.
 
 ## The thing everyone says
 
@@ -106,13 +115,13 @@ radiator area.**
 
 I had heard, secondhand, that a space data center would need a radiator "ten
 times the size of the ISS." Ten times the ISS's *radiator area* is 4,220 m²,
-which sheds about 5.6 MW — not a hyperscale data center, off by nearly a factor
-of twenty. But ten times the ISS's *overall footprint* — the station's 109 m
-truss by 73 m array span is about 8,000 m² of bounding box — comes to
-80,000 m², within about 7% of the 100 MW figure.
+which sheds about 5.6 MW — not a hyperscale data center, off by a factor of
+twenty. But ten times the ISS's *overall dimensions* — the station's 109 m truss
+by 73 m array span, about 8,000 m² of bounding box — comes to 80,000 m², which
+lands almost exactly on the 100 MW figure.
 
-Both readings circulate. They differ by roughly 19×. It's worth knowing which
-one you've been told.
+Both readings circulate. They differ by 20×. It's worth knowing which one you've
+been told.
 
 ## Where this leaves us
 
@@ -130,6 +139,6 @@ That's next.
 
 ---
 
-*This is the second post in a series working through the engineering of orbital
-data centers from first principles. Corrections are genuinely welcome — the numbers
+*This is the first in a series working through the engineering of orbital data
+centers from first principles. Corrections are genuinely welcome — the numbers
 here are mine, and I'd rather find out they're wrong from you than not find out.*
