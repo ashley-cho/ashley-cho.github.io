@@ -3,7 +3,6 @@ title: "A Hard Problem"
 subtitle: "Sixteen problems between one GPU in orbit and a hyperscale data center"
 description: "Sixteen problems to solve to have a data center in space."
 date: 2026-08-24
-field: Spaceflight
 series: "Data centers in orbit"
 seriesPart: 1
 draft: true
@@ -118,12 +117,14 @@ whole thing has to survive up there while it happens.
 
 [One kilowatt is flying today](https://www.datacenterdynamics.com/en/news/starcloud-1-satellite-reaches-space-with-nvidia-h100-gpu-now-operating-in-orbit/) — a single H100 on Starcloud-1. Almost nothing on this list applies to it yet.
 
-## What I think everyone gets wrong
+## What surprised me
 
-Every article about this is about cooling. Cooling is hard, and it's where I'll
-start, because the standard explanation of it is wrong in an interesting way.
+Most of what I read about this was about cooling. Cooling is hard, and it's
+where I'll start, because the standard explanation of it is wrong in an
+interesting way.
 
-But it isn't the answer. This is a **mass-per-kilowatt problem**. Every item
+But it isn't the answer. When I worked the numbers, this came out as a
+**mass-per-kilowatt problem**. Every item
 above turns into kilograms you have to lift, and they trade against each other.
 Run the radiator hotter and it shrinks, but the chips have to change. Go modular
 and the plumbing gets easier, but every module buys its own thrusters and radios.
