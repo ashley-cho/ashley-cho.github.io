@@ -75,20 +75,20 @@ whole thing has to survive up there while it happens.
 
 **Power in**
 
-1. **Collecting it.** 230,000 m² of array for 100 MW. Three times the radiator area.
+1. **Collecting it.** 239,000 m² of array for 100 MW — three times the radiator area, and 4% oversized because deleting the sun-tracking gimbal means living with seasonal drift.
 2. **Eclipse.** A dawn-dusk orbit is 99% sunlit, not 100%. Batteries cover the gap and are dead mass the rest of the year.
-3. **Distributing it.** Low voltage means enormous cable mass. High voltage arcs, because low orbit is full of plasma.
+3. **Distributing it.** Low voltage means enormous cable mass. High voltage arcs, because low orbit is full of plasma. Build it modular and the 100 MW version of this problem never exists — each module only ever distributes its own 100 kW.
 
 **Heat out**
 
 4. **Rejecting it.** Radiation only. [75,000 m² of panel at 80 °C](https://blog.spacecomputer.io/cooling-for-orbital-compute/). The 2.7-kelvin background contributes almost nothing.
 5. **Moving it.** Heat conducting through solid aluminium peters out after 30 cm. Getting it from a dense rack to a distant panel needs pumped loops at a scale nobody has flown.
-6. **The ceiling.** Radiated power goes as temperature to the fourth, so running hot is the strongest lever there is. Chips stop at 100 °C. Pumping heat to a hotter radiator costs more power than it saves in area.
+6. **The ceiling.** Radiated power goes as temperature to the fourth, so running hot is the strongest lever there is. Chips stop at 100 °C, and pumping heat to a hotter radiator costs more power than it saves in area. The way out is a chip built to run hot, which is a semiconductor question rather than a spacecraft one — so the move available today is to rate the plumbing for 150 °C and operate it at 80, and keep the option.
 
 **Survival**
 
 7. **Radiation.** Two problems in one word. Cumulative dose degrades chips slowly and shielding helps. Single-event upsets flip one bit instantly, come from cosmic rays you can't shield against, and have to be absorbed in software.
-8. **[Micrometeoroids](https://orbitaldebris.jsc.nasa.gov/modeling/ordem.html).** A 1 mm grain at orbital speed carries the energy of a 70 mph fastball into a 1 mm spot. Spread 300,000 m² of thin, fluid-filled surface across five years and you get thirty times the ISS's lifetime exposure.
+8. **[Micrometeoroids](https://orbitaldebris.jsc.nasa.gov/modeling/ordem.html).** A 1 mm grain at orbital speed carries the energy of a 70 mph fastball into a 1 mm spot. Spread 314,000 m² of thin surface across five years and you get thirty times the ISS's lifetime exposure. The two surfaces care very differently: the array takes three quarters of the hits and shrugs them off as a few lost watts, while the radiator takes fewer and can lose its coolant.
 9. **Drag.** Huge area, low mass, atmosphere that hasn't quite ended. You burn propellant continuously. Fly higher and the radiation dose triples.
 10. **Obsolescence.** Three-year chips, fifteen-year spacecraft. Starlink already builds for a five-year life and planned disposal, so this one may be solved by precedent.
 
@@ -110,7 +110,7 @@ whole thing has to survive up there while it happens.
 |---|---|
 | 50 kW | Heat rejection stops being trivial |
 | 100 kW | You need a pumped loop, and you hit the largest panel that unfolds without robots |
-| 1 MW | The array overtakes the radiator; you need a second satellite, so coordination begins |
+| 2.5 MW | Too big for one spacecraft, so formation flying and coordination begin |
 | 13 MW | Micrometeoroid exposure passes the ISS's entire lifetime |
 | 30 MW | Graceful degradation stops being elegant and becomes mandatory |
 | 100 MW | You measurably worsen the debris environment you're flying in |
