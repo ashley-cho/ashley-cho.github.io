@@ -44,20 +44,61 @@ Survival: 7 radiation (dose + bit flips) · 8 micrometeoroids · 9 drag · 10 ob
 Data: 11 ground bandwidth · 12 inter-satellite links · 13 distributed training
 Structure: 14 unfolding · 15 pointing · 16 mass
 
-## Series plan
+## Series plan — one post per problem
 
-1. The map (this is the intro) — `what-it-would-take.md`
-2. Space is cold, and it barely matters — `space-is-cold.md`
-3. The array is bigger than the radiator
-4. You can't just run the chips hotter
-5. Nobody writes about the plumbing
-6. What is the right module size?
-7. Two kinds of radiation damage
-8. Have no surface: MMOD and droplet radiators
-9. The atmosphere is the whole problem (bandwidth)
-10. Lockstep across a drifting formation
-11. The fleet that fades — Ashley's own idea, the strongest one in the series
-12. Kilograms per kilowatt (finale)
+The intro promises sixteen problems, so there are sixteen posts plus the intro.
+Every post declares `problem: N` in its frontmatter and renders as
+"Problem N of 16". Reading order does not have to equal problem order, because
+each post is labelled — publish in whatever order the research is ready.
+
+| # | Post | Status |
+|---|---|---|
+| — | The map (intro) — `what-it-would-take.md` | drafted |
+| 1 | The array is bigger than the radiator | — |
+| 2 | Eclipse, and why the battery is small | — |
+| 3 | Volts, cables, and arcing in plasma | — |
+| 4 | Space is cold, and it barely matters — `space-is-cold.md` | drafted |
+| 5 | Nobody writes about the plumbing | — |
+| 6 | You can't just run the chips hotter | — |
+| 7 | Two kinds of radiation damage | — |
+| 8 | Have no surface: MMOD and droplet radiators | — |
+| 9 | Drag, and the altitude squeeze | — |
+| 10 | Design for death, not longevity | — |
+| 11 | The atmosphere is the whole problem | — |
+| 12 | Lasers between things that drift | — |
+| 13 | Lockstep across a moving fabric | — |
+| 14 | Every joint is a place to fail | — |
+| 15 | Three subsystems, one orientation | — |
+| 16 | Kilograms per kilowatt (finale) | — |
+
+Posts 2 and 9 are the thinnest and may end up short; 14 and 15 got substantially
+richer once the design was drawn (see below).
+
+## The reference design
+
+Everything the posts say should be consistent with this, and vice versa. If a
+post and the design disagree, one of them is wrong — say so rather than papering
+over it.
+
+- **Orbit** 650 km dawn-dusk sun-synchronous. Below the Van Allen belts, ~99%
+  sunlit, and going higher costs 2.2x launch mass to save 11% radiator area.
+- **Module** 100 kW. Size set by the largest panel that unfolds with no robot.
+  239 m² array (4% oversized for beta drift), 75 m² radiator at 80 °C.
+- **Chips mounted on the radiator panel**, so the coolant loop never crosses a
+  joint. 4 joints total, none carrying coolant or rotating power.
+- **Sun-pointing attitude**, so the solar array is body-fixed and there is no
+  gimbal — the ISS SARJ failure mode is absent rather than mitigated.
+- **Clusters of 25 modules** sharing one bus. Saves ~1,000 t of thrusters,
+  radios and batteries; shrinks the optical mesh from 1,000 nodes to 40; each
+  module still self-deploys, so nothing needs robotic assembly.
+- **Thermal system specced for 150 °C**, operated at 80 °C, so a
+  wide-bandgap chip generation drops in without a redesign.
+- **No servicing.** 5-year life, graceful degradation, replaced by launch,
+  active deorbit at end of life.
+- ~30 kg/kW after clustering. ~3,000 t and ~30 Starship launches for 100 MW.
+
+Drawn up at the artifact "Orbital Data Center, Drawn to Scale", which includes
+an audit of the design against all sixteen problems.
 
 ## Open questions
 
