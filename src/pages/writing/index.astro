@@ -5,8 +5,7 @@ import { getCollection } from 'astro:content';
 const posts = (await getCollection('writing', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-const kindOf = (d) => d.kind ?? (d.url ? 'reference' : 'essay');
-const meta = (d) => [fmt(d.date), d.series, kindOf(d)].filter(Boolean).join(' · ');
+const meta = (d) => [fmt(d.date), d.series].filter(Boolean).join(' · ');
 ---
 <Base title="Notes">
   <h1>Notes</h1>
@@ -17,7 +16,9 @@ const meta = (d) => [fmt(d.date), d.series, kindOf(d)].filter(Boolean).join(' ·
     {posts.map(p => (
       <li class="entry">
         <a class="entry-title" href={p.data.url ?? `/writing/${p.id}/`}>{p.data.title}</a>
-        <div class="entry-date">{meta(p.data)}</div>
+        <div class="entry-date">
+          <span class="entry-field">{p.data.field}</span> · {meta(p.data)}
+        </div>
         {p.data.description && <p>{p.data.description}</p>}
       </li>
     ))}
