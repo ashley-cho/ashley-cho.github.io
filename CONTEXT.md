@@ -103,6 +103,43 @@ over it.
   life and comes back as replacement launches. 40 kg/kW beats 30 once the
   heavier build keeps a third more capacity alive.
 
+### Where reliability mass goes
+
+Two ways to spend mass on staying alive, and they are not interchangeable.
+**Margin** makes each part tougher so fewer failures happen. **Redundancy**
+builds more parts than needed so failures stop mattering. Both look identical in
+kg/kW-year, so that metric does not pick a side — the failure *shape* does.
+
+| Subsystem | Failure shape | Spend on | How |
+|---|---|---|---|
+| Chips | frequent, tiny | redundancy | spare GPUs, route around dead ones |
+| Solar array | frequent, tiny | redundancy | already redundant strings; +10% area is cheap |
+| Radiator | frequent, small | redundancy | spare segments + isolation valves |
+| Pumps | rare, fatal | margin | one failure kills a loop |
+| Structure | rare, fatal | margin | cannot overprovision a truss you have one of |
+| Bus / propulsion | rare, fatal | margin | or bound the blast radius by cluster size |
+
+**Redundancy wins where failures are frequent and small** — you live in the
+degraded regime anyway, so spare capacity is used daily rather than idling
+against an event. **Margin wins where failures are rare and fatal**, because
+there is nothing to fall back onto.
+
+Worked example, radiator MMOD: doubling skin thickness stops particles up to
+~1.9x diameter, and small-particle flux falls as roughly d^-2.7, so 2x radiator
+mass buys a 5.7x lower puncture rate. Against that, +10% spare area costs +10%
+mass and absorbs 10% of area lost. Below ~10% area loss over five years,
+redundancy is about 5x cheaper; at 50% loss only thickening works. **Which
+regime we are in is exactly the ORDEM number** — that missing figure decides
+this trade, not just a footnote.
+
+And redundancy has one advantage margin never has: **it does not require knowing
+the failure rate.** Margin means predicting what you are hardening against;
+overprovisioning only needs slack. With the debris flux as the least certain
+number in the whole design, that argues for redundancy wherever it is available.
+
+This is the fleet-that-fades idea one level down — overprovision, let it
+degrade, top up — applied to segments instead of satellites.
+
 Drawn up at the artifact "Orbital Data Center, Drawn to Scale", which includes
 an audit of the design against all sixteen problems.
 
