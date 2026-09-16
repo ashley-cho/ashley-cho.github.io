@@ -153,3 +153,52 @@ it. Rules, in order of how often they get broken:
 7. **Sites enter the campus layer only through Epoch AI.** A news-sourced site
    dropped into an Epoch-sourced layer destroys that layer's provenance. Note it
    in the block and wait.
+
+## Who runs the daily refresh
+
+The job is split by what kind of work it is, because only one half can be
+trusted to a cron.
+
+`.github/workflows/atlas-refresh.yml` — **the mechanical half**, daily at 06:20
+UTC. Runs `check_sources.py`, which pulls Epoch AI and the three Our World in
+Data series and diffs them against what is committed. It may rewrite:
+
+* `Current power (MW)` for a campus already in `sites.py`
+* a value in gen.py's `CIFULL` carbon-intensity table
+* a generation or CO2 value in gen.py's `NAT` table
+
+Then it rebuilds, checks every anchor is still inside ±5%, and pushes to `main`,
+which `deploy.yml` publishes. The anchor check **fails the run** rather than
+shipping a page whose parameters no longer fit the measurements.
+
+It is deliberately not allowed to touch `calib.json`, `policy.json`,
+`override.json`, `disputed.json`, `regs.json` or `news.json`. Those hold the
+admission tests and the reasoning — which source counts as measured, which of
+two disagreeing figures to show, what a filing means. A cron job editing them
+would be inventing the argument the page exists to make.
+
+Epoch names are matched through `build/epochmap.json`, an explicit pin from each
+Epoch CSV row name to its `sites.py` name, so the match is exact. Epoch renames
+rows occasionally; when it does, the row is reported as unmatched and raised as
+an issue rather than fuzzy-matched onto the wrong campus. A genuinely new
+campus is never auto-added: it needs a zip or lat/lon, an operator and an AVERT
+region first, and guessing any of those puts an invented number on the page.
+
+Anything it refuses to decide goes to a GitHub issue labelled `atlas-refresh`,
+appended to the open one rather than opening a new one each day.
+
+**The judgement half** — new regulatory filings, a national statistics office
+publishing a measured series and what the two admission tests say about it, the
+China scope question, hunting replacements for the 2023 Cushman & Wakefield
+rows, and writing the `news.json` entries — is not mechanical and is not in the
+workflow.
+
+### Why the date still moves on a quiet day
+
+`meta.built` is this job's liveness signal, not just a data vintage: after three
+days the page turns red and says the daily refresh has not run. So the workflow
+commits when a value moved **or** when the published date is three days old,
+whichever comes first. On a quiet stretch the date advances every third day and
+the banner stays truthful; if the job actually dies, the date freezes and the
+page says so on day four. That is the one case where rebuilding without a data
+change is honest — because a machine really did check the sources that morning.

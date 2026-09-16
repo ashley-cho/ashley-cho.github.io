@@ -1,0 +1,158 @@
+# Daily refresh of the Data Center Power Atlas — the mechanical half.
+#
+# Pulls Epoch AI and the three Our World in Data series, rewrites the values it
+# is allowed to rewrite, rebuilds the page, checks every calibration anchor is
+# still inside +/-5%, and commits to main. Pushing to main triggers deploy.yml,
+# so the site republishes on its own.
+#
+# It deliberately cannot touch calib.json, policy.json, override.json,
+# disputed.json, regs.json or news.json. Those hold the admission tests and the
+# reasoning, and a cron job editing them would be inventing the argument the
+# page makes. Anything needing that judgement is raised as an issue instead.
+name: Atlas daily refresh
+
+on:
+  schedule:
+    # 06:20 UTC. Epoch updates irregularly; OWID rarely. Off the hour on purpose,
+    # because everyone schedules on the hour and GitHub queues those runs.
+    - cron: '20 6 * * *'
+  workflow_dispatch:
+    inputs:
+      report_only:
+        description: 'Diff and report, write nothing'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: atlas-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # The pipeline is stdlib-only by design: geocoding and country codes come
+      # from committed caches, so a rebuild needs nothing but the interpreter.
+      - name: Check the mechanical sources
+        id: check
+        run: |
+          # Capture the script's own exit code, not a pipeline's last stage.
+          set +e
+          python3 tools/atlas/check_sources.py \
+            ${{ inputs.report_only && '--report-only' || '' }} > /tmp/report.json
+          code=$?
+          set -e
+          cat /tmp/report.json
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          echo "exit $code (0 nothing moved, 10 wrote changes, 20 needs a human, 1 broke)"
+
+      # meta.built is the liveness signal for this job: after 3 days the page
+      # turns red and says the daily refresh has not run. So on a quiet stretch
+      # the date still has to advance, or the page accuses a healthy job of
+      # being dead. It advances only as often as that needs — not every morning
+      # just to look fresh.
+      - name: Is the published date about to go stale?
+        id: age
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import datetime, json, re
+          html = open('public/datacenters/index.html', encoding='utf-8').read()
+          i = html.find('window.__DCDATA__=')
+          built = json.loads(html[i + 18:html.index(';</script>', i)].replace('<\\/', '</'))['meta']['built']
+          age = (datetime.date.today() - datetime.date.fromisoformat(built)).days
+          print(f'built={built}')
+          print(f'days={age}')
+          print(f'stale={"true" if age >= 3 else "false"}')
+          PY
+          cat "$GITHUB_OUTPUT"
+
+      - name: Rebuild the page
+        if: steps.check.outputs.code != '1'
+        run: |
+          ./tools/atlas/refresh.sh
+          python3 tools/atlas/artifact.py
+
+      # A drifting anchor means the fitted parameters no longer describe the
+      # measurements. That needs re-deriving by hand, with the arithmetic in the
+      # commit message — so fail loudly rather than shipping a page that is
+      # quietly wrong. France is an out-of-sample check and is never fitted to.
+      - name: Verify anchor residuals
+        if: steps.check.outputs.code != '1'
+        run: |
+          python3 - <<'PY'
+          import json, re, sys
+          app = open('tools/atlas/parts/app.js', encoding='utf-8').read()
+          k = {'iea': float(re.search(r'kIea\s*:\s*([0-9.]+)', app).group(1)),
+               'metro': float(re.search(r'kNat\s*:\s*([0-9.]+)', app).group(1))}
+          bad = []
+          for a in json.load(open('tools/atlas/build/calib.json', encoding='utf-8'))['anchors']:
+              model = a['cap'] * 8760 * k[a['basis']] / 1e6
+              d = (model - a['meas']) / a['meas'] * 100
+              flag = '' if abs(d) <= 5 or a['place'] == 'France' else '  OUT OF BAND'
+              print(f"{a['place']:<16}{d:+6.2f}%{flag}")
+              if flag:
+                  bad.append(f"{a['place']} {d:+.2f}%")
+          if bad:
+              sys.exit('Anchor drift: ' + ', '.join(bad) + ' — re-derive the factor, do not ignore the anchor.')
+          PY
+
+      - name: Commit and push
+        if: steps.check.outputs.code == '10' || steps.check.outputs.code == '20' || steps.age.outputs.stale == 'true'
+        run: |
+          if [ "${{ inputs.report_only }}" = "true" ]; then echo "report-only, not committing"; exit 0; fi
+          if git diff --quiet -- tools/atlas public/datacenters; then
+            echo "nothing to commit"; exit 0
+          fi
+          python3 tools/atlas/commit_msg.py /tmp/report.json > /tmp/msg
+          cat /tmp/msg
+          git config user.name  'Ashley Cho'
+          git config user.email 'ashleyeuncho@gmail.com'
+          git add -A -- tools/atlas public/datacenters
+          git commit -F /tmp/msg
+          git push
+
+      # Anything the script refused to decide: a campus Epoch added or renamed,
+      # a source that would not respond, a value it could not read.
+      - name: Raise anything needing judgement
+        if: steps.check.outputs.code == '20'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const r = JSON.parse(fs.readFileSync('/tmp/report.json', 'utf8'));
+            if (!r.escalations?.length) return;
+            const today = new Date().toISOString().slice(0, 10);
+            const body = [
+              'The daily refresh handled what it could and stopped short of these.',
+              '', ...r.escalations.map(e => `- ${e}`), '',
+              r.changes.length ? 'Applied this run:' : 'Nothing was applied this run.',
+              ...r.changes.map(c => `- ${c}`), '',
+              '<sub>Opened by .github/workflows/atlas-refresh.yml</sub>',
+            ].join('\n');
+            const { data: open } = await github.rest.issues.listForRepo({
+              ...context.repo, state: 'open', labels: 'atlas-refresh',
+            });
+            if (open.length) {
+              await github.rest.issues.createComment({
+                ...context.repo, issue_number: open[0].number, body: `**${today}**\n\n${body}`,
+              });
+            } else {
+              await github.rest.issues.create({
+                ...context.repo, title: `Atlas refresh needs a decision (${today})`,
+                labels: ['atlas-refresh'], body,
+              });
+            }
+
+      - name: Fail the run if the check itself broke
+        if: steps.check.outputs.code == '1'
+        run: exit 1
