@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Apps I've built. External links, so the internal link checker skips them.
+const apps = [
+  {
+    name: 'Vamos',
+    href: 'https://vamos-orpin.vercel.app',
+    tag: 'Travel',
+    blurb:
+      "An AI travel agent for people who don't want to plan. Tell it roughly what you're in the mood for and it comes back with one trip, day by day, and why each stop made the cut. It will also tell you what to skip.",
+  },
+  {
+    name: 'Gloria',
+    href: 'https://gloria-money-acme-89ea.vercel.app',
+    tag: 'Money',
+    blurb:
+      'Get fluent in money. Short daily quizzes on rates, bonds, stocks and the rest, so the financial news starts making sense. Named after my sister, who asked for it.',
+  },
+];
+---
+<Base title="Apps" description="Small apps Ashley Cho built.">
+  <h1>Apps</h1>
+  <p class="lede" style="margin-bottom:2.2rem">
+    Things I built because I wanted them to exist. Both are works in progress,
+    so expect rough edges.
+  </p>
+
+  <ul class="entry-list">
+    {apps.map(a => (
+      <li class="entry">
+        <a class="entry-title" href={a.href} target="_blank" rel="noopener">{a.name} ↗</a>
+        <div class="entry-date"><span class="entry-field">{a.tag}</span> · {new URL(a.href).host}</div>
+        <p>{a.blurb}</p>
+      </li>
+    ))}
+  </ul>
+</Base>
