@@ -25,7 +25,7 @@ Exit codes: 0 nothing moved | 10 wrote changes | 20 needs a human | 1 broke.
 
     python3 tools/atlas/check_sources.py [--report-only] [--epoch-csv FILE]
 """
-import argparse, json, os, re, sys, urllib.request
+import argparse, csv, io, json, os, re, sys, urllib.request
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 BUILD = os.path.join(ROOT, 'build')
@@ -50,23 +50,54 @@ def get(url, timeout=90):
 # ---------------------------------------------------------------- Epoch AI
 
 def parse_epoch(text):
-    """Name -> MW.
+    """Name -> MW, read with a real CSV parser and keyed by column name.
 
-    Deliberately not csv.DictReader: Epoch's Selected Sources column has
-    contained unescaped double quotes, which makes a strict parser swallow the
-    following record whole. Anchoring on the record start is robust to that.
+    Epoch's Selected Sources column holds quoted fields with embedded newlines,
+    so the file cannot be read a line at a time. A line-anchored regex here
+    previously reported power figures that appear nowhere in the row it named
+    (Google New Albany 453 -> 333, Meta Aiken 142 -> 69, both invented on
+    18 Sep 2026). csv.reader handles the quoting, and the power column is found
+    by its header rather than its position, because the layout has moved before.
     """
-    pat = re.compile(r'^(?!Name,)([^,\n"]+),([0-9.]*),([0-9.]*),([0-9.]*),', re.M)
-    out = {}
-    for m in pat.finditer(text):
-        name, mw = m.group(1).strip(), m.group(3).strip()
+    try:
+        rows = list(csv.reader(io.StringIO(text)))
+    except csv.Error as e:
+        escalations.append(f'Epoch: CSV would not parse ({e}). Left as committed.')
+        return {}
+    if not rows:
+        escalations.append('Epoch: empty CSV.')
+        return {}
+    head = [h.strip() for h in rows[0]]
+    try:
+        ni, mi = head.index('Name'), head.index('Current power (MW)')
+    except ValueError:
+        escalations.append(
+            f'Epoch: expected Name and "Current power (MW)" columns, got {head[:6]}. '
+            'Not trusting this pull.')
+        return {}
+
+    out, clash = {}, set()
+    for r in rows[1:]:
+        if len(r) <= max(ni, mi):
+            continue
+        name = r[ni].strip()
         if not name:
             continue
+        raw = r[mi].strip()
         try:
-            out[name] = float(mw) if mw else 0.0
+            mw = float(raw) if raw else 0.0
         except ValueError:
-            escalations.append(f'Epoch: could not read power for {name!r} (got {mw!r})')
-    return out
+            escalations.append(f'Epoch: could not read power for {name!r} (got {raw!r})')
+            continue
+        if name in out and out[name] != mw:
+            clash.add(name)
+        out[name] = mw
+
+    for n in sorted(clash):
+        escalations.append(
+            f'Epoch: {n!r} appears more than once with different power — not guessing '
+            'which row is the campus.')
+    return {k: v for k, v in out.items() if k not in clash}
 
 
 def check_epoch(csv_text):
@@ -126,7 +157,16 @@ def owid_rows(text):
         ci, yi = head.index('code'), head.index('year')
     except ValueError:
         return {}, None
-    vi = len(head) - 1
+    # The value is not reliably the last column. OWID appends provenance
+    # columns such as co2_intensity__gco2_kwh__original_year to some filtered
+    # exports, and reading that one wrote the year 2024 into the carbon
+    # intensity of 93 countries on 18 Sep 2026. Take the first column that is
+    # neither an identifier nor provenance.
+    cand = [i for i, h in enumerate(head)
+            if h not in ('entity', 'code', 'year') and not h.endswith('__original_year')]
+    if not cand:
+        return {}, None
+    vi = cand[0]
     out, year = {}, None
     for l in lines[1:]:
         p = l.split(',')
@@ -198,6 +238,61 @@ def write_gen(ci_edits, gen_edits, co2_edits):
 
 # --------------------------------------------------------------------- main
 
+# ------------------------------------------------------------------- sanity
+
+# The range outside which a number cannot be the thing it claims to be. These
+# are not tuning knobs: a value landing outside one means a column was misread,
+# not that the world did something surprising. The real maxima sit well inside
+# them - Turkmenistan at 1306 g/kWh is the dirtiest grid on record, and the
+# widest NAT rows are the world totals.
+BOUNDS = {
+    'epoch': (0.0, 5000.0, 'MW'),
+    'ci':    (1.0, 1500.0, 'g/kWh'),
+    'gen':   (0.1, 60000.0, 'TWh'),
+    'co2':   (0.1, 60000.0, 'Mt'),
+}
+
+# One morning's genuine news does not move this many series at once. A run that
+# wants to is reporting a parse failure: on 18 Sep 2026 a column-order bug
+# produced 100 edits, every one of them wrong, and nothing objected.
+MAX_EDITS = 12
+
+
+def sanity_gate(epoch_edits, owid_edits):
+    """Drop impossible values, and refuse the whole run if it looks like a parse failure."""
+    lo, hi, unit = BOUNDS['epoch']
+    kept_epoch = []
+    for site, old, new in epoch_edits:
+        if lo <= new <= hi:
+            kept_epoch.append((site, old, new))
+        else:
+            escalations.append(
+                f'Epoch: refusing {site} {old:g} -> {new:g} {unit}, outside {lo:g}-{hi:g}. '
+                'That is a misread column, not a value that moved.')
+
+    kept_owid = {}
+    for kind, label in (('ci', 'carbon intensity'), ('gen', 'generation'), ('co2', 'CO2')):
+        lo, hi, unit = BOUNDS[kind]
+        keep = {}
+        for iso, (old, new) in (owid_edits.get(kind) or {}).items():
+            if lo <= new <= hi:
+                keep[iso] = (old, new)
+            else:
+                escalations.append(
+                    f'OWID {label}: refusing {iso} {old:g} -> {new:g} {unit}, outside '
+                    f'{lo:g}-{hi:g}. That is a misread column, not a value that moved.')
+        kept_owid[kind] = keep
+
+    total = len(kept_epoch) + sum(len(v) for v in kept_owid.values())
+    if total > MAX_EDITS:
+        escalations.append(
+            f'{total} values wanted to change in one run, past the limit of {MAX_EDITS}. '
+            'That is the shape of a parsing failure rather than a day of news, so nothing '
+            'was written. Check the source column layouts before re-running.')
+        return [], {k: {} for k in kept_owid}
+    return kept_epoch, kept_owid
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--report-only', action='store_true', help='diff and report, write nothing')
@@ -240,6 +335,13 @@ def main():
             else:
                 notes.append(f'OWID CO2: latest year {year}, no change.')
             owid_edits['co2'] = edits
+
+    epoch_edits, owid_edits = sanity_gate(epoch_edits, owid_edits)
+    # the report has to describe what was written, not what was proposed
+    changes[:] = [f'Epoch: {s_} {o:g} -> {n:g} MW' for s_, o, n in epoch_edits]
+    for _kind, _label in (('ci', 'carbon intensity'), ('gen', 'generation TWh'), ('co2', 'CO2 Mt')):
+        for _iso, (_o, _n) in sorted((owid_edits.get(_kind) or {}).items()):
+            changes.append(f'OWID {_label}: {_iso} {_o:g} -> {_n:g}')
 
     wrote = False
     if not a.report_only:

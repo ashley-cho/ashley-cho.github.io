@@ -25,6 +25,10 @@ on:
         description: 'Diff and report, write nothing'
         type: boolean
         default: false
+      force_rebuild:
+        description: 'Rebuild and publish even if nothing moved'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -46,6 +50,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+      # The parsers are the part that has been wrong before, and a wrong parser
+      # does not look wrong: it looks like a quiet day until it looks like 100
+      # changes. Fail here, before anything is read or written.
+      - name: Test the source parsers
+        run: python3 tools/atlas/test_check_sources.py
 
       # The pipeline is stdlib-only by design: geocoding and country codes come
       # from committed caches, so a rebuild needs nothing but the interpreter.
@@ -117,7 +127,7 @@ jobs:
       # site build is verified before any refresh reaches the public page.
       - name: Open a pull request with the refresh
         id: pr
-        if: steps.check.outputs.code == '10' || steps.check.outputs.code == '20' || steps.age.outputs.stale == 'true'
+        if: steps.check.outputs.code == '10' || steps.check.outputs.code == '20' || steps.age.outputs.stale == 'true' || inputs.force_rebuild
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
