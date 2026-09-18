@@ -195,6 +195,35 @@ region first, and guessing any of those puts an invented number on the page.
 Anything it refuses to decide goes to a GitHub issue labelled `atlas-refresh`,
 appended to the open one rather than opening a new one each day.
 
+### Why a parser cannot be trusted on its own
+
+On 18 Sep 2026 the first real run proposed 100 edits and every one was wrong.
+`owid_rows` took the last CSV column, which for the filtered carbon-intensity
+export is `co2_intensity__gco2_kwh__original_year`, so it wrote the year 2024
+into the carbon intensity of 93 countries. `parse_epoch` used a line-anchored
+regex that Epoch's multi-line quoted Sources column defeats, and reported power
+figures — 453 to 333, 142 to 69 — that appear nowhere in the rows it named.
+Nothing in the pipeline objected: the anchor residual check constrains the
+energy factors and says nothing about carbon intensity, and the run only
+stopped because CI could not run on a bot's pull request.
+
+Both parsers now select their column by header name, Epoch is read with
+`csv.reader` so quoting works, and a campus appearing twice is escalated rather
+than silently taking whichever row came last. Two further guards sit in
+`sanity_gate`, and they are the important part:
+
+* **Bounds.** A value outside the range in `BOUNDS` cannot be the thing it
+  claims to be, so it is a misread column, not news. 2024 g/kWh is refused
+  because the dirtiest grid on record is Turkmenistan at 1306.
+* **Volume.** More than `MAX_EDITS` (12) values moving in one run is the shape
+  of a parsing failure rather than a day of news, so the whole run is refused
+  and nothing is written.
+
+`tools/atlas/test_check_sources.py` holds both failures as regressions and runs
+in the workflow before any source is read. It needs only the interpreter:
+
+    python3 tools/atlas/test_check_sources.py
+
 **The judgement half** — new regulatory filings, a national statistics office
 publishing a measured series and what the two admission tests say about it, the
 China scope question, hunting replacements for the 2023 Cushman & Wakefield
