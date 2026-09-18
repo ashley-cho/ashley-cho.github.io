@@ -45,7 +45,24 @@ jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
+      # Checked out with ATLAS_BOT_TOKEN rather than the default GITHUB_TOKEN.
+      # GitHub puts any pull_request event raised by GITHUB_TOKEN into an
+      # approval-required state that no repository setting can switch off, so a
+      # PR opened with the built-in token sits waiting for a human and the job
+      # never gets its checks. A user token is not subject to that rule.
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.ATLAS_BOT_TOKEN }}
+
+      - name: Check the bot token is present
+        run: |
+          if [ -z "${{ secrets.ATLAS_BOT_TOKEN }}" ]; then
+            echo "ATLAS_BOT_TOKEN is not set. Without it the job can open a pull"
+            echo "request but never gets CI on it, because GitHub holds any PR"
+            echo "raised by GITHUB_TOKEN for manual approval. Add the secret under"
+            echo "Settings > Secrets and variables > Actions."
+            exit 1
+          fi
 
       - uses: actions/setup-python@v5
         with:
@@ -129,7 +146,7 @@ jobs:
         id: pr
         if: steps.check.outputs.code == '10' || steps.check.outputs.code == '20' || steps.age.outputs.stale == 'true' || inputs.force_rebuild
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.ATLAS_BOT_TOKEN }}
         run: |
           if [ "${{ inputs.report_only }}" = "true" ]; then echo "report-only, not committing"; exit 0; fi
           if git diff --quiet -- tools/atlas public/datacenters; then
@@ -157,7 +174,7 @@ jobs:
         id: merge
         if: steps.pr.outputs.number
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.ATLAS_BOT_TOKEN }}
         run: |
           gh pr checks "${{ steps.pr.outputs.number }}" --watch --interval 10 --fail-fast
           gh pr merge "${{ steps.pr.outputs.number }}" --merge --delete-branch
@@ -170,7 +187,7 @@ jobs:
       - name: Republish the site
         if: steps.merge.outputs.merged == 'true'
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.ATLAS_BOT_TOKEN }}
         run: gh workflow run deploy.yml --ref main
 
       # Anything the script refused to decide: a campus Epoch added or renamed,
