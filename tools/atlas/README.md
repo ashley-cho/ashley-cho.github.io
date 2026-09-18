@@ -195,6 +195,23 @@ region first, and guessing any of those puts an invented number on the page.
 Anything it refuses to decide goes to a GitHub issue labelled `atlas-refresh`,
 appended to the open one rather than opening a new one each day.
 
+### Why the job needs a token of its own
+
+`main` requires a pull request and a passing check, so the job opens one. But a
+`pull_request` event raised by the built-in `GITHUB_TOKEN` is held by GitHub in
+an approval-required state, and no repository setting turns that off — the fork
+contributor-approval setting governs forks, not this. A PR opened with the
+built-in token therefore sits forever waiting for someone to press *Approve
+workflows to run*, which is the one thing an unattended job cannot do.
+
+So the workflow checks out and runs `gh` with `ATLAS_BOT_TOKEN`, a user token
+kept in Settings > Secrets and variables > Actions. It needs Contents, Pull
+requests and Actions write on this repository — Actions because the last step
+dispatches `deploy.yml`. Prefer a fine-grained token scoped to this repository
+alone with an expiry: it can push to `main` through a PR and trigger workflows,
+so its reach should stop at this repo. The job fails on its second step with a
+plain message if the secret is missing.
+
 ### Why a parser cannot be trusted on its own
 
 On 18 Sep 2026 the first real run proposed 100 edits and every one was wrong.
