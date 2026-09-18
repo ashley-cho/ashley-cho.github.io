@@ -2,8 +2,11 @@
 #
 # Pulls Epoch AI and the three Our World in Data series, rewrites the values it
 # is allowed to rewrite, rebuilds the page, checks every calibration anchor is
-# still inside +/-5%, and commits to main. Pushing to main triggers deploy.yml,
-# so the site republishes on its own.
+# still inside +/-5%, and lands the result on main through a pull request.
+#
+# It goes through a PR rather than pushing to main directly, because the
+# `protect main` ruleset requires one and because that keeps ci.yml as the gate
+# on every refresh — including the ones nobody is awake to look at.
 #
 # It deliberately cannot touch calib.json, policy.json, override.json,
 # disputed.json, regs.json or news.json. Those hold the admission tests and the
@@ -26,6 +29,9 @@ on:
 permissions:
   contents: write
   issues: write
+  pull-requests: write
+  # Needed to dispatch deploy.yml at the end. See "Republish the site".
+  actions: write
 
 concurrency:
   group: atlas-refresh
@@ -106,8 +112,14 @@ jobs:
               sys.exit('Anchor drift: ' + ', '.join(bad) + ' — re-derive the factor, do not ignore the anchor.')
           PY
 
-      - name: Commit and push
+      # main is protected: commits must arrive by pull request and ci.yml must
+      # pass. So the job opens one rather than pushing, which also means the
+      # site build is verified before any refresh reaches the public page.
+      - name: Open a pull request with the refresh
+        id: pr
         if: steps.check.outputs.code == '10' || steps.check.outputs.code == '20' || steps.age.outputs.stale == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           if [ "${{ inputs.report_only }}" = "true" ]; then echo "report-only, not committing"; exit 0; fi
           if git diff --quiet -- tools/atlas public/datacenters; then
@@ -115,11 +127,41 @@ jobs:
           fi
           python3 tools/atlas/commit_msg.py /tmp/report.json > /tmp/msg
           cat /tmp/msg
+          branch="atlas-auto/$(date -u +%Y%m%d-%H%M)"
           git config user.name  'Ashley Cho'
           git config user.email 'ashleyeuncho@gmail.com'
+          git switch -c "$branch"
           git add -A -- tools/atlas public/datacenters
           git commit -F /tmp/msg
-          git push
+          git push -u origin "$branch"
+          url=$(gh pr create --base main --head "$branch" \
+                  --title "$(head -1 /tmp/msg)" --body-file /tmp/msg)
+          echo "$url"
+          echo "number=${url##*/}" >> "$GITHUB_OUTPUT"
+          echo "branch=$branch"    >> "$GITHUB_OUTPUT"
+
+      # Wait for ci.yml rather than merging blind. If the site stops building or
+      # a link breaks, the refresh stays in the PR and main is untouched — the
+      # page then goes stale honestly, which is the failure mode we want.
+      - name: Wait for CI, then merge
+        id: merge
+        if: steps.pr.outputs.number
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr checks "${{ steps.pr.outputs.number }}" --watch --interval 10 --fail-fast
+          gh pr merge "${{ steps.pr.outputs.number }}" --merge --delete-branch
+          echo "merged=true" >> "$GITHUB_OUTPUT"
+
+      # A merge made with GITHUB_TOKEN does NOT trigger deploy.yml's `on: push`
+      # — GitHub suppresses it to stop workflows recursing. Without this step the
+      # commit lands on main, the run goes green, and the published page never
+      # changes. workflow_dispatch is the documented exception to that rule.
+      - name: Republish the site
+        if: steps.merge.outputs.merged == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref main
 
       # Anything the script refused to decide: a campus Epoch added or renamed,
       # a source that would not respond, a value it could not read.

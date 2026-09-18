@@ -167,9 +167,17 @@ Data series and diffs them against what is committed. It may rewrite:
 * a value in gen.py's `CIFULL` carbon-intensity table
 * a generation or CO2 value in gen.py's `NAT` table
 
-Then it rebuilds, checks every anchor is still inside ±5%, and pushes to `main`,
-which `deploy.yml` publishes. The anchor check **fails the run** rather than
-shipping a page whose parameters no longer fit the measurements.
+Then it rebuilds, checks every anchor is still inside ±5%, and opens a pull
+request. `main` is protected: commits have to arrive by PR and `ci.yml` has to
+pass, so the job waits for that check and merges only if it goes green. The
+anchor check **fails the run** rather than shipping a page whose parameters no
+longer fit the measurements.
+
+It then dispatches `deploy.yml` explicitly. It has to: a merge made with
+`GITHUB_TOKEN` does not fire that workflow's `on: push` — GitHub suppresses
+events raised by the token so workflows cannot recurse, with `workflow_dispatch`
+as the documented exception. Without the dispatch the commit would land on
+`main`, the run would go green, and the published page would never change.
 
 It is deliberately not allowed to touch `calib.json`, `policy.json`,
 `override.json`, `disputed.json`, `regs.json` or `news.json`. Those hold the
