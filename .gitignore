@@ -5,7 +5,7 @@
 .vercel/
 dist/
 node_modules/
-tools/atlas/build/__pycache__/
+__pycache__/
 tools/atlas/build/data.json
 tools/atlas/build/entities.json
 tools/atlas/dist/
