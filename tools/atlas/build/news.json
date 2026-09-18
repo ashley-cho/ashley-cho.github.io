@@ -31,6 +31,26 @@
       "moved": false,
       "src": "Wyoming Tribune Eagle",
       "url": "https://www.wyomingnews.com/news/local_news/commissioners-approve-zone-change-for-vantage-data-center-south-of-cheyenne/article_ee336047-ce8e-4c25-8300-3af52862357c.html"
+    },
+    {
+      "date": "2026-09-18",
+      "kind": "data",
+      "title": "Epoch AI revises two campuses down",
+      "detail": "Google New Albany cut from 453 to 333 MW and Meta Aiken from 142 to 69 MW in Epoch's frontier data centre dataset. Same source, newer estimate, no change of method.",
+      "effect": "Mapped campus capacity 13,257 to 13,064 MW, down 193 MW, almost all of it US. Country and metro layers are unaffected: both sites sit outside a mapped metro, so nothing was double counted either way.",
+      "moved": true,
+      "src": "Epoch AI",
+      "url": "https://epoch.ai/data/data_centers"
+    },
+    {
+      "date": "2026-09-17",
+      "kind": "data",
+      "title": "IEA publishes 485 TWh for 2025",
+      "detail": "Key Questions on Energy and AI (16 April 2026) puts global data centre electricity at 485 TWh in 2025, up 17% on the year. The page is anchored to the IEA's 415 TWh for 2024, from Energy and AI.",
+      "effect": "Not adopted, and the anchor is unchanged. The whole capacity basis here is IEA installed capacity for 2024 (122.2 GW); dividing 2025 energy by 2024 capacity would move kIea from 0.398 to 0.453 on a year mismatch rather than on evidence. It becomes adoptable when the IEA publishes a 2025 capacity figure to pair it with. Recorded in policy.json.",
+      "moved": false,
+      "src": "IEA",
+      "url": "https://www.iea.org/reports/key-questions-on-energy-and-ai/executive-summary"
     }
   ]
 }
