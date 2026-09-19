@@ -414,6 +414,10 @@ function regsFor(){
   if(st.selRegion) return REGS.filter(r=>st.selRegion.iso.indexOf(r.iso)>=0);
   return REGS;
 }
+// Label each item by what it actually is. An unknown kind prints its own
+// name rather than defaulting to 'announced' — a regulator's decision
+// labelled as an announcement overstates one and understates the other.
+const NEWSTAG={data:'data',announce:'announced',policy:'policy'};
 function newsBlock(){
   if(!NEWS||!NEWS.items) return '';
   const built = new Date(D.meta.built+'T00:00:00Z');
@@ -431,7 +435,7 @@ function newsBlock(){
     return '<li'+(i.moved?' class="moved"':'')+'>'+
       '<span class="newsDate">'+fmt(i.date)+'</span>'+
       '<span class="newsTag '+(i.kind==='data'?'tagData':'tagAnn')+'">'+
-        (i.kind==='data'?'data':'announced')+'</span>'+
+        (NEWSTAG[i.kind]||i.kind)+'</span>'+
       '<span class="newsBody"><b>'+i.title+'</b> '+i.detail+
       ' <a href="'+i.url+'" target="_blank" rel="noopener">'+i.src+'</a>'+
       '<span class="newsEffect">'+(i.moved?'&#9679; ':'')+i.effect+'</span></span></li>';
