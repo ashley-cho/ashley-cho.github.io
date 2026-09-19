@@ -51,6 +51,16 @@
       "moved": false,
       "src": "IEA",
       "url": "https://www.iea.org/reports/key-questions-on-energy-and-ai/executive-summary"
+    },
+    {
+      "date": "2026-09-18",
+      "kind": "policy",
+      "title": "Oregon puts data centres in their own rate class",
+      "detail": "The POWER Act (House Bill 3546, 2025) requires Oregon utilities to serve large energy use facilities of 20 MW and above under a separate schedule on contracts of ten years or longer. The PUC approved Portland General Electric's version in Order No. 26-239 on 10 July 2026, raising data centre rates about 29% on average while every other class fell. Pacific Power's is pending in Docket UE 463.",
+      "effect": "No figure moved. Added to the regulatory set, where it attaches to Hillsboro / Portland — whose 491 MW (CBRE, H1 2026) is unchanged. Cost allocation is not generation, so no capacity or consumption value depends on it.",
+      "moved": false,
+      "src": "Oregon PUC",
+      "url": "https://www.oregon.gov/puc/forms/Forms%20and%20Reports/2026%20POWER%20Act%20Legislative%20Report.pdf"
     }
   ]
 }
