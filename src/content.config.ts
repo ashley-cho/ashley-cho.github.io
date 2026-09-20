@@ -20,6 +20,7 @@ const writing = defineCollection({
       'Materials science',
       'Mathematics',
       'Metrology',
+      'Science',
       'Spaceflight',
     ]),
     draft: z.boolean().default(false),

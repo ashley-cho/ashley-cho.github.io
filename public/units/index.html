@@ -469,6 +469,11 @@ tabs.forEach(([t,p])=>{
   };
 });
 
+/* ?q=... in the URL prefills the search, so other pages can link to an entry */
+const q0 = new URLSearchParams(location.search).get("q");
+if(q0){ document.getElementById("q").value=q0; query=q0.trim(); view="all";
+  document.getElementById("preset-common").setAttribute("aria-pressed","false");
+  document.getElementById("preset-all").setAttribute("aria-pressed","true"); }
 render();
 </script>
 
