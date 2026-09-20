@@ -208,8 +208,7 @@ p.body strong{color:var(--ink);font-weight:600}
 .syms a:hover{border-bottom-style:solid}
 .from a{font-family:var(--sans);font-size:.85rem;color:var(--accent)}
 .from a+a::before{content:"·";color:var(--muted);margin:0 7px}
-.row.hit{background:var(--accent-soft)}
-.row:target{background:var(--accent-soft)}
+.row.hit,.row:target{background:var(--accent-soft);padding-left:16px;padding-right:16px;border-radius:3px}
 @media (max-width:860px){ .row{grid-template-columns:minmax(0,1fr);gap:6px} .eq{font-size:.95rem} }
 </style>
 </head>
