@@ -61,6 +61,16 @@
       "moved": false,
       "src": "Oregon PUC",
       "url": "https://www.oregon.gov/puc/forms/Forms%20and%20Reports/2026%20POWER%20Act%20Legislative%20Report.pdf"
+    },
+    {
+      "date": "2026-09-20",
+      "kind": "policy",
+      "title": "Pennsylvania sets a model large-load tariff",
+      "detail": "PUC Final Order of 13 May 2026, Docket M-2025-3054271, adopted at the 30 April public meeting. It covers customers above 50 MW individually or 100 MW in aggregate: cost causation for interconnection, deposits and collateral against stranded cost, six-month study timelines, minimum contract terms and exit provisions, a public interconnection queue.",
+      "effect": "No figure moved. Added to the regulatory set as a national-thread item; Pennsylvania has no mapped metro on this page, so nothing attaches to a marker. Found on a gap check rather than published this fortnight — it is here because the set had Ohio and Oregon but not the one statewide model tariff written for the same problem.",
+      "moved": false,
+      "src": "Pennsylvania PUC",
+      "url": "https://www.puc.pa.gov/press-release/2026/puc-releases-final-order-establishing-first-of-its-kind-large-load-model-tariff-framework-05132026"
     }
   ]
 }
