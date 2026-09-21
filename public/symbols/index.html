@@ -213,10 +213,10 @@ p.body strong{color:var(--ink);font-weight:600}
     </div>
     <div class="bar">
       <div class="seg" role="group" aria-label="Which symbols to show">
-        <button class="segb" id="preset-common" aria-pressed="true"><span class="lg">Symbols of the day</span><span class="sm">Today</span></button>
+        <button class="segb" id="preset-common" aria-pressed="true"><span class="lg">Symbol of the day</span><span class="sm">Today</span></button>
         <button class="segb" id="preset-all" aria-pressed="false"><span class="lg">All 222</span><span class="sm">All</span></button>
       </div>
-      <button class="chip" id="shuffle" title="Draw ten more at random">Shuffle</button>
+      <button class="chip" id="shuffle" title="Draw another at random">Shuffle</button>
       <select id="domain" aria-label="Filter by field"></select>
       <select id="origin" aria-label="Filter by how the glyph was chosen"></select>
       <span class="count" id="count"></span>
@@ -288,7 +288,7 @@ function rng(seed){ return function(){ seed|=0; seed=seed+0x6D2B79F5|0;
 function hash(s){ let h=2166136261; for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);} return h>>>0; }
 function draw(seed){ const r=rng(seed), pool=ALL.slice();
   for(let i=pool.length-1;i>0;i--){ const j=Math.floor(r()*(i+1)); [pool[i],pool[j]]=[pool[j],pool[i]]; }
-  return pool.slice(0,10); }
+  return pool.slice(0,1); }
 const today = new Date();
 const dayKey = today.getFullYear()+"-"+String(today.getMonth()+1).padStart(2,"0")+"-"+String(today.getDate()).padStart(2,"0");
 const dayLabel = today.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
@@ -395,9 +395,9 @@ function render(){
   document.getElementById("shuffle").hidden = !isDay;
   let html;
   if(isDay){
-    html = group("Symbols of the day", dayLabel, "", daily, true, 10, 0)
-      + '<p class="lead">Ten drawn at random, redrawn every day. Shuffle for another ten, search above, or switch to <b>All 222</b>.</p>';
-    document.getElementById("count").textContent = "10 / " + TOTAL;
+    html = group("Symbol of the day", dayLabel, "", daily, true, 1, 0)
+      + '<p class="lead">One drawn at random, redrawn every day. Shuffle for another, search above, or switch to <b>All 222</b>.</p>';
+    document.getElementById("count").textContent = "1 / " + TOTAL;
   } else if(query){
     const hits = results();
     html = hits.length
@@ -437,6 +437,11 @@ tabs.forEach(([t,p])=>{ document.getElementById(t).onclick=()=>{
     document.getElementById(p2).hidden=(p2!==p); });
   window.scrollTo({top:0}); }; });
 
+/* ?q=... in the URL prefills the search, so other pages can link to an entry */
+const q0 = new URLSearchParams(location.search).get("q");
+if(q0){ document.getElementById("q").value=q0; query=q0.trim(); view="all";
+  document.getElementById("preset-common").setAttribute("aria-pressed","false");
+  document.getElementById("preset-all").setAttribute("aria-pressed","true"); }
 render();
 </script>
 

@@ -213,10 +213,10 @@ p.body strong{color:var(--ink);font-weight:600}
     </div>
     <div class="bar">
       <div class="seg" role="group" aria-label="Which units to show">
-        <button class="segb" id="preset-common" aria-pressed="true"><span class="lg">Units of the day</span><span class="sm">Today</span></button>
+        <button class="segb" id="preset-common" aria-pressed="true"><span class="lg">Unit of the day</span><span class="sm">Today</span></button>
         <button class="segb" id="preset-all" aria-pressed="false"><span class="lg">All 342</span><span class="sm">All</span></button>
       </div>
-      <button class="chip" id="shuffle" title="Draw ten more at random">Shuffle</button>
+      <button class="chip" id="shuffle" title="Draw another at random">Shuffle</button>
       <select id="domain" aria-label="Filter by domain"></select>
       <select id="origin" aria-label="Filter by origin"></select>
       <span class="count" id="count"></span>
@@ -313,7 +313,7 @@ const POOL = ALL.filter(e => e.sym && !/^see /i.test(e.val));
 function draw(seed){
   const r = rng(seed), pool = POOL.slice();
   for(let i=pool.length-1;i>0;i--){ const j=Math.floor(r()*(i+1)); [pool[i],pool[j]]=[pool[j],pool[i]]; }
-  return pool.slice(0,10);
+  return pool.slice(0,1);
 }
 const today = new Date();
 const dayKey = today.getFullYear()+"-"+String(today.getMonth()+1).padStart(2,"0")+"-"+String(today.getDate()).padStart(2,"0");
@@ -415,9 +415,9 @@ function render(){
   document.getElementById("shuffle").hidden = !isDay;
   let html;
   if(isDay){
-    html = group("Units of the day", dayLabel, "", daily, true, 10, 0)
-      + '<p class="lead">Ten drawn at random from the catalogue, redrawn every day. Shuffle for another ten, search above, or switch to <b>All 342</b>.</p>';
-    document.getElementById("count").textContent = "10 / " + TOTAL;
+    html = group("Unit of the day", dayLabel, "", daily, true, 1, 0)
+      + '<p class="lead">One drawn at random from the catalogue, redrawn every day. Shuffle for another, search above, or switch to <b>All 342</b>.</p>';
+    document.getElementById("count").textContent = "1 / " + TOTAL;
   } else if(query){
     const hits = results();
     html = hits.length
@@ -469,6 +469,11 @@ tabs.forEach(([t,p])=>{
   };
 });
 
+/* ?q=... in the URL prefills the search, so other pages can link to an entry */
+const q0 = new URLSearchParams(location.search).get("q");
+if(q0){ document.getElementById("q").value=q0; query=q0.trim(); view="all";
+  document.getElementById("preset-common").setAttribute("aria-pressed","false");
+  document.getElementById("preset-all").setAttribute("aria-pressed","true"); }
 render();
 </script>
 
