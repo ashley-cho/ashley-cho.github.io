@@ -256,3 +256,52 @@ whichever comes first. On a quiet stretch the date advances every third day and
 the banner stays truthful; if the job actually dies, the date freezes and the
 page says so on day four. That is the one case where rebuilding without a data
 change is honest — because a machine really did check the sources that morning.
+
+## Landing the judgement half
+
+`.github/workflows/atlas-judgement.yml` - dispatched, never scheduled. It exists
+because the session doing the judgement pass has no git credentials: it can read
+the repo, reason about the sources and write the edits, but it cannot push. The
+result used to be a commit sitting on a local branch until a human ran
+`git push`, and twice a finding never reached the page at all.
+
+The session dispatches it from the Actions page with its edits as a JSON payload:
+
+    {"news":     {"add": [...]},
+     "regs":     {"add": [...], "update": [{"k": "...", ...}]},
+     "policy":   {"admit": [...], "reject": [...], "recheck": [{"place", "why"}]},
+     "disputed": {"set": {"CHN": {...}}}}
+
+`apply_judgement.py` is the gate and `test_apply_judgement.py` pins every rule it
+claims to enforce - the workflow runs those tests before it trusts the gate, every
+time. It refuses:
+
+* any section outside the four ledger files. `calib.json`, `override.json`,
+  `newload.json` and `sites.py` stay manual: moving a fitted number needs
+  arithmetic in a commit message and a person reading it
+* an admitted **anchor** whose implied load factor is outside 0.3-0.85. That is
+  Test 2, enforced rather than trusted; the same figure may still be recorded as
+  an override with its scope mismatch declared, the way China is
+* a news item dated anything but today or yesterday, so nothing can be backdated
+  past the 14-day window or dated forward into it
+* `moved: true` whose `effect` names no figures
+* a filing naming a metro or campus the map does not have, a duplicate `k`, or a
+  `body_text` under 200 characters - the entry is the argument, not a stub
+* unknown or missing fields anywhere, and more than 8 edits in one run
+
+Then it rebuilds, checks the anchors, and **opens a pull request**. It stops
+there. It holds `contents` and `pull-requests` write and nothing else: no merge
+permission, no deploy dispatch. The diff gets read by someone before it reaches
+the public page, and that checkpoint is the point - the page's claim is that a
+person stands behind the admissions and the rejections.
+
+Two details worth keeping:
+
+The four per-file JSON formats in `apply_judgement.py` were measured against the
+committed files, not assumed - they are the only `json.dumps` arguments that
+reproduce each byte for byte, so a one-line edit stays a one-line diff. A test
+pins that, and it caught `disputed.json` being written the wrong way.
+
+The payload reaches the job through the environment, never interpolated into a
+shell line: `${{ inputs.payload }}` inside a `run:` block would be a command
+injection, and this input is attacker-shaped by construction.
