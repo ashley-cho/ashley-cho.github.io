@@ -110,14 +110,19 @@ select{font-family:var(--sans);font-size:.78rem;font-weight:600;padding:0 9px;he
 /* catalogue */
 .cat{margin-top:22px}
 .cat-head{display:flex;align-items:flex-end;gap:12px;padding-bottom:9px;border-bottom:2px solid var(--ink)}
-.cat-head h2{font-family:var(--head);font-weight:700;font-size:clamp(1.05rem,1.7vw,1.3rem);
+.cat-head h2{font-family:var(--head);font-weight:700;font-size:clamp(1.05rem,1.7vw,1.3rem);line-height:1;
   letter-spacing:-.015em;margin:0}
+:root{--desc:calc(clamp(1.05rem,1.7vw,1.3rem)*.2);--xh:calc(clamp(1.05rem,1.7vw,1.3rem)*.52);--ch:calc(clamp(1.05rem,1.7vw,1.3rem)*.7)}
+.cat-head .db{align-self:flex-end;margin-bottom:calc(var(--desc) - 2px);font-size:.55rem;padding:2px 6px;line-height:1.3}
+.cat-head .chip{align-self:flex-end;margin-bottom:var(--desc)}
+.cat-head .chip.icon svg{width:var(--ch);height:var(--ch)}
 .cat-head .sub,.cat-head .n{font-family:var(--mono);font-size:.72rem;color:var(--muted);
   font-variant-numeric:tabular-nums}
 .cat-head .rule{flex:1;height:1px}
 .cat-head .chip{height:26px;padding:0 10px}
-.chip.icon{width:26px;padding:0;justify-content:center}
-.chip.icon svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.chip.icon{width:auto;height:auto;padding:0;line-height:0;border:0;background:none;color:var(--muted)}
+.chip.icon:hover{color:var(--ink)}
+.chip.icon svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .cat-note{font-size:.9rem;line-height:1.6;color:var(--ink-2);margin:14px 0 0;
   padding-top:12px;border-top:1px solid var(--rule-soft)}
 .cat-note b{font-family:var(--mono);font-weight:500;color:var(--muted);font-size:.7rem;
@@ -452,8 +457,19 @@ document.getElementById("preset-common").onclick = ()=>{
   setView("day");
 };
 document.getElementById("preset-all").onclick = ()=>setView("all");
+/* size the tag box to the title's lowercase n, the icon to its H, and put both on
+   the title's baseline, measured from the real font once it has loaded. */
+function fitHead(){ const h=document.querySelector(".cat-head h2"); if(!h) return;
+  const cv=document.createElement("canvas").getContext("2d"); cv.font=getComputedStyle(h).font;
+  const xh=cv.measureText("n").actualBoundingBoxAscent, ch=cv.measureText("H").actualBoundingBoxAscent;
+  const probe=document.createElement("span"); probe.style.cssText="display:inline-block;width:0;height:0"; h.appendChild(probe);
+  const desc=h.getBoundingClientRect().bottom-probe.getBoundingClientRect().bottom; probe.remove();
+  const r=document.documentElement.style; r.setProperty("--xh",xh.toFixed(2)+"px"); r.setProperty("--ch",ch.toFixed(2)+"px"); r.setProperty("--desc",desc.toFixed(2)+"px");
+}
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fitHead);
+window.addEventListener("load", fitHead); window.addEventListener("resize", fitHead);
 const SHUF = '<button class="chip icon" id="shuffle" title="Draw another at random" aria-label="Draw another at random"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg></button>';
-document.getElementById("cat").addEventListener("click", ev=>{ if(ev.target.closest("#shuffle")){ daily = draw((Math.random()*4294967296)>>>0); render(); } });
+document.getElementById("cat").addEventListener("click", ev=>{ if(ev.target.closest("#shuffle")){ daily = draw((Math.random()*4294967296)>>>0); render(); fitHead(); } });
 document.getElementById("domain").onchange = e=>{ domain = e.target.value||null; setView(domain||origin||query?"all":view); };
 document.getElementById("origin").onchange = e=>{ origin = e.target.value||null; setView(domain||origin||query?"all":view); };
 document.getElementById("q").addEventListener("input", e=>{
