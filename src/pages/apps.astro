@@ -21,12 +21,12 @@ const apps = [
 ---
 <Base title="Apps" description="Small apps Ashley Cho built.">
   <h1>Apps</h1>
-  <p class="lede" style="margin-bottom:2.2rem">
+  <p class="lede">
     Things I built because I wanted them to exist. Both are works in progress,
     so expect rough edges.
   </p>
 
-  <ul class="entry-list">
+  <ul class="entry-list blurbs">
     {apps.map(a => (
       <li class="entry">
         <a class="entry-title" href={a.href} target="_blank" rel="noopener">{a.name} ↗</a>

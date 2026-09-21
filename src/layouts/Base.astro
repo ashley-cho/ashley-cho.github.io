@@ -23,15 +23,13 @@ const nav = [
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="alternate" type="application/rss+xml" title="Ashley Cho" href="/rss.xml" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛰️</text></svg>" />
 </head>
 <body>
   <header class="site-head">
     <div class="wrap">
       <nav>
-        <span class="brand"><a href="/">Ashley Cho</a></span>
         {nav.map(i => (
-          <a href={i.href} style={path.startsWith(i.href) ? 'color:var(--fg)' : ''}>{i.label}</a>
+          <a href={i.href} class={(path === '/' && i.href === '/writing/') || path.startsWith(i.href) ? 'on' : undefined}>{i.label}</a>
         ))}
       </nav>
     </div>
@@ -44,9 +42,9 @@ const nav = [
   </main>
 
   <footer class="site-foot">
-    <div class="wrap" style="display:flex;gap:1rem;flex-wrap:wrap;width:100%">
-      <span>© {new Date().getFullYear()} Ashley Cho</span>
-      <span style="margin-left:auto"><a href="/rss.xml">RSS</a></span>
+    <div class="wrap">
+      <span>© {new Date().getFullYear()}</span>
+      <a href="/rss.xml">RSS</a>
     </div>
   </footer>
 </body>
