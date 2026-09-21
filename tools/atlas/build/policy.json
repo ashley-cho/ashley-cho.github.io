@@ -1,7 +1,7 @@
 {
  "rule": [
   "A national statistical source replaces the IEA estimate for its own country when it passes two tests.",
-  "TEST 1 - PROVENANCE. The figure must come from a national statistics office, energy regulator, grid operator or ministry, and be measured rather than modelled. Consultancy estimates, industry-commissioned models and government projections do not qualify, however widely they are cited.",
+  "TEST 1 - PROVENANCE. The figure must come from a national statistics office, energy regulator, grid operator or ministry, and be measured rather than modeled. Consultancy estimates, industry-commissioned models and government projections do not qualify, however widely they are cited.",
   "TEST 2 - PHYSICAL PLAUSIBILITY. Divide the measured electricity by the mapped capacity times 8,760 hours. The result is the load factor the two datasets jointly imply. Real facilities run between roughly 0.3 and 0.85. A result inside that band means both sources are describing the same fleet, so the measurement is admitted as an anchor and used to calibrate the model. A result outside it means they are counting different facilities, so the measurement is used for that country's own total and the scope mismatch is declared.",
   "The test is what separates a defensible override from cherry-picking. China is the only case so far that fails Test 2, and it fails it decisively."
  ],
@@ -66,25 +66,25 @@
    "place": "Japan",
    "fig": "no national series",
    "test": "Test 1",
-   "why": "METI only began requiring data centre operators to report electricity use in 2026, so no measured aggregate exists yet. Published national numbers are forward projections."
+   "why": "METI only began requiring data center operators to report electricity use in 2026, so no measured aggregate exists yet. Published national numbers are forward projections."
   },
   {
    "place": "Germany",
    "fig": "21.3 TWh (2025), Borderstep Institut",
    "test": "Test 1",
-   "why": "Modelled by a research institute under commission from Bitkom, the industry association. Reproduced in a federal ministry report, which is not the same as being measured by one."
+   "why": "Modeled by a research institute under commission from Bitkom, the industry association. Reproduced in a federal ministry report, which is not the same as being measured by one."
   },
   {
    "place": "South Korea",
    "fig": "5 TWh (2023), MOTIE 11th Basic Plan",
    "test": "Test 1",
-   "why": "A planning baseline inside an electricity supply plan, modelled rather than metered, with no published methodology or scope. Would have passed Test 2 at a load factor of 0.77."
+   "why": "A planning baseline inside an electricity supply plan, modeled rather than metered, with no published methodology or scope. Would have passed Test 2 at a load factor of 0.77."
   },
   {
    "place": "Singapore",
    "fig": "3.40 TWh (2020), EMA via parliamentary reply",
    "test": "Test 1",
-   "why": "Genuinely official, but five years stale with no stated scope, and EMA's live statistics fold data centres into 'Commerce and Services'. Too old to test against current capacity."
+   "why": "Genuinely official, but five years stale with no stated scope, and EMA's live statistics fold data centers into 'Commerce and Services'. Too old to test against current capacity."
   },
   {
    "place": "Australia",
@@ -102,7 +102,7 @@
    "place": "World",
    "fig": "485 TWh (2025), IEA Key Questions on Energy and AI",
    "test": "neither",
-   "why": "Passes Test 1 and would pass Test 2; held back on vintage alone. Every capacity figure on this page is IEA installed capacity for 2024, so pairing 485 TWh (2025) with 122.2 GW (2024) implies 0.453 and would move kIea from 0.398 purely because the two readings are a year apart. The anchor stays at 415 TWh (2024) until the IEA publishes 2025 capacity to pair with it. Re-checked 20 Sep 2026: the IEA page still carries 415 TWh (2024) and no 2025 installed-capacity figure, so the hold stands."
+   "why": "Passes Test 1 and would pass Test 2; held back on vintage alone. Every capacity figure on this page is IEA installed capacity for 2024, so pairing 485 TWh (2025) with 122.2 GW (2024) implies 0.453 and would move kIea from 0.398 purely because the two readings are a year apart. The anchor stays at 415 TWh (2024) until the IEA publishes 2025 capacity to pair with it. Re-checked Sep 20, 2026: the IEA page still carries 415 TWh (2024) and no 2025 installed-capacity figure, so the hold stands."
   }
  ]
 }

@@ -39,7 +39,7 @@ names={}
 for _iso3,_i in json.load(open(os.path.join(ROOT,'isocache.json')))['iso3info'].items(): names[_iso3]=_i['name']
 names['HKG']='Hong Kong'; names['TWN']='Taiwan'
 COMPLETE={'USA':'us','CHN':'cn','IND':'in','GBR':'uk','BRA':'br'}
-# published national statistics for data centre electricity share, where an official source exists
+# published national statistics for data center electricity share, where an official source exists
 BENCH={'IRL':{'pct':23.0,'yr':'2025','src':'CSO Ireland, Data Centres Metered Electricity Consumption (Jul 2026)'}}
 
 EU27="AUT BEL BGR HRV CYP CZE DNK EST FIN FRA DEU GRC HUN IRL ITA LVA LTU LUX MLT NLD POL PRT ROU SVK SVN ESP SWE".split()

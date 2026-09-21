@@ -388,7 +388,7 @@ const SRC = {
   avert:{n:'EPA — AVERT v4.3 avoided emission rates',u:'https://www.epa.gov/avert/avoided-emission-rates-generated-avert',w:'US regional marginal emission rates, 2023 — what ramps to serve new load'},
   lbnl:{n:'Berkeley Lab — US Data Center Energy Usage',u:'https://newscenter.lbl.gov/2025/01/15/berkeley-lab-report-evaluates-increase-in-electricity-demand-from-data-centers/',w:'Measured US consumption, 176 TWh in 2023'},
   cso:{n:'CSO Ireland — Data Centres Metered Electricity',u:'https://www.cso.ie/en/releasesandpublications/ep/p-dcmec/datacentresmeteredelectricityconsumption2025/keyfindings/',w:'Measured Irish consumption, 7.66 TWh in 2025'},
-  cbs:{n:'CBS Netherlands — data centre electricity',u:'https://www.cbs.nl/en-gb/news/2025/51/data-centres-consume-4-6-percent-of-the-netherlands-electricity',w:'Measured Dutch consumption, 5.10 TWh in 2024'},
+  cbs:{n:'CBS Netherlands — data center electricity',u:'https://www.cbs.nl/en-gb/news/2025/51/data-centres-consume-4-6-percent-of-the-netherlands-electricity',w:'Measured Dutch consumption, 5.10 TWh in 2024'},
 };
 function srcKeyFor(s){
   if(!s) return null;
@@ -416,7 +416,7 @@ function regsFor(){
 }
 // Label each item by what it actually is. An unknown kind prints its own
 // name rather than defaulting to 'announced' — a regulator's decision
-// labelled as an announcement overstates one and understates the other.
+// labeled as an announcement overstates one and understates the other.
 const NEWSTAG={data:'data',announce:'announced',policy:'policy'};
 function newsBlock(){
   if(!NEWS||!NEWS.items) return '';
@@ -430,7 +430,7 @@ function newsBlock(){
   if(!live.length) return '<div class="news">'+head+
     '<p class="newsEmpty">Nothing published in the last '+win+' days that bears on these numbers. An empty list is a finding, not a gap.</p></div>';
   const fmt = function(d){ const x=new Date(d+'T00:00:00Z');
-    return x.toLocaleDateString('en-GB',{day:'numeric',month:'short',timeZone:'UTC'}); };
+    return x.toLocaleDateString('en-US',{day:'numeric',month:'short',timeZone:'UTC'}); };
   return '<div class="news">'+head+'<ul class="newsList">'+live.map(function(i){
     return '<li'+(i.moved?' class="moved"':'')+'>'+
       '<span class="newsDate">'+fmt(i.date)+'</span>'+
@@ -577,7 +577,7 @@ function tabAcc(){
       '<td class="num">'+nf(K[x.a.basis],3)+'</td>'+
       '<td class="num" style="color:'+(Math.abs(x.d)<10?'var(--ink2)':'var(--s3)')+'">'+(x.d>=0?'+':'')+nf(x.d,0)+'%</td></tr>').join('')+
     '</tbody></table>'+
-    '<p class="note">Five places measure data centre electricity rather than estimate it. Every parameter here is set from these, not from judgement. They split by which capacity dataset they divide into — IEA-basis implies 0.388–0.408, metro-basis 0.658–0.702 — which is why each layer carries its own factor. France was added after the factors were fixed, so it is an out-of-sample check rather than an input.</p>'+
+    '<p class="note">Five places measure data center electricity rather than estimate it. Every parameter here is set from these, not from judgment. They split by which capacity dataset they divide into — IEA-basis implies 0.388–0.408, metro-basis 0.658–0.702 — which is why each layer carries its own factor. France was added after the factors were fixed, so it is an out-of-sample check rather than an input.</p>'+
     polBlock()+ vintBlock()+ avertBlock()+
     '<p class="note warn">The world row above is the IEA-basis check. The headline world total is higher than the IEA&rsquo;s 415 TWh because China is counted on its own national statistics (260 TWh) rather than the IEA&rsquo;s 100 TWh. That is deliberate: China&rsquo;s own number is better evidenced, at the cost of comparability.</p>'+
     '<p class="note">The load factor is the well-constrained part. The remaining error is capacity coverage: how much of a country&#39;s estate the mapped metros contain. Trust the world and US figures to roughly ±10%; treat other countries as floors.</p>';
@@ -610,7 +610,7 @@ function avertBlock(){
     '<tr><td>'+k+'</td><td class="num">'+Math.round(v)+'</td><td class="num">'+
     Math.round(0.48*506.25+0.52*v)+'</td></tr>').join('');
   return '<h4 style="margin-top:18px">US new load is priced at the margin</h4>'+
-    '<p class="note">Average grid intensity answers &ldquo;what does the fleet emit?&rdquo;. The question a new data centre poses is &ldquo;which generator ramps to serve it?&rdquo;, and the answer is almost always gas. '+
+    '<p class="note">Average grid intensity answers &ldquo;what does the fleet emit?&rdquo;. The question a new data center poses is &ldquo;which generator ramps to serve it?&rdquo;, and the answer is almost always gas. '+
     'Each US campus now uses the EPA AVERT marginal rate for its region ('+a.year+', '+a.profile+' profile) for the '+
     Math.round((1-0.48)*100)+'% of new capacity that draws on the ordinary grid. The other 48% arrives with its own generation and is priced as built. '+
     'Site values run <b>'+a.lo+'&ndash;'+a.hi+' g/kWh</b> across '+a.sites+' campuses, against the single <b>'+n.flat+' g/kWh</b> used before.</p>'+

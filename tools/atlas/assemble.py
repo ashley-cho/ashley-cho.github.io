@@ -29,7 +29,7 @@ blob = blob.replace('</', '<\\/')
 html = (
  '<!doctype html><html lang="en"><head><meta charset="utf-8">'
  '<meta name="viewport" content="width=device-width,initial-scale=1">'
- '<meta name="description" content="Interactive map of global data centre capacity, '
+ '<meta name="description" content="Interactive map of global data center capacity, '
  'electricity use and CO2 - every parameter anchored to measured national statistics.">'
  + head +
  '</head><body>' + body +

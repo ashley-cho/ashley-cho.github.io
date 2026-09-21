@@ -6,7 +6,7 @@
     "year": "2023",
     "profile": "Uniform EE",
     "unit_src": "lb CO2 / MWh",
-    "note": "Uniform EE is AVERT's flat, around-the-clock load profile. A data centre is a flat load addition, so this is its mirror image; the wind and solar profiles are shaped and would be the wrong instrument. AVERT reports CO2 only, not CO2e.",
+    "note": "Uniform EE is AVERT's flat, around-the-clock load profile. A data center is a flat load addition, so this is its mirror image; the wind and solar profiles are shaped and would be the wrong instrument. AVERT reports CO2 only, not CO2e.",
     "regiondef": "AVERT v4.2 User Manual, Table 1, p.17",
     "regiondef_url": "https://www.epa.gov/system/files/documents/2023-10/avert-user-manual-v4.2.pdf"
   },
