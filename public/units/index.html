@@ -116,6 +116,8 @@ select{font-family:var(--sans);font-size:.78rem;font-weight:600;padding:0 9px;he
   font-variant-numeric:tabular-nums}
 .cat-head .rule{flex:1;height:1px}
 .cat-head .chip{height:26px;padding:0 10px}
+.chip.icon{width:26px;padding:0;justify-content:center}
+.chip.icon svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .cat-note{font-size:.9rem;line-height:1.6;color:var(--ink-2);margin:14px 0 0;
   padding-top:12px;border-top:1px solid var(--rule-soft)}
 .cat-note b{font-family:var(--mono);font-weight:500;color:var(--muted);font-size:.7rem;
@@ -450,7 +452,7 @@ document.getElementById("preset-common").onclick = ()=>{
   setView("day");
 };
 document.getElementById("preset-all").onclick = ()=>setView("all");
-const SHUF = '<button class="chip" id="shuffle" title="Draw another at random">Shuffle</button>';
+const SHUF = '<button class="chip icon" id="shuffle" title="Draw another at random" aria-label="Draw another at random"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg></button>';
 document.getElementById("cat").addEventListener("click", ev=>{ if(ev.target.closest("#shuffle")){ daily = draw((Math.random()*4294967296)>>>0); render(); } });
 document.getElementById("domain").onchange = e=>{ domain = e.target.value||null; setView(domain||origin||query?"all":view); };
 document.getElementById("origin").onchange = e=>{ origin = e.target.value||null; setView(domain||origin||query?"all":view); };
