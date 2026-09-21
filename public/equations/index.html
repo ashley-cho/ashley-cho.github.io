@@ -387,7 +387,7 @@ function figHTML(id){
 /* KaTeX is loaded deferred from the CDN; if it is missing the raw TeX is shown. */
 function tex(s, disp){
   if(!window.katex) return '<code>'+esc(s)+'</code>';
-  try { return katex.renderToString(s, {displayMode:!!disp, throwOnError:false, strict:"ignore"}); }
+  try { return katex.renderToString(s, {displayMode:!!disp, throwOnError:false, strict:"ignore", output:"html"}); }
   catch(err) { return '<code>'+esc(s)+'</code>'; }
 }
 /* prose with $...$ spans: text is escaped and highlighted, maths is typeset */
@@ -483,8 +483,8 @@ function rowHTML(e, showField, hideName){
       + '<div class="dn">'+rich(e.says)+'</div>'
       + (fb?'<div class="badges">'+fb+'</div>':"")
       + figHTML(e.id) + '</div>'
-    + '<div><div class="org">'+rich(e.means)+'</div>'
-      + '<div class="fld"><b>Symbols</b>'+symsHTML(e)+'</div>'
+    + '<div><div class="fld" style="margin-top:0"><b>Symbols</b>'+symsHTML(e)+'</div>'
+      + '<div class="org" style="margin-top:12px">'+rich(e.means)+'</div>'
       + '<div class="col"><b>Assumes, and where it breaks</b>'+rich(e.assumes)+'</div>'
       + (e.limits?'<div class="fld"><b>Limits</b>'+rich(e.limits)+'</div>':"")
       + (from.length?'<div class="fld from"><b>Descends from</b>'+from.map(id=>'<a href="#eq-'+id+'" data-go="'+id+'">'+esc(BYID[id].name)+'</a>').join("")+'</div>':"")
