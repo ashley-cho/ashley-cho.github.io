@@ -110,7 +110,7 @@ select{font-family:var(--sans);font-size:.78rem;font-weight:600;padding:0 9px;he
 /* catalogue */
 .cat{margin-top:22px}
 .cat-head{display:flex;align-items:baseline;gap:12px;padding-bottom:9px;border-bottom:2px solid var(--ink)}
-.cat-head h2{font-family:var(--head);font-weight:700;font-size:clamp(1.15rem,2vw,1.5rem);
+.cat-head h2{font-family:var(--head);font-weight:700;font-size:clamp(1.05rem,1.7vw,1.3rem);
   letter-spacing:-.015em;margin:0}
 .cat-head .sub,.cat-head .n{font-family:var(--mono);font-size:.72rem;color:var(--muted);
   font-variant-numeric:tabular-nums}
@@ -201,7 +201,7 @@ p.body strong{color:var(--ink);font-weight:600}
 <header class="plate">
   <div class="eyebrow">
     <span class="brand"><a href="https://ashley-cho.github.io/">Ashley Cho</a></span>
-    <span>Reference</span><span class="rule"></span><span>Revised 7 September 2026</span>
+    <span class="rule"></span><span>Revised 7 September 2026</span>
   </div>
   <h1>Every unit <em>still</em> in use</h1>
   <p class="standfirst">342 units people actually write down today, across 30 domains, each with where it came from and who decided it. Not a museum of cubits and hogsheads.</p>
@@ -392,24 +392,24 @@ function results(){
     .map(p=>p[1]);
 }
 
-function rowHTML(e, showDomain){
+function rowHTML(e, showDomain, hideName){
   const kb = e.k ? '<span class="kb">'+(e.k==="scale"?"ordinal scale":"dimensionless")+'</span>' : "";
   const db = showDomain ? '<span class="db">'+esc(e.cname)+'</span>' : "";
   return '<div class="row">'
     + '<div class="sym">'+(e.sym?hl(e.sym):"&mdash;")+'</div>'
-    + '<div><div class="nm">'+hl(e.name)+'</div>'
+    + '<div>'+(hideName?"":'<div class="nm">'+hl(e.name)+'</div>')
       + (e.qty?'<div class="qt">'+hl(e.qty)+'</div>':"")
       + '<div class="badges"><span class="ob" style="--sc:'+OVAR[e.o]+'">'+OLABEL[e.o]+'</span>'+kb+db+'</div></div>'
     + '<div>'+(e.val?'<div class="val">'+hl(e.val)+'</div>':"")
       + (e.org?'<div class="org">'+hl(e.org)+'</div>':"")+'</div></div>';
 }
 
-function group(title, sub, note, rows, showDomain, n, of, extra){
+function group(title, sub, note, rows, showDomain, n, of, extra, hideName){
   return '<section class="cat">'
     + '<div class="cat-head"><h2>'+esc(title)+'</h2>'
-    + (sub?'<span class="sub">'+esc(sub)+'</span>':"")
+    + (sub?'<span class="'+(hideName?"db":"sub")+'">'+esc(sub)+'</span>':"")
     + '<span class="rule"></span>'+(of&&of!==n?'<span class="n">'+n+' of '+of+'</span>':"")+(extra||"")+'</div>'
-    + '<div class="rows">'+rows.map(e=>rowHTML(e,showDomain)).join("")+'</div>'
+    + '<div class="rows">'+rows.map(e=>rowHTML(e,showDomain,hideName)).join("")+'</div>'
     + (note?'<p class="cat-note"><b>About this domain</b>'+esc(note)+'</p>':"")
     + '</section>';
 }
@@ -418,7 +418,7 @@ function render(){
   const isDay = view==="day" && !query && !domain && !origin;
   let html;
   if(isDay){
-    html = group("Unit of the day", dayLabel, "", daily, true, 1, 0, SHUF)
+    html = group(daily[0].name, daily[0].cname, "", daily, false, 1, 0, SHUF, true)
       + '<p class="lead">One drawn at random from the catalogue, redrawn every day. Shuffle for another, search above, or switch to <b>All 342</b>.</p>';
   } else if(query){
     const hits = results();

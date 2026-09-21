@@ -112,7 +112,7 @@ select{font-family:var(--sans);font-size:.78rem;font-weight:600;padding:0 9px;he
 /* catalogue */
 .cat{margin-top:22px}
 .cat-head{display:flex;align-items:baseline;gap:12px;padding-bottom:9px;border-bottom:2px solid var(--ink)}
-.cat-head h2{font-family:var(--head);font-weight:700;font-size:clamp(1.15rem,2vw,1.5rem);
+.cat-head h2{font-family:var(--head);font-weight:700;font-size:clamp(1.05rem,1.7vw,1.3rem);
   letter-spacing:-.015em;margin:0}
 .cat-head .sub,.cat-head .n{font-family:var(--mono);font-size:.72rem;color:var(--muted);
   font-variant-numeric:tabular-nums}
@@ -259,7 +259,7 @@ p.body strong{color:var(--ink);font-weight:600}
 <header class="plate">
   <div class="eyebrow">
     <span class="brand"><a href="https://ashley-cho.github.io/">Ashley Cho</a></span>
-    <span>Reference</span><span class="rule"></span><span>172 equations</span>
+    <span class="rule"></span><span>172 equations</span>
   </div>
   <h1>The world in <em>equations</em></h1>
   <p class="standfirst">172 equations that carry science. What each one says, what it quietly assumes, where it stops working, what it descends from, and who wrote it down first.</p>
@@ -474,12 +474,12 @@ function unitsHTML(e){
     ? '<a href="/units/?q='+encodeURIComponent(x[1])+'" title="On the units page">'+rich(x[0])+'</a>'
     : rich(x[0])).join("; ");
 }
-function rowHTML(e, showField){
+function rowHTML(e, showField, hideName){
   const fb = showField ? '<span class="db">'+esc(e.cname)+'</span>' : "";
   const from = e.from.filter(id=>BYID[id]);
   return '<div class="row" id="eq-'+e.id+'">'
     + '<div><div class="eq">'+tex(e.tex,true)+'</div>'
-      + '<div class="nm">'+hl(e.name)+'</div>'
+      + ''+(hideName?"":'<div class="nm">'+hl(e.name)+'</div>')
       + '<div class="dn">'+rich(e.says)+'</div>'
       + (fb?'<div class="badges">'+fb+'</div>':"")
       + figHTML(e.id) + '</div>'
@@ -494,11 +494,11 @@ function rowHTML(e, showField){
     + '</div></div>';
 }
 
-function group(title, sub, note, rows, showField, n, of, extra){
+function group(title, sub, note, rows, showField, n, of, extra, hideName){
   return '<section class="cat"><div class="cat-head"><h2>'+esc(title)+'</h2>'
-    + (sub?'<span class="sub">'+esc(sub)+'</span>':"")
+    + (sub?'<span class="'+(hideName?"db":"sub")+'">'+esc(sub)+'</span>':"")
     + '<span class="rule"></span>'+(of&&of!==n?'<span class="n">'+n+' of '+of+'</span>':"")+(extra||"")+'</div>'
-    + '<div class="rows">'+rows.map(e=>rowHTML(e,showField)).join("")+'</div>'
+    + '<div class="rows">'+rows.map(e=>rowHTML(e,showField,hideName)).join("")+'</div>'
     + (note?'<p class="cat-note"><b>About this field</b>'+esc(note)+'</p>':"")+'</section>';
 }
 
@@ -506,7 +506,7 @@ function render(){
   const isDay = view==="day" && !query && !domain && !prov;
   let html;
   if(isDay){
-    html = group("Equation of the day", dayLabel, "", daily, true, 1, 0, SHUF)
+    html = group(daily[0].name, daily[0].cname, "", daily, false, 1, 0, SHUF, true)
       + '<p class="lead">One drawn at random, redrawn every day. Shuffle for another, search above, or switch to <b>All '+TOTAL+'</b>.</p>';
   } else if(query){
     const hits = results();
