@@ -79,7 +79,7 @@ h1 em{font-style:normal;color:var(--accent)}
 
 /* controls */
 .controls{position:sticky;top:0;z-index:20;background:var(--ground);
-  border-bottom:1px solid var(--rule);padding:16px 0 14px}
+  border-bottom:1px solid var(--rule);padding:12px 0 10px}
 .search{position:relative;margin-bottom:9px}
 .search input{width:100%;height:var(--ctl-h);padding:0 12px 0 34px;font-family:var(--sans);
   font-size:.875rem;background:var(--surface);color:var(--ink);border:1px solid var(--rule);border-radius:3px}
@@ -101,18 +101,23 @@ h1 em{font-style:normal;color:var(--accent)}
 .chip:hover{color:var(--ink);border-color:var(--muted)}
 select{font-family:var(--sans);font-size:.78rem;font-weight:600;padding:0 9px;height:var(--ctl-h);
   background:var(--surface);color:var(--ink-2);border:1px solid var(--rule);border-radius:3px;
-  cursor:pointer;flex:1 1 0;min-width:0;max-width:16rem;text-overflow:ellipsis}
+  cursor:pointer;flex:0 1 auto;min-width:0;max-width:16rem;text-overflow:ellipsis;
+  appearance:none;-webkit-appearance:none;padding-right:26px;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' fill='none' stroke='%236B7A77' stroke-width='1.5'/></svg>");background-repeat:no-repeat;background-position:right 9px center}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) select{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' fill='none' stroke='%238A9895' stroke-width='1.5'/></svg>")} }
+:root[data-theme="dark"] select{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' fill='none' stroke='%238A9895' stroke-width='1.5'/></svg>")}
 .count{font-family:var(--mono);font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums;
   white-space:nowrap;flex:0 0 auto}
 
 /* catalogue */
-.cat{margin-top:clamp(34px,5vh,52px)}
+.cat{margin-top:22px}
 .cat-head{display:flex;align-items:baseline;gap:12px;padding-bottom:9px;border-bottom:2px solid var(--ink)}
 .cat-head h2{font-family:var(--head);font-weight:700;font-size:clamp(1.15rem,2vw,1.5rem);
   letter-spacing:-.015em;margin:0}
 .cat-head .sub,.cat-head .n{font-family:var(--mono);font-size:.72rem;color:var(--muted);
   font-variant-numeric:tabular-nums}
 .cat-head .rule{flex:1;height:1px}
+.cat-head .chip{height:28px;padding:0 10px;align-self:center}
 .cat-note{font-size:.9rem;line-height:1.6;color:var(--ink-2);margin:14px 0 0;max-width:46rem;
   padding-top:12px;border-top:1px solid var(--rule-soft)}
 .cat-note b{font-family:var(--mono);font-weight:500;color:var(--muted);font-size:.7rem;
@@ -123,7 +128,9 @@ select{font-family:var(--sans);font-size:.78rem;font-weight:600;padding:0 9px;he
 .rows{display:flex;flex-direction:column}
 .row{display:grid;grid-template-columns:6.2rem minmax(0,.74fr) minmax(0,1.9fr);gap:18px;
   padding:14px 0;border-bottom:1px solid var(--rule-soft);align-items:start}
-.row:hover{background:var(--surface)}
+.row{position:relative;isolation:isolate}
+.row::before{content:"";position:absolute;inset:0 -12px;z-index:-1;border-radius:3px}
+@media (hover:hover){ .row:hover::before{background:var(--surface)} }
 .sym,.gl{color:var(--accent);overflow-wrap:anywhere}
 .sym{font-family:var(--mono);font-size:.85rem;font-weight:500;padding-top:2px}
 .gl{font-family:var(--glyph);font-size:1.9rem;line-height:1.1}
@@ -187,7 +194,7 @@ p.body strong{color:var(--ink);font-weight:600}
   .chip{padding:0 9px}
   select{font-size:.75rem;padding:0 6px}
 }
-@media (max-width:540px){ .bar{flex-wrap:wrap} select{flex:1 1 45%} .count{width:100%} }
+@media (max-width:540px){ .bar{flex-wrap:wrap} select{flex:1 1 45%} }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
 /* equations page: the glyph column becomes a typeset equation, so the row is
@@ -208,7 +215,7 @@ p.body strong{color:var(--ink);font-weight:600}
 .syms a:hover{border-bottom-style:solid}
 .from a{font-family:var(--sans);font-size:.85rem;color:var(--accent)}
 .from a+a::before{content:"·";color:var(--muted);margin:0 7px}
-.row.hit,.row:target{background:var(--accent-soft);padding-left:16px;padding-right:16px;border-radius:3px}
+.row.hit::before,.row:target::before{background:var(--accent-soft)}
 
 /* small plots under an equation: the equation's curve in the accent, the
    fuller law or the measured behaviour dashed in the muted ink */
@@ -259,7 +266,7 @@ p.body strong{color:var(--ink);font-weight:600}
   <p class="standfirst">172 equations that carry science. What each one says, what it quietly assumes, where it stops working, what it descends from, and who wrote it down first.</p>
   <div class="tabs" role="tablist">
     <button class="tab" id="tab-cat" role="tab" aria-selected="true" aria-controls="panel-cat">Catalogue<span class="n">172</span></button>
-    <button class="tab" id="tab-org" role="tab" aria-selected="false" aria-controls="panel-org">How an equation earns its place</button>
+    <button class="tab" id="tab-org" role="tab" aria-selected="false" aria-controls="panel-org">Lineage and timeline</button>
   </div>
 </header>
 
@@ -274,10 +281,7 @@ p.body strong{color:var(--ink);font-weight:600}
         <button class="segb" id="preset-common" aria-pressed="true"><span class="lg">Equation of the day</span><span class="sm">Today</span></button>
         <button class="segb" id="preset-all" aria-pressed="false"><span class="lg">All 172</span><span class="sm">All</span></button>
       </div>
-      <button class="chip" id="shuffle" title="Draw another at random">Shuffle</button>
       <select id="domain" aria-label="Filter by field"></select>
-      <select id="origin" aria-label="Filter by standing"></select>
-      <span class="count" id="count"></span>
     </div>
   </div>
   <main id="cat"></main>
@@ -285,17 +289,6 @@ p.body strong{color:var(--ink);font-weight:600}
 
 <div id="panel-org" role="tabpanel" aria-labelledby="tab-org" hidden>
   <section class="essay">
-    <h2 class="sec">Five kinds of standing</h2>
-    <p class="body">An equation is not true or false the way a sentence is. It holds in a regime, and the interesting fact about it is usually the edge of that regime. Where an equation comes from decides where its edge is, and the equations on this page come from five different places.</p>
-    <div class="strands" id="strands"></div>
-
-    <h2 class="sec">Where they break</h2>
-    <div class="notes">
-      <p>Almost every equation here is exact for something that does not exist: a point mass, a frictionless fluid, a gas of molecules with no size, a material that is perfectly elastic, a column that is perfectly straight. The <strong>assumes, and where it breaks</strong> field on each entry is the reason this page exists. It tries to say the actual regime, with a number where one is known, and what replaces the equation outside it. <strong>Non-relativistic</strong> means below roughly a tenth of the speed of light. <strong>Incompressible</strong> means below about Mach 0.3. <strong>Dilute</strong> means far from the critical point. An equation that says only <strong>ideal conditions</strong> is not telling you anything.</p>
-      <p>The failures fall into a few families. A <strong>limiting form</strong> is wrong by a computable amount outside its limit, and the fuller equation is usually on this page too. An <strong>empirical law</strong> is wrong wherever the measurements stopped, and often nobody wrote down where that was; Ohm's law holds for metals and not for diodes, Hooke's law to the elastic limit, Arrhenius across the temperature range someone bothered to test. A <strong>derived</strong> equation inherits every assumption of what it was derived from, which is what the <strong>descends from</strong> links are for. And a <strong>postulate</strong> breaks only when the whole theory does, which happened to Newton twice, in 1905 and 1925, and has not happened to Maxwell yet.</p>
-      <p>The classic misuse is extrapolation from a fitted law: an activation energy measured between 25 and 60 °C applied at zero, a fatigue curve extended past the data, a Hubble constant read at a redshift where the relation is no longer linear. Where an entry knows of such a misuse it names it.</p>
-    </div>
-
     <h2 class="sec">When they were written down</h2>
     <p class="body">One dot per equation, at the year of the origin note: the first statement in a recognisable form, not the first idea. The clusters are real. Newton's decade, the thermodynamic and electromagnetic middle of the nineteenth century, and the thirty years from 1900 in which relativity and quantum mechanics were written almost entirely. Hover for the name; click to open the entry.</p>
     <div class="tl" id="timeline"></div>
@@ -304,6 +297,13 @@ p.body strong{color:var(--ink);font-weight:600}
     <h2 class="sec">What descends from what</h2>
     <p class="body">The <strong>descends from</strong> links drawn as one graph, postulates at the left. A column further right means one more step of derivation, and every assumption made on the way is inherited. Hover an equation to light its ancestors and descendants; click to open it. Entries with no links in either direction are not shown.</p>
     <div class="lin" id="lineage"></div>
+
+    <h2 class="sec">Where they break</h2>
+    <div class="notes">
+      <p>Almost every equation here is exact for something that does not exist: a point mass, a frictionless fluid, a gas of molecules with no size, a material that is perfectly elastic, a column that is perfectly straight. The <strong>assumes, and where it breaks</strong> field on each entry is the reason this page exists. It tries to say the actual regime, with a number where one is known, and what replaces the equation outside it. <strong>Non-relativistic</strong> means below roughly a tenth of the speed of light. <strong>Incompressible</strong> means below about Mach 0.3. <strong>Dilute</strong> means far from the critical point. An equation that says only <strong>ideal conditions</strong> is not telling you anything.</p>
+      <p>The failures fall into a few families. A <strong>limiting form</strong> is wrong by a computable amount outside its limit, and the fuller equation is usually on this page too. An <strong>empirical law</strong> is wrong wherever the measurements stopped, and often nobody wrote down where that was; Ohm's law holds for metals and not for diodes, Hooke's law to the elastic limit, Arrhenius across the temperature range someone bothered to test. A <strong>derived</strong> equation inherits every assumption of what it was derived from, which is what the <strong>descends from</strong> links are for. And a <strong>postulate</strong> breaks only when the whole theory does, which happened to Newton twice, in 1905 and 1925, and has not happened to Maxwell yet.</p>
+      <p>The classic misuse is extrapolation from a fitted law: an activation energy measured between 25 and 60 °C applied at zero, a fatigue curve extended past the data, a Hubble constant read at a redshift where the relation is no longer linear. Where an entry knows of such a misuse it names it.</p>
+    </div>
 
     <h2 class="sec">On what is and is not recorded</h2>
     <div class="notes">
@@ -408,18 +408,9 @@ const dayKey = today.getFullYear()+"-"+String(today.getMonth()+1).padStart(2,"0"
 const dayLabel = today.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
 daily = draw(hash(dayKey));
 
-const counts={}; ALL.forEach(e=>counts[e.st]=(counts[e.st]||0)+1);
-document.getElementById("strands").innerHTML = PKEYS.map(k=>{
-  const [name,desc,ex]=S[k];
-  return '<div class="strand" style="--pc:'+PVAR[k]+'">'
-    +'<span class="tag">'+name+'<span class="ct"> &nbsp;'+counts[k]+'</span></span>'
-    +'<span class="desc">'+desc+'</span><span class="ex">'+ex+'</span></div>';
-}).join("");
 
 document.getElementById("domain").innerHTML = '<option value="">All '+DATA.length+' fields</option>'
   + DATA.map(c=>'<option value="'+c.id+'">'+esc(c.t)+' ('+c.u.length+')</option>').join("");
-document.getElementById("origin").innerHTML = '<option value="">Any standing</option>'
-  + PKEYS.map(k=>'<option value="'+k+'">'+PLABEL[k]+' ('+counts[k]+')</option>').join("");
 
 function wstart(hay, q){
   if(!hay) return false;
@@ -491,7 +482,7 @@ function rowHTML(e, showField){
     + '<div><div class="eq">'+tex(e.tex,true)+'</div>'
       + '<div class="nm">'+hl(e.name)+'</div>'
       + '<div class="dn">'+rich(e.says)+'</div>'
-      + '<div class="badges"><span class="pb" style="--pc:'+PVAR[e.st]+'">'+PLABEL[e.st]+'</span>'+fb+'</div>'
+      + (fb?'<div class="badges">'+fb+'</div>':"")
       + figHTML(e.id) + '</div>'
     + '<div><div class="org">'+rich(e.means)+'</div>'
       + '<div class="fld"><b>Symbols</b>'+symsHTML(e)+'</div>'
@@ -504,28 +495,25 @@ function rowHTML(e, showField){
     + '</div></div>';
 }
 
-function group(title, sub, note, rows, showField, n, of){
+function group(title, sub, note, rows, showField, n, of, extra){
   return '<section class="cat"><div class="cat-head"><h2>'+esc(title)+'</h2>'
     + (sub?'<span class="sub">'+esc(sub)+'</span>':"")
-    + '<span class="rule"></span><span class="n">'+n+(of&&of!==n?" of "+of:"")+'</span></div>'
+    + '<span class="rule"></span>'+(of&&of!==n?'<span class="n">'+n+' of '+of+'</span>':"")+(extra||"")+'</div>'
     + '<div class="rows">'+rows.map(e=>rowHTML(e,showField)).join("")+'</div>'
     + (note?'<p class="cat-note"><b>About this field</b>'+esc(note)+'</p>':"")+'</section>';
 }
 
 function render(){
   const isDay = view==="day" && !query && !domain && !prov;
-  document.getElementById("shuffle").hidden = !isDay;
   let html;
   if(isDay){
-    html = group("Equation of the day", dayLabel, "", daily, true, 1, 0)
+    html = group("Equation of the day", dayLabel, "", daily, true, 1, 0, SHUF)
       + '<p class="lead">One drawn at random, redrawn every day. Shuffle for another, search above, or switch to <b>All '+TOTAL+'</b>.</p>';
-    document.getElementById("count").textContent = "1 / " + TOTAL;
   } else if(query){
     const hits = results();
     html = hits.length
       ? group("Results", "best match first", "", hits, true, hits.length, 0)
       : '<p class="empty">Nothing matches that. Try a name, a symbol such as ħ, or a person such as Euler or Nernst.</p>';
-    document.getElementById("count").textContent = hits.length + " / " + TOTAL;
   } else {
     const hits = results();
     html = DATA.map(c=>{
@@ -534,7 +522,6 @@ function render(){
       return group(c.t, "", c.note, rows, false, rows.length, c.u.length);
     }).join("");
     if(!html) html = '<p class="empty">Nothing here. Widen the filters.</p>';
-    document.getElementById("count").textContent = hits.length + " / " + TOTAL;
   }
   document.getElementById("cat").innerHTML = html;
 }
@@ -544,12 +531,12 @@ function setView(v){ view=v;
   document.getElementById("preset-all").setAttribute("aria-pressed", v==="all");
   render(); }
 function reset(){ query=""; document.getElementById("q").value=""; domain=null; prov=null;
-  document.getElementById("domain").value=""; document.getElementById("origin").value=""; }
+  document.getElementById("domain").value=""; }
 document.getElementById("preset-common").onclick = ()=>{ reset(); setView("day"); };
 document.getElementById("preset-all").onclick = ()=>setView("all");
-document.getElementById("shuffle").onclick = ()=>{ daily = draw((Math.random()*4294967296)>>>0); render(); };
+const SHUF = '<button class="chip" id="shuffle" title="Draw another at random">Shuffle</button>';
+document.getElementById("cat").addEventListener("click", ev=>{ if(ev.target.closest("#shuffle")){ daily = draw((Math.random()*4294967296)>>>0); render(); } });
 document.getElementById("domain").onchange = e=>{ domain=e.target.value||null; setView(domain||prov||query?"all":view); };
-document.getElementById("origin").onchange = e=>{ prov=e.target.value||null; setView(domain||prov||query?"all":view); };
 document.getElementById("q").addEventListener("input", e=>{
   query=e.target.value.trim(); if(query) setView("all"); else render(); });
 
