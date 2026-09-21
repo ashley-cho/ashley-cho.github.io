@@ -266,7 +266,7 @@ p.body strong{color:var(--ink);font-weight:600}
   <p class="standfirst">172 equations that carry science. What each one says, what it quietly assumes, where it stops working, what it descends from, and who wrote it down first.</p>
   <div class="tabs" role="tablist">
     <button class="tab" id="tab-cat" role="tab" aria-selected="true" aria-controls="panel-cat">Catalogue<span class="n">172</span></button>
-    <button class="tab" id="tab-org" role="tab" aria-selected="false" aria-controls="panel-org">How an equation earns its place</button>
+    <button class="tab" id="tab-org" role="tab" aria-selected="false" aria-controls="panel-org">Lineage and timeline</button>
   </div>
 </header>
 
@@ -289,17 +289,6 @@ p.body strong{color:var(--ink);font-weight:600}
 
 <div id="panel-org" role="tabpanel" aria-labelledby="tab-org" hidden>
   <section class="essay">
-    <h2 class="sec">Five kinds of equation</h2>
-    <p class="body">An equation is not true or false the way a sentence is. It holds in a regime, and the interesting fact about it is usually the edge of that regime. Where an equation comes from decides where its edge is, and the equations on this page come from five different places.</p>
-    <div class="strands" id="strands"></div>
-
-    <h2 class="sec">Where they break</h2>
-    <div class="notes">
-      <p>Almost every equation here is exact for something that does not exist: a point mass, a frictionless fluid, a gas of molecules with no size, a material that is perfectly elastic, a column that is perfectly straight. The <strong>assumes, and where it breaks</strong> field on each entry is the reason this page exists. It tries to say the actual regime, with a number where one is known, and what replaces the equation outside it. <strong>Non-relativistic</strong> means below roughly a tenth of the speed of light. <strong>Incompressible</strong> means below about Mach 0.3. <strong>Dilute</strong> means far from the critical point. An equation that says only <strong>ideal conditions</strong> is not telling you anything.</p>
-      <p>The failures fall into a few families. A <strong>limiting form</strong> is wrong by a computable amount outside its limit, and the fuller equation is usually on this page too. An <strong>empirical law</strong> is wrong wherever the measurements stopped, and often nobody wrote down where that was; Ohm's law holds for metals and not for diodes, Hooke's law to the elastic limit, Arrhenius across the temperature range someone bothered to test. A <strong>derived</strong> equation inherits every assumption of what it was derived from, which is what the <strong>descends from</strong> links are for. And a <strong>postulate</strong> breaks only when the whole theory does, which happened to Newton twice, in 1905 and 1925, and has not happened to Maxwell yet.</p>
-      <p>The classic misuse is extrapolation from a fitted law: an activation energy measured between 25 and 60 °C applied at zero, a fatigue curve extended past the data, a Hubble constant read at a redshift where the relation is no longer linear. Where an entry knows of such a misuse it names it.</p>
-    </div>
-
     <h2 class="sec">When they were written down</h2>
     <p class="body">One dot per equation, at the year of the origin note: the first statement in a recognisable form, not the first idea. The clusters are real. Newton's decade, the thermodynamic and electromagnetic middle of the nineteenth century, and the thirty years from 1900 in which relativity and quantum mechanics were written almost entirely. Hover for the name; click to open the entry.</p>
     <div class="tl" id="timeline"></div>
@@ -308,6 +297,13 @@ p.body strong{color:var(--ink);font-weight:600}
     <h2 class="sec">What descends from what</h2>
     <p class="body">The <strong>descends from</strong> links drawn as one graph, postulates at the left. A column further right means one more step of derivation, and every assumption made on the way is inherited. Hover an equation to light its ancestors and descendants; click to open it. Entries with no links in either direction are not shown.</p>
     <div class="lin" id="lineage"></div>
+
+    <h2 class="sec">Where they break</h2>
+    <div class="notes">
+      <p>Almost every equation here is exact for something that does not exist: a point mass, a frictionless fluid, a gas of molecules with no size, a material that is perfectly elastic, a column that is perfectly straight. The <strong>assumes, and where it breaks</strong> field on each entry is the reason this page exists. It tries to say the actual regime, with a number where one is known, and what replaces the equation outside it. <strong>Non-relativistic</strong> means below roughly a tenth of the speed of light. <strong>Incompressible</strong> means below about Mach 0.3. <strong>Dilute</strong> means far from the critical point. An equation that says only <strong>ideal conditions</strong> is not telling you anything.</p>
+      <p>The failures fall into a few families. A <strong>limiting form</strong> is wrong by a computable amount outside its limit, and the fuller equation is usually on this page too. An <strong>empirical law</strong> is wrong wherever the measurements stopped, and often nobody wrote down where that was; Ohm's law holds for metals and not for diodes, Hooke's law to the elastic limit, Arrhenius across the temperature range someone bothered to test. A <strong>derived</strong> equation inherits every assumption of what it was derived from, which is what the <strong>descends from</strong> links are for. And a <strong>postulate</strong> breaks only when the whole theory does, which happened to Newton twice, in 1905 and 1925, and has not happened to Maxwell yet.</p>
+      <p>The classic misuse is extrapolation from a fitted law: an activation energy measured between 25 and 60 °C applied at zero, a fatigue curve extended past the data, a Hubble constant read at a redshift where the relation is no longer linear. Where an entry knows of such a misuse it names it.</p>
+    </div>
 
     <h2 class="sec">On what is and is not recorded</h2>
     <div class="notes">
@@ -412,13 +408,6 @@ const dayKey = today.getFullYear()+"-"+String(today.getMonth()+1).padStart(2,"0"
 const dayLabel = today.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
 daily = draw(hash(dayKey));
 
-const counts={}; ALL.forEach(e=>counts[e.st]=(counts[e.st]||0)+1);
-document.getElementById("strands").innerHTML = PKEYS.map(k=>{
-  const [name,desc,ex]=S[k];
-  return '<div class="strand" style="--pc:'+PVAR[k]+'">'
-    +'<span class="tag">'+name+'<span class="ct"> &nbsp;'+counts[k]+'</span></span>'
-    +'<span class="desc">'+desc+'</span><span class="ex">'+ex+'</span></div>';
-}).join("");
 
 document.getElementById("domain").innerHTML = '<option value="">All '+DATA.length+' fields</option>'
   + DATA.map(c=>'<option value="'+c.id+'">'+esc(c.t)+' ('+c.u.length+')</option>').join("");
