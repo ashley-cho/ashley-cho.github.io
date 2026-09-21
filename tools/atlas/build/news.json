@@ -71,6 +71,16 @@
       "moved": false,
       "src": "Pennsylvania PUC",
       "url": "https://www.puc.pa.gov/press-release/2026/puc-releases-final-order-establishing-first-of-its-kind-large-load-model-tariff-framework-05132026"
+    },
+    {
+      "date": "2026-09-21",
+      "kind": "data",
+      "title": "China's energy regulator: internet data services power use up 44%",
+      "detail": "At its Jul 30, 2026 press conference the National Energy Administration reported that electricity used by the internet data services industry reached 49.4 billion kWh (49.4 TWh) in the first half of 2026, up 44% year on year. It is an official, measured series, but it counts consumption by enterprises classified as internet data services, a narrower and differently drawn population than the 260 TWh (2024) figure this page uses for China. Separately, a Wood Mackenzie projection of 774 TWh by 2030 (reported by China Daily, Sep 3, 2026) is a consultancy forecast and does not qualify under Test 1.",
+      "effect": "No figure moved. China stays on 260 TWh (2024), scope mismatch declared. The NEA value is a half-year, 2026-vintage, industry-classified total, so it cannot be set against 2024 capacity, and it does not say whether telecom and 5G network rooms are in or out, which is the question that would settle China. Watching for a full-year NEA or CEC value.",
+      "moved": false,
+      "src": "National Energy Administration (China), press conference transcript, Jul 30, 2026",
+      "url": "https://www.nea.gov.cn/20260730/3ce671c387574eeeb120fc3825be0399/c.html"
     }
   ]
 }
