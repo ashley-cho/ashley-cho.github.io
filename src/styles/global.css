@@ -47,12 +47,14 @@ body {
   display: flex;
   gap: 20px;
   font-size: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule);
 }
 .site-head a { color: var(--fg-muted); text-decoration: none; }
 .site-head a:hover { color: var(--fg); text-decoration: underline; }
 .site-head a.on { color: var(--fg); }
 
-main { padding-top: 24px; }
+main { padding-top: 10px; }
 
 .site-foot {
   margin-top: 48px;
@@ -169,14 +171,13 @@ tbody tr:last-child td { border-bottom: none; }
 .lede { color: var(--fg-muted); }
 
 /* ---------- index list ---------- */
-.entry-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--rule); }
+.entry-list { list-style: none; padding: 0; margin: 0; }
 .entry {
   display: flex;
   gap: 16px;
   align-items: baseline;
-  padding: 8px 0;
+  padding: 5px 0;
   margin: 0;
-  border-bottom: 1px solid var(--rule);
 }
 .entry a.entry-title { color: var(--fg); text-decoration: none; }
 .entry a.entry-title:hover { text-decoration: underline; }
@@ -188,11 +189,6 @@ tbody tr:last-child td { border-bottom: none; }
   white-space: nowrap;
 }
 .entry-field { color: var(--fg-faint); }
-
-/* looser rows with a blurb (apps page) */
-.entry-list.blurbs .entry { display: block; padding: 12px 0; }
-.entry-list.blurbs .entry-date { margin: 2px 0 0; }
-.entry-list.blurbs .entry p { margin: 4px 0 0; color: var(--fg-muted); font-size: 14px; }
 
 .section-label {
   font-size: 12px;
@@ -223,5 +219,5 @@ img, svg, video { max-width: 100%; height: auto; }
 
 @media (max-width: 640px) {
   .site-head { padding-top: 28px; }
-  main { padding-top: 20px; }
+  main { padding-top: 10px; }
 }
