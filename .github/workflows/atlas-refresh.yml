@@ -50,7 +50,7 @@ jobs:
       # approval-required state that no repository setting can switch off, so a
       # PR opened with the built-in token sits waiting for a human and the job
       # never gets its checks. A user token is not subject to that rule.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           token: ${{ secrets.ATLAS_BOT_TOKEN }}
 
