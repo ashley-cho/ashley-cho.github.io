@@ -55,20 +55,23 @@ a:focus-visible,:focus-visible{outline:2px solid var(--accent);outline-offset:3p
 [hidden]{display:none!important}
 
 /* masthead */
-header.plate{padding:clamp(34px,5vh,60px) 0 0}
+header.plate{padding:clamp(18px,3vh,30px) 0 0}
 .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;
   color:var(--muted);display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
 .eyebrow .brand{letter-spacing:.06em;color:var(--ink-2)}
 .eyebrow .brand a{color:var(--ink-2);text-decoration:none}
 .eyebrow .brand a:hover{color:var(--accent)}
 .eyebrow .rule{flex:1;height:1px;background:var(--rule);min-width:16px}
-h1{font-family:var(--head);font-weight:700;font-size:clamp(2rem,4.4vw,3rem);line-height:1.05;
-  letter-spacing:-.022em;margin:.32em 0 0;text-wrap:balance}
+h1{font-family:var(--head);font-weight:700;font-size:clamp(1.45rem,2.6vw,1.9rem);line-height:1.1;
+  letter-spacing:-.018em;margin:14px 0 0;text-wrap:balance}
 h1 em{font-style:normal;color:var(--accent)}
-.standfirst{font-size:1.06rem;line-height:1.6;color:var(--ink-2);margin:18px 0 0}
+.standfirst{font-size:.93rem;line-height:1.55;color:var(--ink-2);margin:8px 0 0}
 
 /* tabs */
-.tabs{display:flex;gap:2px;border-bottom:1px solid var(--rule);margin-top:26px}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--rule);margin-top:20px}
+.back{font-family:var(--sans);font-size:.8rem;line-height:1}
+.back a{color:var(--muted);text-decoration:none}
+.back a:hover{color:var(--accent)}
 .tab{font-family:var(--sans);font-size:.875rem;font-weight:600;background:none;border:0;
   border-bottom:2px solid transparent;color:var(--muted);padding:10px 14px;cursor:pointer;margin-bottom:-1px}
 .tab:hover{color:var(--ink)}
@@ -209,14 +212,11 @@ p.body strong{color:var(--ink);font-weight:600}
 <div class="wrap">
 
 <header class="plate">
-  <div class="eyebrow">
-    <span class="brand"><a href="https://ashley-cho.github.io/">Ashley Cho</a></span>
-    <span class="rule"></span><span>Revised 7 September 2026</span>
-  </div>
+  <nav class="back"><a href="https://ashley-cho.github.io/">&larr; Back</a></nav>
   <h1>Every unit <em>still</em> in use</h1>
   <p class="standfirst">342 units people actually write down today, across 30 domains, each with where it came from and who decided it. Not a museum of cubits and hogsheads.</p>
   <div class="tabs" role="tablist">
-    <button class="tab" id="tab-cat" role="tab" aria-selected="true" aria-controls="panel-cat">Catalogue<span class="n">342</span></button>
+    <button class="tab" id="tab-cat" role="tab" aria-selected="true" aria-controls="panel-cat">Catalogue</button>
     <button class="tab" id="tab-org" role="tab" aria-selected="false" aria-controls="panel-org">Where units come from</button>
   </div>
 </header>
@@ -226,7 +226,7 @@ p.body strong{color:var(--ink);font-weight:600}
   <div class="controls">
     <div class="search">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M16.5 16.5 21 21"></path></svg>
-      <input id="q" type="search" placeholder="Search 342 units by name, symbol, quantity or origin" aria-label="Search units">
+      <input id="q" type="search" placeholder="Search units by name, symbol, quantity or origin" aria-label="Search units">
     </div>
     <div class="bar">
       <div class="seg" role="group" aria-label="Which units to show">
