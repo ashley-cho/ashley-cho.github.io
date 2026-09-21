@@ -65,15 +65,13 @@ header.plate{padding:clamp(18px,3vh,30px) 0 0}
 .eyebrow .brand a:hover{color:var(--accent)}
 .eyebrow .rule{flex:1;height:1px;background:var(--rule);min-width:16px}
 h1{font-family:var(--head);font-weight:700;font-size:clamp(1.45rem,2.6vw,1.9rem);line-height:1.1;
-  letter-spacing:-.018em;margin:14px 0 0;text-wrap:balance}
+  letter-spacing:-.018em;margin:28px 0 0;text-wrap:balance}
 h1 em{font-style:normal;color:var(--accent)}
 .standfirst{font-size:.93rem;line-height:1.55;color:var(--ink-2);margin:8px 0 0}
 
 /* tabs */
 .tabs{display:flex;gap:2px;border-bottom:1px solid var(--rule);margin-top:20px}
-.back{font-family:var(--sans);font-size:.8rem;line-height:1}
-.back a{color:var(--muted);text-decoration:none}
-.back a:hover{color:var(--accent)}
+
 .tab{font-family:var(--sans);font-size:.875rem;font-weight:600;background:none;border:0;
   border-bottom:2px solid transparent;color:var(--muted);padding:10px 14px;cursor:pointer;margin-bottom:-1px}
 .tab:hover{color:var(--ink)}
@@ -274,6 +272,12 @@ p.body strong{color:var(--ink);font-weight:600}
 .lin .colh{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;fill:var(--muted);cursor:default}
 .lin .colh:hover{fill:var(--muted)}
 @media (max-width:860px){ .row{grid-template-columns:minmax(0,1fr);gap:6px} .eq{font-size:.95rem} }
+
+/* shared page head, identical on every standalone page:
+   Back link, 28px, title, 8px, standfirst */
+.back{font-family:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;font-size:.8rem;line-height:1;margin:0}
+.back a{color:var(--muted);text-decoration:none}
+.back a:hover{color:var(--accent,var(--focus))}
 </style>
 </head>
 <body>
@@ -281,7 +285,7 @@ p.body strong{color:var(--ink);font-weight:600}
 <div class="wrap">
 
 <header class="plate">
-  <nav class="back"><a href="https://ashley-cho.github.io/">&larr; Back</a></nav>
+  <nav class="back"><a href="/">&larr; Back</a></nav>
   <h1>The world in <em>equations</em></h1>
   <p class="standfirst">172 equations that carry science. What each one says, what it quietly assumes, where it stops working, what it descends from, and who wrote it down first.</p>
   <div class="tabs" role="tablist">
