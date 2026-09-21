@@ -20,18 +20,11 @@ const apps = [
 ];
 ---
 <Base title="Apps" description="Small apps Ashley Cho built.">
-  <h1>Apps</h1>
-  <p class="lede" style="margin-bottom:2.2rem">
-    Things I built because I wanted them to exist. Both are works in progress,
-    so expect rough edges.
-  </p>
-
   <ul class="entry-list">
     {apps.map(a => (
       <li class="entry">
-        <a class="entry-title" href={a.href} target="_blank" rel="noopener">{a.name} ↗</a>
-        <div class="entry-date"><span class="entry-field">{a.tag}</span> · {new URL(a.href).host}</div>
-        <p>{a.blurb}</p>
+        <a class="entry-title" href={a.href} target="_blank" rel="noopener">{a.name}</a>
+        <span class="entry-date">{a.tag}</span>
       </li>
     ))}
   </ul>

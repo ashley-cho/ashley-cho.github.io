@@ -4,17 +4,10 @@ import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('writing', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-const meta = (d) => [fmt(d.date), d.series].filter(Boolean).join(' · ');
+const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
 const shown = posts.slice(0, 12);
 ---
 <Base>
-  <p class="lede" style="margin-bottom:2.6rem">
-    I get curious about things and then read too much about them. This is where
-    that ends up — mostly physics and infrastructure at the moment, but the
-    subject drifts.
-  </p>
-
   {posts.length === 0 && (
     <p style="color:var(--fg-muted)">Nothing published yet — first piece is in progress.</p>
   )}
@@ -22,15 +15,12 @@ const shown = posts.slice(0, 12);
     {shown.map(p => (
       <li class="entry">
         <a class="entry-title" href={p.data.url ?? `/writing/${p.id}/`}>{p.data.title}</a>
-        <div class="entry-date">
-          <span class="entry-field">{p.data.field}</span> · {meta(p.data)}
-        </div>
-        {p.data.description && <p>{p.data.description}</p>}
+        <span class="entry-date">{fmt(p.data.date)}</span>
       </li>
     ))}
   </ul>
 
   {posts.length > shown.length && (
-    <p style="margin-top:1.6rem"><a href="/writing/">All notes →</a></p>
+    <p style="margin-top:16px"><a href="/writing/">All notes</a></p>
   )}
 </Base>
