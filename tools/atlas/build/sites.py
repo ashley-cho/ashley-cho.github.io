@@ -44,7 +44,7 @@ EPOCH = [
 ("Meta–QTS Hillsboro 2",180,"Meta","USA","97124",None,None,None),
 ("Google Waltham Cross",88,"Google","GBR",None,(51.71,-0.03),None,None),
 ("VNET Bayin Ulanqab",221,"VNET","CHN",None,(41.02,113.13),None,None),
-("Huawei Horinger",241.8,"Huawei","CHN",None,(40.42,111.80),None,None),
+("Huawei Horinger",184.3,"Huawei","CHN",None,(40.42,111.80),None,None),
 ("Google Red Oak",77,"Google","USA","75154",None,None,None),
 ("Meta Gallatin",87,"Meta","USA","37066",None,None,None),
 ("Meta Los Lunas",87,"Meta","USA","87031",None,None,None),
