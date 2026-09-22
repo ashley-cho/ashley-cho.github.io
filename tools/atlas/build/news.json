@@ -81,6 +81,16 @@
       "moved": false,
       "src": "National Energy Administration (China), press conference transcript, Jul 30, 2026",
       "url": "https://www.nea.gov.cn/20260730/3ce671c387574eeeb120fc3825be0399/c.html"
+    },
+    {
+      "date": "2026-09-22",
+      "kind": "policy",
+      "title": "Pennsylvania opens a second data center proceeding",
+      "detail": "At its Sep 10, 2026 public meeting the Pennsylvania PUC voted 5-0 to have staff propose updates to its emergency curtailment rules and hold a technical conference on cost allocation for data centers, with a tentative order due at the Oct 1, 2026 meeting and a final vote targeted for Jan 28, 2027. A companion motion set up a ratemaking working group (Docket M-2026-3064953). This follows the model large-load tariff (Docket M-2025-3054271) already in the regulatory set.",
+      "effect": "No figure moved. Curtailment and cost allocation are not generation, and Pennsylvania has no mapped metro, so nothing attaches to a marker. The existing Pennsylvania entry is left as is until the tentative order is published with a docket number.",
+      "moved": false,
+      "src": "Pennsylvania PUC",
+      "url": "https://www.puc.pa.gov/press-release/2026/puc-launches-review-of-utility-ratemaking-to-address-affordability-transparency-and-changing-economic-conditions-09102026"
     }
   ]
 }
