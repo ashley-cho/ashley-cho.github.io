@@ -72,7 +72,7 @@
    "place": "Germany",
    "fig": "21.3 TWh (2025), Borderstep Institut",
    "test": "Test 1",
-   "why": "Modelled by a research institute under commission from Bitkom, the industry association. Reproduced in a federal ministry report, which is not the same as being measured by one."
+   "why": "The Borderstep figure stays rejected on Test 1: modeled by a research institute under commission from Bitkom, the industry association, and reproduced in a federal ministry report, which is not the same as being measured by one. Re-checked Sep 23, 2026 against a measured series that did not exist when this was written. Eurostat's isoc_env_ict_nrg, which member states must file annually for data centers above 1 MW under the EU energy statistics regulation, puts Germany at 20.0 TWh (2024) - which passes Test 1 and corroborates Borderstep's order of magnitude. It fails Test 2 instead, and decisively: 20.0 / (1.199 GW x 8.76) = 1.90, against a band of 0.30 to 0.85. The series itself is sound - it reproduces Ireland at 6.969 TWh, the Netherlands at 5.093 and France at 4.348 for 2024, each within about 1% of the anchor already fitted here - so what breaks is the pairing. The 1.199 GW mapped for Germany is Frankfurt, Berlin and Munich colocation; Eurostat counts every German data center above 1 MW, enterprise rooms included. One caveat before the figure is ever used: Germany's readings arrive rounded (17.9, 18.0, 20.0 TWh for 2022-2024) where Ireland's arrive to three decimals. Germany therefore stays out as an anchor, and is now a candidate for the treatment China gets - its own national total with the scope mismatch declared - which moves override.json and is not decided on this path."
   },
   {
    "place": "South Korea",
@@ -102,7 +102,7 @@
    "place": "World",
    "fig": "485 TWh (2025), IEA Key Questions on Energy and AI",
    "test": "neither",
-   "why": "Passes Test 1 and would pass Test 2; held back on vintage alone. Every capacity figure on this page is IEA installed capacity for 2024, so pairing 485 TWh (2025) with 122.2 GW (2024) implies 0.453 and would move kIea from 0.398 purely because the two readings are a year apart. The anchor stays at 415 TWh (2024) until the IEA publishes 2025 capacity to pair with it. Re-checked Sep 22, 2026: the IEA Energy and AI page still carries 415 TWh (2024) and no 2025 installed-capacity figure, so the hold stands."
+   "why": "Passes Test 1 and would pass Test 2; held back on vintage alone. Every capacity figure on this page is IEA installed capacity for 2024, so pairing 485 TWh (2025) with 122.2 GW (2024) implies 0.453 and would move kIea from 0.398 purely because the two readings are a year apart. The anchor stays at 415 TWh (2024) until the IEA publishes 2025 capacity to pair with it. Re-checked Sep 23, 2026: the IEA page still carries 415 TWh (2024) and no 2025 installed-capacity figure, so the hold stands."
   }
  ]
 }
