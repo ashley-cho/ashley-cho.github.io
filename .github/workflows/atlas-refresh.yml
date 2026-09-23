@@ -176,8 +176,19 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.ATLAS_BOT_TOKEN }}
         run: |
-          gh pr checks "${{ steps.pr.outputs.number }}" --watch --interval 10 --fail-fast
-          gh pr merge "${{ steps.pr.outputs.number }}" --merge --delete-branch
+          n="${{ steps.pr.outputs.number }}"
+          # ci.yml registers its check a few seconds after the PR opens. If
+          # `gh pr checks` looks first it exits 1 on "no checks reported" and
+          # the refresh is left sitting in an open PR (Sep 22, 2026: PR #63
+          # opened 11:49:42, this step failed 11:49:46, CI started 11:49:47).
+          # Wait up to five minutes for a check to appear before watching.
+          for i in $(seq 1 30); do
+            c=$(gh pr checks "$n" --json name --jq 'length' 2>/dev/null || true)
+            if [ -n "$c" ] && [ "$c" != "0" ]; then break; fi
+            sleep 10
+          done
+          gh pr checks "$n" --watch --interval 10 --fail-fast
+          gh pr merge "$n" --merge --delete-branch
           echo "merged=true" >> "$GITHUB_OUTPUT"
 
       # A merge made with GITHUB_TOKEN does NOT trigger deploy.yml's `on: push`
