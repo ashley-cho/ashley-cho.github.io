@@ -91,6 +91,26 @@
       "moved": false,
       "src": "Pennsylvania PUC",
       "url": "https://www.puc.pa.gov/press-release/2026/puc-launches-review-of-utility-ratemaking-to-address-affordability-transparency-and-changing-economic-conditions-09102026"
+    },
+    {
+      "date": "2026-09-23",
+      "kind": "data",
+      "title": "Eurostat publishes a measured data center electricity series",
+      "detail": "Dataset isoc_env_ict_nrg, \"Data centres' electricity consumption\", last updated Jul 27, 2026, covering 2020-2024 in terajoules for 42 countries. The EU energy statistics regulation obliges member states to file data center energy use above 1 MW with Eurostat annually, colocation and enterprise alike, so this is measured national reporting rather than a consultancy model.",
+      "effect": "No figure moved. The series reproduces three of the five anchors for 2024 within about 1% - Ireland 6.969 TWh against the CSO's 6.973, the Netherlands 5.093 against the CBS's 5.100, France 4.348 against SDES's 4.3 - which is independent corroboration of the metro basis rather than a new input. Germany is the live question and is recorded in policy.json: the series passes Test 1 there but fails Test 2 at 1.90. Finland, Poland and Spain would pass both tests, but admitting anchors moves kNat and needs calib.json, which this path will not carry.",
+      "moved": false,
+      "src": "Eurostat",
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/isoc_env_ict_nrg/default/table?lang=en"
+    },
+    {
+      "date": "2026-09-23",
+      "kind": "policy",
+      "title": "Imperial Irrigation District adopts a curtail-first large load tariff",
+      "detail": "The IID board voted unanimously on Sep 16, 2026 to adopt a Large Load Tariff for customers above 20 MW: infrastructure cost recovery, a minimum monthly charge of at least 85% of contracted energy, a fifteen-year commitment, cash deposits, and first place in line to be shut off when demand peaks.",
+      "effect": "No figure moved, and it is not in the regulatory set. The tariff document on iid.com refused the request from here, so only the press account could be read, and that set holds filings read on the filing itself. Imperial Valley has no mapped metro, so nothing would attach to a marker either way. Recorded here so a later run can promote it once the document is reachable.",
+      "moved": false,
+      "src": "KPBS",
+      "url": "https://www.kpbs.org/news/environment/2026/09/16/imperial-valley-utility-adopts-new-pricing-rules-putting-data-centers-first-for-power-cuts"
     }
   ]
 }
