@@ -4,7 +4,7 @@ EPOCH = [
 ("Microsoft Fairwater Atlanta",636,"Microsoft","USA","30214",None,None,None),
 ("Google Pryor (North)",368,"Google","USA","74361",None,None,None),
 ("Amazon–Anthropic New Carlisle (Project Rainier)",910,"Amazon","USA","46552",None,1925,2028),
-("Meta Prometheus (New Albany)",562,"Meta","USA","43054",None,None,None),
+("Meta Prometheus (New Albany)",496,"Meta","USA","43054",None,None,None),
 ("Google New Albany",333,"Google","USA","43054",None,None,None),
 ("OpenAI Stargate Abilene",421,"Oracle / OpenAI","USA","79601",None,1200,2026),
 ("Microsoft Fairwater Wisconsin",369,"Microsoft","USA","53403",None,2263,2028),
