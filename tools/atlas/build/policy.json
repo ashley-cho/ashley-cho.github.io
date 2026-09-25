@@ -102,7 +102,13 @@
    "place": "World",
    "fig": "485 TWh (2025), IEA Key Questions on Energy and AI",
    "test": "neither",
-   "why": "Passes Test 1 and would pass Test 2; held back on vintage alone. Every capacity figure on this page is IEA installed capacity for 2024, so pairing 485 TWh (2025) with 122.2 GW (2024) implies 0.453 and would move kIea from 0.398 purely because the two readings are a year apart. The anchor stays at 415 TWh (2024) until the IEA publishes 2025 capacity to pair with it. Re-checked Sep 24, 2026: the IEA page still carries 415 TWh (2024) and no 2025 installed-capacity figure, so the hold stands."
+   "why": "Passes Test 1 and would pass Test 2; held back on vintage alone. Every capacity figure on this page is IEA installed capacity for 2024, so pairing 485 TWh (2025) with 122.2 GW (2024) implies 0.453 and would move kIea from 0.398 purely because the two readings are a year apart. The anchor stays at 415 TWh (2024) until the IEA publishes 2025 capacity to pair with it. Re-checked Sep 25, 2026: the Energy and AI demand page still gives around 415 TWh for 2024, about 1.5% of global electricity, and still publishes no 2025 installed-capacity figure, so the hold stands."
+  },
+  {
+   "place": "United States (EIA)",
+   "fig": "no historical series; Annual Energy Outlook 2026 projections only",
+   "test": "Test 1",
+   "why": "The US Energy Information Administration is the first place anyone looks for an American figure, and it does not publish one. Its only data-center-specific national numbers come from the Annual Energy Outlook 2026, released Apr 8, 2026, whose Commercial Demand Model was updated for this edition to report data center server electricity separately from commercial computing. Everything it yields is forward-looking: server consumption of 446 to 818 billion kWh by 2050 across the Counterfactual Baseline and High Electricity Demand cases, and even the 2025 reading - servers at about 7% of commercial sector electricity - is model output rather than a metered aggregate. EIA states the outlook reflects laws and regulations only as of December 2025. The measured survey behind it, the Commercial Buildings Energy Consumption Survey, appears in that same release only as the source of the 2003 electricity-intensity high, not as a data center series. Test 1 excludes government projections however widely cited, which is the same ground Japan and Denmark are rejected on, so the US anchor stays with Berkeley Lab's 192 TWh (2024). Checked Sep 25, 2026."
   }
  ]
 }
