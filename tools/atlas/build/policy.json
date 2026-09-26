@@ -102,7 +102,7 @@
    "place": "World",
    "fig": "485 TWh (2025), IEA Key Questions on Energy and AI",
    "test": "neither",
-   "why": "Passes Test 1 and would pass Test 2; held back on vintage alone. Every capacity figure on this page is IEA installed capacity for 2024, so pairing 485 TWh (2025) with 122.2 GW (2024) implies 0.453 and would move kIea from 0.398 purely because the two readings are a year apart. The anchor stays at 415 TWh (2024) until the IEA publishes 2025 capacity to pair with it. Re-checked Sep 25, 2026: the Energy and AI demand page still gives around 415 TWh for 2024, about 1.5% of global electricity, and still publishes no 2025 installed-capacity figure, so the hold stands."
+   "why": "Passes Test 1 and would pass Test 2; held back on vintage alone. Every capacity figure on this page is IEA installed capacity for 2024, so pairing 485 TWh (2025) with 122.2 GW (2024) implies 0.453 and would move kIea from 0.398 purely because the two readings are a year apart. The anchor stays at 415 TWh (2024) until the IEA publishes 2025 capacity to pair with it. Re-checked Sep 26, 2026: the Energy and AI demand page still gives around 415 TWh for 2024, and the IEA's data centres and networks page, current as of June 2026, still sources its figures to Key Questions on Energy and AI and carries a consumption series only. No 2025 installed-capacity figure has been published on either, so the hold stands."
   },
   {
    "place": "United States (EIA)",
