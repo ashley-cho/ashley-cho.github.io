@@ -111,6 +111,16 @@
       "moved": false,
       "src": "KPBS",
       "url": "https://www.kpbs.org/news/environment/2026/09/16/imperial-valley-utility-adopts-new-pricing-rules-putting-data-centers-first-for-power-cuts"
+    },
+    {
+      "date": "2026-09-26",
+      "kind": "data",
+      "title": "China Electricity Council: internet data services power use past 60 TWh this year",
+      "detail": "At the 2026 Energy Green Development Conference, reported by CCTV News on Sep 16, 2026, the China Electricity Council said national electricity use by the internet data services industry has passed 60 billion kWh (60 TWh) so far in 2026, up more than 40% year on year and already far above the full-year 2024 level. It described the first half, the 49.4 TWh the National Energy Administration reported in July, as already close to that full-year 2024 total. The council's Pan Yuelong separately projected national computing-power electricity reaching 800 TWh by 2030, about 6% of all electricity used in China.",
+      "effect": "No figure moved. China stays on 260 TWh (2024), scope mismatch declared. This is the same narrow industry classification as the National Energy Administration's half-year figure, it is a partial year, and it is 2026 vintage, so it cannot be set against 2024 capacity and Test 2 cannot be run on it at all. It does sharpen the mismatch rather than settle it: the council puts the full-year 2024 total for that classification close to 49.4 TWh, roughly a fifth of the 260 TWh this page uses for China in the same year, which is direct evidence the two sources count different populations. It still does not say whether telecom and 5G network rooms are inside the wider figure, which is the question that would settle China. The 800 TWh 2030 number is a projection and fails Test 1. The council's own site timed out from here, so this rests on the CCTV News account as carried by 21st Century Business Herald.",
+      "moved": false,
+      "src": "China Electricity Council, via CCTV News, Sep 16, 2026",
+      "url": "https://www.21jingji.com/article/20260916/herald/dc6f1c88d594d73d307b70c1f382730c.html"
     }
   ]
 }
