@@ -121,6 +121,26 @@
       "moved": false,
       "src": "China Electricity Council, via CCTV News, Sep 16, 2026",
       "url": "https://www.21jingji.com/article/20260916/herald/dc6f1c88d594d73d307b70c1f382730c.html"
+    },
+    {
+      "date": "2026-09-28",
+      "kind": "policy",
+      "title": "Pennsylvania conditions data center permits on local approval",
+      "detail": "Executive Order 2026-05, signed Aug 18, 2026, directs the Department of Environmental Protection to review a data center permit application only where the developer has made a legally binding commitment, through a Consent Order and Agreement, to the Governor's Responsible Infrastructure Development (GRID) requirements covering energy affordability, environmental protection, workforce and economic development, transparency and community engagement, and has already secured every required local approval. It removes all AI data center projects from the state's Permit Fast Track program and bars nondisclosure agreements on data center projects.",
+      "effect": "No figure moved. Permitting conditions are not generation, and Pennsylvania has no mapped metro on this page, so nothing attaches to a marker. Deliberately not added to the regulatory set: only the Governor's office announcement could be read here, and the executed order itself is a PDF whose text this run could not extract. It is recorded here so a later run can promote it once the order is readable, which is how the Imperial Irrigation District tariff was handled on Sep 23 and promoted on Sep 24.",
+      "moved": false,
+      "src": "Office of the Governor (Pennsylvania)",
+      "url": "https://www.pa.gov/governor/newsroom/2026-press-releases/governor-shapiro-signs-executive-order-on-data-center-developmen"
+    },
+    {
+      "date": "2026-09-28",
+      "kind": "policy",
+      "title": "Pennsylvania PUC study puts PJM reliability risk at six times the standard",
+      "detail": "The Commission released an independent analysis by Synapse Energy Economics on Sep 14, 2026. On PJM's current load forecast and with no further policy action it finds the regional grid fails PJM's reliability planning standard from 2027 through 2030, with modeled 2030 risk near six times that standard and, in a severe scenario combining higher demand with constrained new generation, more than 13 loss-of-load events a year from 2030. It attributes the demand growth largely to data center development, and notes projected new PJM data center demand for 2029 and 2030 alone exceeds the entire current annual electricity demand of Pennsylvania.",
+      "effect": "No figure moved. This is a consultancy model of future reliability commissioned by a regulator, not a measured consumption series, so it fails Test 1 on the same ground as the EIA's Annual Energy Outlook projections and the Borderstep figure for Germany. It is recorded because it is exactly the kind of widely cited data center demand number a reader would expect this page to have accounted for, and the reason it is not used belongs in the ledger rather than only in a chat.",
+      "moved": false,
+      "src": "Pennsylvania Public Utility Commission",
+      "url": "https://www.puc.pa.gov/press-release/2026/puc-study-warns-rapid-data-center-growth-could-pose-serious-risks-to-electric-reliability-09142026"
     }
   ]
 }
