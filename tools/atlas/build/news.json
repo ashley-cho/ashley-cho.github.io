@@ -141,6 +141,16 @@
       "moved": false,
       "src": "Pennsylvania Public Utility Commission",
       "url": "https://www.puc.pa.gov/press-release/2026/puc-study-warns-rapid-data-center-growth-could-pose-serious-risks-to-electric-reliability-09142026"
+    },
+    {
+      "date": "2026-09-29",
+      "kind": "data",
+      "title": "China's energy regulator gives a full-year figure for computing centers",
+      "detail": "At the national AI-and-energy meeting on May 26, 2026, reported on the administration's own site on May 29, the National Energy Administration said China's computing centers used 170 billion kWh (170 TWh) of electricity in 2025, 1.6% of national consumption, and that 42 ten-thousand-accelerator clusters had been built. Its director, Wang Hongzhi, put computing-power electricity on course for 800 TWh by 2030, about 6% of national consumption, which is the same 2030 figure the China Electricity Council gave in September. This is the first full-year official Chinese value on the table, but it arrives under a third classification: computing centers is neither the narrow internet data services series (49.4 TWh, first half of 2026) nor the 260 TWh (2024) total this page uses.",
+      "effect": "No figure moved. China stays on 260 TWh (2024), scope mismatch declared. Against the 31.9 GW of Chinese capacity the IEA counts, 170 TWh implies a load factor of 170/(31.9 x 8.76) = 0.61, inside the 0.3-0.85 band, where 260 TWh implies an impossible 0.93 - so on physical plausibility alone this figure would qualify, and it is the first Chinese number that does. It is held back for the reason the IEA's 485 TWh is held back: the whole capacity basis here is 2024, so pairing a 2025 energy figure with it would move China on a year mismatch rather than on evidence. Provenance is the second hold. This is a statement at a conference carried by a newspaper and republished by the administration, not a statistical release with a stated scope, so it still does not say whether telecom and 5G network rooms are counted. Recorded as rejected in policy.json, and it is the strongest candidate to date once a 2025 capacity basis exists or the series is published with a definition.",
+      "moved": false,
+      "src": "National Energy Administration (China), May 29, 2026",
+      "url": "https://www.nea.gov.cn/20260529/18c09743776c4dddb55288ceea38b8b1/c.html"
     }
   ]
 }
