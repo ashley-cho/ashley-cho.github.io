@@ -30,7 +30,7 @@ EPOCH = [
 ("QTS Richmond 3",144,"QTS","USA","23150",None,None,None),
 ("Meta Montgomery",153,"Meta","USA","36105",None,None,None),
 ("Meta Kuna",152,"Meta","USA","83634",None,None,None),
-("Meta Temple",152,"Meta","USA","76504",None,None,None),
+("Meta Temple",178,"Meta","USA","76504",None,None,None),
 ("Meta Cheyenne",152,"Meta","USA","82007",None,None,None),
 ("Amazon Ridgeland",228,"Amazon","USA","39157",None,None,None),
 ("Meta Huntsville",146,"Meta","USA","35773",None,None,None),
