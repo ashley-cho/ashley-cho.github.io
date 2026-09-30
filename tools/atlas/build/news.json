@@ -151,6 +151,16 @@
       "moved": false,
       "src": "National Energy Administration (China), May 29, 2026",
       "url": "https://www.nea.gov.cn/20260529/18c09743776c4dddb55288ceea38b8b1/c.html"
+    },
+    {
+      "date": "2026-09-29",
+      "kind": "policy",
+      "title": "FERC accepts PJM's reliability backstop, then suspends it five months",
+      "detail": "The Commission issued 196 FERC 61,245 (eLibrary accession 20260929-3099) accepting PJM's Reliability Backstop Procurement in Docket ER26-3380, and at the same time opened a companion investigation, Docket EL26-108, into whether parts of it are just and reasonable. PJM filed the tariff on Jul 31, 2026 under the title 'Reliability Backstop Procurement to Address Resource Adequacy and Large Loads', asking for a Sep 29, 2026 effective date. Chairman Swett and Commissioners Rosner, See and LaCerte concurred with a separate statement. RTO Insider reported on Sep 30, 2026 that implementation is suspended for five months while the investigation runs.",
+      "effect": "Nothing moves. The order procures generation against large load rather than measuring consumption, so no capacity or consumption figure on this page changes. Recorded in the regulatory set as evidence of data-center-driven generation, alongside the December 2025 co-location order and the June 2026 show cause orders it sits with.",
+      "moved": false,
+      "src": "FERC eLibrary",
+      "url": "https://elibrary.ferc.gov/eLibrary/docinfo?accession_Number=20260929-3099"
     }
   ]
 }
