@@ -86,6 +86,13 @@ EPOCH = [
 ("OpenAI Stargate Wisconsin (Port Washington)",0,"Oracle / OpenAI","USA","53074",None,1300,2027),
 ("QTS Cedar Rapids",0,"QTS","USA","52228",None,None,None),
 ("QTS Eagle Mountain",0,"QTS","USA","84013",None,None,None),
+("DayOne Kempas",421.691664,"DayOne","MYS",None,(1.5642,103.7193),None,None),
+("Huawei Wuhu",157,"Huawei","CHN",None,(31.18,118.21),None,None),
+("Nebius Mantsala",75,"Nebius","FIN",None,(60.64,25.32),None,None),
+("Nscale Keflavik",5.11,"Nscale","ISL",None,(63.977,-22.575),None,None),
+("CoreWeave Lancaster Greenfield site",0,"CoreWeave","USA","17601",None,None,None),
+("EcoDataCenter 2",0,"Mistral AI","SWE",None,(60.525,15.414),None,None),
+("Meta Bowling Green",0,"Meta","USA","43402",None,None,None),
 ]
 
 # name, iso3, lat, lon, live_MW, pipeline_MW|None, vintage, source
