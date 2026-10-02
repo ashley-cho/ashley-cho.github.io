@@ -1,145 +1,131 @@
 ---
 title: "Space is cold, and it's the least relevant fact about cooling a data center"
-description: "Everyone reaches for the 3-kelvin background when they explain orbital data centers. It contributes about five parts in a billion."
-date: 2026-08-24
+description: "Everyone reaches for the 3-kelvin background when they explain orbital data centers. It contributes about seven parts in a billion."
+date: 2026-09-02
 field: Spaceflight
 series: "Data centers in orbit"
-seriesPart: 2
+seriesPart: 5
 problem: 4
 draft: true
 ---
 
-There is an Nvidia H100 running in low Earth orbit right now. It went up on
-Starcloud-1 in November 2025 — one GPU, roughly a kilowatt, orbiting the planet
-while it works.
+Every explanation of orbital compute starts with the cold. The cosmic
+microwave background sits at [2.7 kelvin](https://lambda.gsfc.nasa.gov/product/cobe/),
+so a data center in orbit can dump its waste heat into that reservoir for free.
+The number is real, and it doesn't matter.
 
-A hyperscale data center on the ground is about 100 megawatts. Some of the AI
-training campuses being built today are heading toward a gigawatt.
-
-So the gap between what is flying and what is being promised is five to six
-orders of magnitude. That gap is the subject of this series: not whether anyone
-*wants* orbital compute, but what physics demands from anyone who tries. I want
-to work it out from the constants rather than from the press releases.
-
-We start with heat, because heat is where every explanation of this idea goes
-first — and where almost every explanation goes wrong in the same way.
-
-## The thing everyone says
-
-The pitch is always some version of this: space is cold. The cosmic microwave
-background sits at 2.7 kelvin. A data center in orbit can dump its waste heat
-into that enormous cold reservoir, and you get cooling for free.
-
-It sounds right. It has a real number in it. And the number is almost entirely
-irrelevant.
+This post assumes what the series settles later: a 15.8 MW facility sized for
+one frontier training run per 60 days, a 650 km dawn-dusk orbit, a flat
+radiator edge-on to Earth with both faces radiating, GPU-class chips at about
+1.4 W per square millimetre of die, silicon capped at 85 °C, coolant boiling
+directly on the die, and a pumped two-phase loop from chip to panel.
 
 ## Why the 3 kelvin doesn't matter
 
-A surface radiating into space sheds heat according to Stefan–Boltzmann:
+A surface radiating into space sheds heat by Stefan–Boltzmann:
 
 $$
-P = \varepsilon \sigma \left(T_{\text{rad}}^{4} - T_{\text{sink}}^{4}\right)
+q = n\,\varepsilon \sigma \left(T_{\text{rad}}^{4} - T_{\text{sink}}^{4}\right)
 $$
 
-Everything hinges on that fourth power. Run a radiator at 80 °C — 353 K, about
-as hot as you can get the back of a working server — against a 3 K sink, and the
-sink's contribution to the bracket is:
+$q$ is watts per square metre, $n$ the number of faces that see sky,
+$\varepsilon$ emissivity, $\sigma$ the Stefan–Boltzmann constant, and the two
+temperatures are the panel's and the sink's, in kelvin.
 
-$$
-\left(\frac{3}{353}\right)^{4} \approx 5 \times 10^{-9}
-$$
-
-Five parts in a billion. If the background were 3 K or 30 K or 0 K, your
-radiator would perform the same to nine significant figures. **The cold of space
-is free, and it is also nearly meaningless.** What matters is how hot *your*
-side is.
-
-That is not a pedantic correction. It changes what you optimize. "Space is cold"
-suggests the environment is doing work for you. It isn't. Every watt you shed is
-bought entirely with your own temperature.
+Everything hinges on the fourth power. A radiator at 54.6 °C, where this
+design's ends up, is 328 K, so the sink's share of the bracket against a 3 K
+sky is (3/328)⁴, seven parts in a billion. **The cold of space is free, and it
+is also nearly meaningless.** Every watt you shed is bought with your own
+temperature.
 
 ## What is actually true
 
-Two things, and they pull in opposite directions.
+Two things, and both make it harder.
 
-The first is genuinely hard: **there is no convection.** On Earth, a data center
-moves heat with air and water — fans, chilled water loops, evaporative towers.
-All of that requires a fluid to carry heat away, and in vacuum there is no
-fluid. Radiation is the only exit. It is the mechanism of last resort in
-terrestrial engineering, and in orbit it is the only one you have.
+**There is no convection.** On Earth a data center moves heat with air and
+water. In vacuum there is no fluid, so radiation is the only exit — the
+mechanism of last resort on Earth, and the only one in orbit.
 
-The second is the part nobody mentions: **heat is also coming in.**
+**Heat is also coming in**, from three sources.
 
-A radiator panel in low Earth orbit sits in a shooting gallery of thermal
-inputs. Direct sunlight is 1,361 W/m². Roughly 30% of that bounces off Earth and
-comes back up at you as albedo. Earth itself glows in the infrared at about
-240 W/m². Even with a good optical solar reflector coating — the kind of
-silvered surface that reflects most sunlight while still radiating efficiently —
-a panel absorbs somewhere between 200 and 350 W/m² that it did not ask for.
+Sunlight, 1,361 W/m² on the sunward face with the sun square-on, the hot case,
+of which the panel keeps whatever the coating fails to reflect. Good white
+paint [darkens under UV](https://ntrs.nasa.gov/api/citations/20080018585/downloads/20080018585.pdf),
+and at an assumed end-of-life absorptance of 19% that is **258.6 W/m²**, 71% of
+everything the panel takes in.
 
-Which means the *effective* sink your radiator works against isn't 3 K at all.
-In LEO it behaves more like 250–290 K. You are not radiating into the void. You
-are radiating into a fairly warm room that happens to have no air in it.
+Earth's infrared, [239 W/m²](https://en.wikipedia.org/wiki/Outgoing_longwave_radiation).
+Edge-on, each face sees the planet with a view factor of 0.241 and absorbs at
+its emissivity of 0.90: **51.8 W/m²** on each face, since the panel radiates
+from both sides and collects from both too.
 
-## What it costs
+Albedo, sunlight bounced off the planet, about 11 W/m² on the sunward face at
+the same 19%: **2.1 W/m²**. The anti-sun face looks at the unlit half of the
+planet and gets none.
 
-Put those together and you can size the thing. Both faces of the panel radiate,
-emissivity around 0.9, minus 250 W/m² of parasitic load:
+That is 312.5 W/m² on the sunward face, 51.8 on the other, **364 W/m² in
+total**. Solve 364 = 2 × 0.90 × σ × T⁴ and the temperature that pushes back
+that hard is 244 K. The *effective* sink is −29 °C, a room with no air in it.
+The 3 K background sits somewhere behind that and never gets a vote.
 
-| Radiator temperature | Net flux | Area for 100 MW |
+## The number that actually sets the size
+
+The hotter the panel, the smaller it can be, and what caps its temperature is
+the chips: **heat only flows downhill.** The radiator runs at the junction
+temperature — the silicon itself — minus whatever it costs to carry the heat
+out of the chip and into the panel. That drop is the thermal stack, and every
+kelvin of it is paid for in area.
+
+How big the drop is comes down to two things: how densely the chip makes heat,
+and whether the coolant boils on bare silicon or through a metal lid and a
+layer of thermal paste, which is how essentially every server CPU package on
+Earth is built. Direct-die on this chip costs about 30 K, so an 85 °C junction
+puts the radiator at 54.6 °C. On an H100, which makes heat at 0.86 W/mm²
+instead of 1.4, the same path costs 18 K. A lid costs 50 to 90 K. At the
+bottom of that range the radiator sits at 35 °C, nets 556 W/m² and is 1.5
+times the size; at the top it sits at −5 °C, nets 164 W/m² and is five times
+the size. At −29 °C it rejects nothing at all.
+
+| Radiator temperature | Net flux | Planform area at 16.8 MW |
 |---|---|---|
-| 60 °C | 1,007 W/m² | 99,000 m² |
-| 80 °C | 1,337 W/m² | 74,800 m² |
-| 100 °C | 1,729 W/m² | 57,800 m² |
-| 127 °C | 2,367 W/m² | 42,300 m² |
+| 40 °C | 617 W/m² | 27,200 m² |
+| 54.6 °C — this design | 813 W/m² | 20,700 m² |
+| 60 °C | 893 W/m² | 18,800 m² |
+| 80 °C | 1,223 W/m² | 13,700 m² |
+| 100 °C | 1,615 W/m² | 10,400 m² |
 
-Seventy-five thousand square metres for one hyperscale data center's worth of
-compute. That is about eleven soccer fields of radiator, unfolded in orbit, to
-run a facility that on Earth fits in a warehouse with a chiller plant on the
-roof.
+Net flux is 2 × 0.90 × σ × T⁴ − 364. Area is 16.8 MW over that, the extra 6%
+being the leakage the silicon draws at 85 °C without doing work.
 
-And look at the shape of that table. Going from 60 °C to 127 °C more than halves
-the area. That is the fourth power doing its work — and it is the single
-strongest lever anyone building this has. Almost everything interesting about
-orbital thermal design turns out to be an argument about how to run the radiator
-hotter. (That's the next post but one, and the answer is not what you'd guess.)
+The 30 K stack is more than a third of the panel: without it the radiator
+could sit at 85 °C and shed the same heat from 12,800 m².
 
-## A calibration, because these numbers are hard to feel
+## A calibration
 
-The International Space Station has the largest active thermal control system
-ever flown. Its ammonia-loop radiators cover **422 m² and reject 70 kW** — about
-166 W/m² in practice, well under the theoretical figure, precisely because of
-the solar and Earth-IR loading described above.
+The ISS radiators are rated for [70 kW through six units of
+79.2 m²](https://www.nasa.gov/wp-content/uploads/2021/02/473486main_iss_atcs_overview.pdf),
+475 m² in all, so about **147 W/m²**. This design's panel nets 813 W/m². Most
+of the gap is temperature — the ISS loop is set to 2.8 °C, where the same
+parasitic load leaves 228 W/m² — and the rest is the drop through the loop and
+fin efficiency.
 
-So a 100 MW orbital data center needs roughly **177 times the ISS's entire
-radiator area.**
-
-I had heard, secondhand, that a space data center would need a radiator "ten
-times the size of the ISS." Ten times the ISS's *radiator area* is 4,220 m²,
-which sheds about 5.6 MW — not a hyperscale data center, off by a factor of
-twenty. But ten times the ISS's *overall dimensions* — the station's 109 m truss
-by 73 m array span, about 8,000 m² of bounding box — comes to 80,000 m², which
-lands almost exactly on the 100 MW figure.
-
-Both readings circulate. They differ by 20×. It's worth knowing which one you've
-been told.
+So this facility needs about **44 times the ISS's radiator planform area**.
 
 ## Where this leaves us
 
-The framing to carry forward is that this is not a cold problem. It is a
-temperature-and-area problem, and the cold of space is a boundary condition so
-generous it has stopped being interesting.
+Cooling a data center in orbit is a temperature-and-area problem, and the cold
+of space is a boundary condition that has stopped being interesting. The
+biggest lever on the radiator's share of kilograms per kilowatt is whether
+there is a lid between the chip and the coolant — a millimetre of metal and
+paste every server on Earth has, and this one can't afford. The second is the
+chip's own heat density, which is why a chip built for orbit wants to spread
+the same work over more silicon.
 
-Which sets up the thing that genuinely surprised me when I worked it out, and
-which inverts the premise most people arrive with. Everyone assumes cooling is
-the hard part of putting a data center in orbit.
-
-It isn't. The solar panels are three times bigger than the radiators.
-
-That's next.
+That's a later post. The next one is about getting the heat from the chip to
+this panel at all, which is where the design stops being about temperature and
+starts being about plumbing.
 
 ---
 
-*This is the first in a series working through the engineering of orbital data
-centers from first principles. Corrections are genuinely welcome — the numbers
-here are mine, and I'd rather find out they're wrong from you than not find out.*
+*Part of a series working through the engineering of orbital data centers from
+first principles. Corrections are welcome.*
