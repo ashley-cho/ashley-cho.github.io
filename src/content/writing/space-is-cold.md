@@ -14,7 +14,7 @@ microwave background sits at [2.7 kelvin](https://lambda.gsfc.nasa.gov/product/c
 so a data center in orbit can dump its waste heat into that reservoir for free.
 The number is real, and it doesn't matter.
 
-This post assumes what the series settles later: a 15.8 MW facility sized for
+This post assumes what the series settles later: a 15.7 MW facility sized for
 one frontier training run per 60 days, a 650 km dawn-dusk orbit, a flat
 radiator edge-on to Earth with both faces radiating, GPU-class chips at about
 1.4 W per square millimetre of die, silicon capped at 85 °C, coolant boiling
@@ -83,22 +83,22 @@ Earth is built. Direct-die on this chip costs about 30 K, so an 85 °C junction
 puts the radiator at 54.6 °C. On an H100, which makes heat at 0.86 W/mm²
 instead of 1.4, the same path costs 18 K. A lid costs 50 to 90 K. At the
 bottom of that range the radiator sits at 35 °C, nets 556 W/m² and is 1.5
-times the size; at the top it sits at −5 °C, nets 164 W/m² and is five times
+times the size; at the top it sits at −5 °C, nets 163 W/m² and is five times
 the size. At −29 °C it rejects nothing at all.
 
-| Radiator temperature | Net flux | Planform area at 16.8 MW |
+| Radiator temperature | Net flux | Planform area at 16.7 MW |
 |---|---|---|
-| 40 °C | 617 W/m² | 27,200 m² |
-| 54.6 °C — this design | 813 W/m² | 20,700 m² |
-| 60 °C | 893 W/m² | 18,800 m² |
-| 80 °C | 1,223 W/m² | 13,700 m² |
-| 100 °C | 1,615 W/m² | 10,400 m² |
+| 40 °C | 617 W/m² | 27,000 m² |
+| 54.6 °C — this design | 813 W/m² | 20,500 m² |
+| 60 °C | 893 W/m² | 18,700 m² |
+| 80 °C | 1,223 W/m² | 13,600 m² |
+| 100 °C | 1,615 W/m² | 10,300 m² |
 
-Net flux is 2 × 0.90 × σ × T⁴ − 364. Area is 16.8 MW over that, the extra 6%
+Net flux is 2 × 0.90 × σ × T⁴ − 364. Area is 16.7 MW over that, the extra 6%
 being the leakage the silicon draws at 85 °C without doing work.
 
 The 30 K stack is more than a third of the panel: without it the radiator
-could sit at 85 °C and shed the same heat from 12,800 m².
+could sit at 85 °C and shed the same heat from 12,700 m².
 
 ## A calibration
 
@@ -109,7 +109,7 @@ of the gap is temperature — the ISS loop is set to 2.8 °C, where the same
 parasitic load leaves 228 W/m² — and the rest is the drop through the loop and
 fin efficiency.
 
-So this facility needs about **44 times the ISS's radiator planform area**.
+So this facility needs about **43 times the ISS's radiator planform area**.
 
 ## Where this leaves us
 
