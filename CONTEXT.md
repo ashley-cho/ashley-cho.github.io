@@ -40,21 +40,23 @@ duplicating everything.
 - The array normal on the orbit normal, which deletes the gimbal rather than
   improving it.
 
-**What it puts under suspicion, and nobody has answered:** there are 48 pumps in
-this design, one per module, and a pump is the one item the thermal analysis
-calls single-point-fatal — the flow-boiling correlations are only valid with
-enough mass flux to sweep bubbles, which at zero g means the pump *is* the
-physics. That is 48 vulnerable points in the place the design can least afford
-them. Two pumps per module doubles the count but removes the single point; under
-principle 1 alone that is worse, under principle 3 it is better. **This is the
-sharpest unresolved conflict between the principles and it should be worked
-before post 5.**
+**The pump is the single-point-fatal item**, in every version of this design:
+the flow-boiling correlations are only valid with enough mass flux to sweep
+bubbles, which at zero g means the pump *is* the physics. At 48 modules that was
+48 vulnerable points and a real conflict — two pumps per module removes the
+single point (principle 3) but adds 48 parts (principle 1). **At three modules
+the conflict mostly dissolves.** One pump failure now takes out a third of the
+facility, and a second pump per module costs three parts fleet-wide. Redundancy
+wins; carry two pumps per module and say so in post 5.
 
-**What it does not reopen:** module count. Forty-eight looks like 48× everything,
-and fewer, larger modules would cut the part count — but each module is already
-~90 t at flown hardware, which is at the edge of a single launch. Going bigger
-means assembling in orbit, which adds far more vulnerable points than it removes.
-The count is bounded from below by launch capacity, not chosen.
+**Module count is bounded by launch mass, not chosen.** Fewer, larger modules
+cut the part count, so the count is the smallest that fits the launcher: at the
+near-term mass line (~14.8 kg/kW) a 5.2 MW module is ~77 t, three of them carry
+the benchmark facility, and each is one heavy-lift launch. Going bigger means
+assembling in orbit, which adds far more vulnerable points than it removes.
+(The 100 MW design was 48 modules of 2.21 MW at ~90 t flown — same logic, other
+mass line.) The cost of fewer modules lands on the array: a 5.5 MW wing is
+~200× the largest flown, see open question 2.
 
 > **October 2026 update — read `CHIP-SPEC.md` alongside this.** Ashley restated
 > the design metrics (light · super simple · easy to build · point-to-point
@@ -63,7 +65,9 @@ The count is bounded from below by launch capacity, not chosen.
 > three modules. The physics, the thermal stack, the layout trade, the mass
 > lines and the sixteen problems below all still hold; the *scale* numbers
 > (48 modules, 363,005 m², 4,253 t) are the historical 100 MW case. Where the
-> two documents disagree on scale, CHIP-SPEC.md is current.
+> two documents disagree on scale, CHIP-SPEC.md is current, and `canon.py`
+> (v6) computes both — the benchmark design and, at the bottom, this file's
+> 100 MW numbers as a cross-check.
 
 ## Working rules
 
@@ -126,12 +130,20 @@ and zero on the other, not 30 W/m² total. Parasitic drops 392 → 364, net rise
 971 → 999, and the radiator shrinks 2.8%.
 
 ```
-Tj 85 °C  −  18.2 K stack  =  radiator 66.8 °C
+Tj 85 °C  −  18.2 K stack  =  radiator 66.8 °C        (H100 die, 0.86 W/mm²)
 1,063 m²  radiator per MW  (66.8 °C, both faces, ε 0.90, −364 W/m² parasitic)
 2,567 m²  solar array per MW  (incl. 5.3% cosine margin, see below)
 2.41×     array ÷ radiator  — was 2.96 before the stack; NOT fixed by physics
 14–43 kg/kW   and the spread is TWO inputs, not one
 ```
+
+**The stack is chip-dependent, and this block is the H100 case.** At a fixed
+boiling coefficient the die-to-coolant drop scales with die heat flux. The
+Rubin-class chip in CHIP-SPEC.md makes 2,300 W on ~1,600 mm², 1.44 W/mm²,
+1.67× an H100 — so its stack is **30.4 K, the radiator runs at 54.6 °C, nets
+813 W/m², and needs 1,306 m²/MW**. Array ÷ radiator is then **1.97×**, and the
+break-even cell efficiency drops from 77% to 63%. Everything below that quotes
+66.8 °C, 999 W/m² or 2.41× is the H100 case; `canon.py` prints both.
 
 Full v5 roll-up: radiator 106,315 m², array 256,690 m², surface 363,005 m²,
 disc 98.1 m, break-even η 77.3%, mass 4,253 t flown / 3,370 t optimistic /
@@ -204,8 +216,8 @@ each post is labelled — publish in whatever order the research is ready.
 | # | Post | Status |
 |---|---|---|
 | — | The map (intro) — `what-it-would-take.md` | drafted |
-| 1 | The array is the larger SURFACE (2.41x, robust). Which is the larger MASS is not settled: radiator 1,506 t vs array 1,315 t at 14.2 kg/m2, but array wins at 8 kg/m2 (1,315 vs 851) and near-term (373 vs 319). Never write "biggest" without a unit. | — |
-| 2 | Eclipse, and why there is no battery | — |
+| 1 | The array is the larger SURFACE (2.41× with an H100 stack, 1.97× with the Rubin-class stack — robust either way). Which is the larger MASS is not settled: at the benchmark design, radiator 290 t vs array 206 t at flown hardware, 61 vs 58 near-term. Never write "biggest" without a unit. | — |
+| 2 | Eclipse, and why there is no ride-through battery (a keep-alive one for memory, under a tonne, stays) | — |
 | 3 | Volts, cables, and arcing in plasma | — |
 | 4 | Space is cold, and it barely matters — `space-is-cold.md` | drafted |
 | 5 | Nobody writes about the plumbing | — |
@@ -237,8 +249,13 @@ richer once the design was drawn (see below).
   interesting post is about the lid, not the temperature.
 - **Post 13** was going to be "lockstep across a moving fabric is very hard."
   Local SGD — sync every few hundred steps instead of every step — cuts the
-  requirement ~500×, from 57 Tbps naive to 113–566 Gbps per module, which is
-  ordinary short-range optics. The post is now about why the hard version of the
+  requirement ~500×. For the 100 MW design that was 57 Tbps naive → 113–566
+  Gbps per module. **Re-derived for the benchmark design** (1T active, three
+  modules, sync every 500 steps, 16M-token batches): the full pseudo-gradient
+  exchange is ~2.7 TB per module per sync against a ~23-minute sync interval,
+  **~15 Gbps per module** — a single TBIRD-class terminal with a 10× margin.
+  Traffic scales with model size and sync interval, not with module size or
+  facility power. `canon.py` prints it. The post is now about why the hard version of the
   problem was the wrong problem. **This does not get its own post** (Ashley,
   explicitly); it folds into 13.
 
@@ -317,8 +334,9 @@ they diverged, it is flagged below.
   ~500 Gbps, which is free-space optics at a few km). Nothing needs to cross, so
   nothing should. 48 free-flying modules of 2.21 MW each, 98 m across.
 - **Local SGD, not tight all-reduce.** Syncing every few hundred steps instead
-  of every step cuts inter-module bandwidth ~500×, to 113–566 Gbps per module
-  instead of 57 Tbps naive. This dissolves what the adversarial review called
+  of every step cuts inter-module bandwidth ~500× — 113–566 Gbps per module at
+  the 100 MW design, ~15 Gbps per module at the benchmark design (see post 13
+  note above). This dissolves what the adversarial review called
   the single worst problem in the design. Found by the clean-sheet agent only.
 - **No servicing.** Graceful degradation, replaced by launch, active deorbit.
   A dead module tumbles, and a tumbling disc presents its mean projected area
@@ -608,9 +626,30 @@ an audit of the design against all sixteen problems.
 
 ## Open questions
 
-Ranked. The first one is new and it outranks everything that was here before.
+Ranked, October 2026. The live ones first; the 100 MW-era ones that still
+matter follow; the merged-sheet question is demoted to the end because the
+chip spec makes it moot.
+
+A. **72-GPU copper domains against a 161 m disc.** 20 domains per module of
+   ~245 kW each, ~300 m² of radiator apiece. Either the chips cluster and the
+   coolant crosses hinges — which breaks "the loop never crosses a joint" — or
+   the in-module fabric goes optical. Problems 12 and 14. The largest
+   unresolved item in the design.
+B. **800 V DC in LEO plasma.** Rubin-era racks run an 800 V bus; arcing in LEO
+   starts around 200–300 V and the ISS runs 160 V with a plasma contactor.
+   Problem 3, made harder specifically by this chip.
+C. **The 220 kW Vera Rubin NVL72 rack figure** (SemiAnalysis via the shared
+   chat) — every number in the power column scales with it. Verify.
+D. **Critical heat flux margin** for ammonia microchannels at 144 W/cm². Past
+   CHF the wall dries out and Tj jumps; nothing in the design pins the margin.
+E. **Two pumps per module** — decided above on principle; not yet drawn or
+   massed.
+
+The older ones:
 
 0. **Eclipse on a merged sheet is a structural problem, not a power problem.**
+   *(Moot for a GPU-class chip — the chip spec forces f = 0. Kept for the
+   SRAM-resident machine it describes.)*
    β\* = asin(Re/(Re+h)) = 65.16°, and the beta range runs down to 58.57°, so the
    orbit is shadowed **88 days a year, up to 19.7 minutes per orbit**. On the
    two-surface design that is a known power gap. On the one-surface sheet it is
@@ -620,8 +659,7 @@ Ranked. The first one is new and it outranks everything that was here before.
    **1,300 times a year**, across six to eight million die attachments on a
    membrane. The ride-through battery is 32.9 MWh = **132–183 t** and appears in
    no mass table. This decides whether "delete the batteries" was ever on offer,
-   and it is the question that could still kill one surface. *(October: moot for
-   a GPU-class chip — the chip spec forces f = 0, see CHIP-SPEC.md.)*
+   and it is the question that could still kill one surface.
 1. **The ×1.347 system overhead.** 1,096 t — 26% of the headline — for bus,
    structure, propellant and 15% margin, inherited from the superseded S1
    breakdown and never rederived for this design. It is the only number in the
@@ -631,11 +669,14 @@ Ranked. The first one is new and it outranks everything that was here before.
    1,315 t at the flown line, and smaller in all three scenarios.) It does not block publishing, because it is now
    labelled and itemised, but it does block quoting "42.5 kg/kW" as though the
    last digit meant anything. Needs a real bus and structure budget.
-2. **Array specific power at module scale.** Decides the whole 14–43 kg/kW
-   spread. Every flown data point is ≤28 kW (37 kW is catalogue) and the trend falls with size; this
-   design needs 2.2 MW per wing. Needs a vendor mass statement for a ≥100 kW
-   wing with blanket separated from boom, so the scaling can be modelled rather
-   than extrapolated.
+2. **Array specific power at module scale — now worse.** Decides the whole
+   14–47 kg/kW spread. Every flown data point is ≤28 kW (37 kW is catalogue)
+   and the trend falls with size. The 100 MW design needed 2.2 MW per wing,
+   79× the largest flown; **the benchmark design's three big modules need
+   5.5 MW per wing, ~200×.** Fewer modules is what "light" and "simple" asked
+   for, and this is its price. Needs a vendor mass statement for a ≥100 kW wing
+   with blanket separated from boom, so the scaling can be modelled rather than
+   extrapolated.
 3. **ORDEM debris flux at 650 km.** Decides three things at once — fin
    thickness, spare-capacity fraction, and the margin-vs-redundancy trade below.
    Guest account at `ordem.appdat.jsc.nasa.gov`. **Only Ashley can run it.** The
@@ -996,10 +1037,9 @@ becomes the URL. Frontmatter: title, description, date, series, seriesPart,
 draft. Math via `$...$` and `$$...$$`. Push to `main` and GitHub Actions
 deploys to https://ashley-cho.github.io.
 
-**The GitHub copy of this file is stale.** As of 2 Oct 2026 the repo's
-CONTEXT.md is the 8 KB first version; this 55 KB one lives in the Claude
-project (`claude/CONTEXT.md`) and should be copied into the repo on the next
-push, alongside `CHIP-SPEC.md`.
+The repo and the Claude project (`claude/CONTEXT.md`, `claude/CHIP-SPEC.md`)
+carry the same copies of this file and CHIP-SPEC.md as of PR #94; keep them in
+step.
 
 ## canon.py — read this before changing any number
 
@@ -1013,8 +1053,16 @@ Run it with `python3 canon.py`. Every figure it prints appears verbatim in
 CONTEXT.md, both posts and both artifacts. If a document disagrees with canon,
 the document is wrong.
 
+**v6 (2 Oct 2026) rebuilt it from scratch** — the v5 file was lost with a
+workspace and had never been pushed. v6 sizes from the benchmark (CHIP-SPEC.md),
+scales the stack with die flux, derives facility power per GPU from the rack,
+estimates the DiLoCo link, and reproduces every v5 100 MW number at the bottom
+as a cross-check (106,315 / 256,690 / 363,005 m², 98.1 m, 2.41, 999, 4,254 t).
+If v6 and a document disagree, the document is wrong; if v6 and the v5 numbers
+in this file disagree by more than rounding, v6 is wrong.
+
 Two things canon does NOT contain and must not be given false precision:
 the ×1.347 system overhead (inherited, never derived) and the 3.36 kg/kW
-compute mass (inherited, unsupported). It also still sizes at 100 MW with the
-2.0× rule; the benchmark-sized facility in CHIP-SPEC.md has not been added to it
-yet — that is the first job for the next session that has the repo.
+compute mass (inherited, unsupported). Two more are estimates with no
+measurement behind them: the 0.34 kW/GPU for bus conversion and pumps, and the
+four utilization factors.

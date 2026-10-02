@@ -22,19 +22,20 @@ Each line below is one division. Everything downstream of the benchmark is
 sized by it.
 
 ```
-35 effective EFLOPS                        the benchmark, fixed
-÷ 0.55 utilization                         → 64 EFLOPS of sustained chip capacity
-÷ 15.2 PFLOPS sustained per chip           → 4,180 working chips
-× 1.05 hot spares                          → 4,390 chips
-× 3.4 kW facility power per chip           → 14.9 MW when all are lit
-÷ 0.94 annual availability                 → 15.8 MW nameplate
-× 1.062 leakage, ÷ 813 W/m² net flux       → 20,700 m² radiator
-× 2,567 m²/MW                              → 40,700 m² array
-× 13.8 kg/kW near-term (42.5 flown)        → ~230 t (~730 t)
+35 effective EFLOPS                        the benchmark, fixed (34.7 unrounded)
+÷ 0.55 utilization                         → 63 EFLOPS of sustained chip capacity
+÷ 15.2 PFLOPS sustained per chip           → 4,150 working chips
+× 1.05 hot spares                          → 4,360 chips
+× 3.4 kW facility power per chip           → 14.8 MW when all are lit
+÷ 0.943 annual availability                → 15.7 MW nameplate
+× 1.062 leakage                            → 16.7 MW of heat
+÷ 813 W/m² net flux                        → 20,500 m² radiator
+× 2,417 m² per MW drawn                    → 40,300 m² array (17.5 MW peak)
+mass lines (array W/kg, radiator kg/m²)    → 232 t near-term, 740 t flown
 ```
 
 Four numbers in that chain are the design: **0.55, 15.2, 3.4, 813.** The rest
-is canon physics. Each of the four is explained below, with what it replaced.
+is canon physics. `canon.py` (v6) prints every line of it. Each of the four is explained below, with what it replaced.
 
 ## The chip
 
@@ -50,7 +51,7 @@ not the logic.
 | memory | 8 × HBM4E: 384 GB, 29 TB/s | best stack that exists (Samsung HBM4E sample, 3.6 TB/s, 48 GB, May 2026); Rubin's eight-stack shoreline |
 | bytes per kFLOP | 1.65 | half of H100 BF16's 3.4; same as Llama 4 Behemoth had on H100 FP8 |
 | tight-link domain | 72 GPUs, NVLink-class copper, ~2 m reach | the NVL72 domain |
-| between domains and modules | local SGD / DiLoCo, sync every few hundred steps | 113–566 Gbps per module |
+| between domains and modules | local SGD / DiLoCo, sync every few hundred steps | ~15 Gbps per module for a 1T model (canon) |
 | junction ceiling | 85 °C | HBM refresh-throttle limit; logic would take ~100 °C |
 | fault tolerance | ECC on all memory, 5% hot spares, in-memory checkpoints | goodput factor |
 | precision | FP8 matmuls; BF16/FP32 for embeddings, output head, norms, optimizer | the DeepSeek V3 pattern; no public run is "full FP8" |
@@ -105,7 +106,8 @@ comparator for an FP8 chip.
 - **Light beats easy-to-build on structure.** Design at the near-term line
   (300 W/kg array, 3 kg/m² radiator); flown (85 W/kg, 14.2 kg/m²) is the
   fallback row. One structural bet entered twice: deploy and hold flat a
-  ~160 m sheet at ~5 kg/m² all-in. 300 W/kg has no array-level demonstration;
+  ~160 m sheet at ~5 kg/m² all-in. Three modules also means a 5.5 MW wing,
+  ~200× the largest flown. 300 W/kg has no array-level demonstration;
   2.9 kg/m² has one carbon-carbon demo.
 - **Custom chip, with honest numbers.** The custom content (HBM4E, ECC, spares,
   domain layout) is worth 0.55 against ~0.47 stock — about 15% of mass. The
@@ -127,27 +129,28 @@ comparator for an FP8 chip.
 | | design (custom chip, near-term structure) | fallbacks |
 |---|---|---|
 | utilization | 0.55 | stock chip ~0.47 |
-| sustained capacity needed | 64 EFLOPS | 74 EFLOPS |
-| GPUs | 4,180 working, 4,390 with spares | ~5,120 |
-| power, nameplate | **15.8 MW** | 18.5 MW |
-| radiator (813 W/m²) | 20,700 m² | 24,100 m² |
-| array (2,567 m²/MW) | 40,700 m² | 47,400 m² |
-| mass | **~230 t near-term** | ~730 t flown structure; ~270 t stock chip |
-| modules | **3 × 5.3 MW, ~77 t each** | 8 launches at flown structure |
-| per module | 1,460 GPUs in 20 domains; disc 161 m, radiator the inner 94 m | |
-| module memory | 562 TB — a full copy of ~35T parameters with training state at 16 B/param | |
-| links | three modules, full mesh = ring, two laser terminals each, 113–566 Gbps | |
+| sustained capacity needed | 63 EFLOPS | 74 EFLOPS |
+| GPUs | 4,150 working, 4,360 with spares | ~5,100 |
+| power, nameplate | **15.7 MW** (16.7 MW of heat) | 18.4 MW |
+| radiator (813 W/m²) | 20,500 m² | 24,000 m² |
+| array (2,417 m² per MW drawn) | 40,300 m² | 47,100 m² |
+| mass | **232 t near-term** (array 58, radiator 61, compute 53, other 60) | 740 t flown; ~270 t stock chip |
+| modules | **3 × 5.2 MW, ~77 t each** | 8 launches at flown structure |
+| per module | 1,450 GPUs in 20 domains; disc 161 m, radiator the inner 93 m | |
+| module memory | 558 TB — a full copy of ~35T parameters with training state at 16 B/param | |
+| links | three modules, full mesh = ring, two laser terminals each; DiLoCo traffic ~15 Gbps per module (1T model, sync every 500 steps) | |
 | energy per 60-day run | ~21 GWh | |
 
 What changed from the previous version of this table (19.6 MW, 285 t): FLOPS
 per chip 16.6 → 15.2 (dropped the clock factor, quoted sustained), power per
 chip 4.6 → 3.4 kW (derived from the rack, dropped the terrestrial PUE). Nine
-percent more chips, twenty percent less of everything else.
+percent more chips, twenty percent less of everything else. Numbers are now
+canon v6's, to the rounding shown.
 
 ## Still open
 
 - **72-GPU copper domains against a 161 m disc.** 20 domains of 245 kW each
-  (72 × 3.4 kW), ~320 m² of radiator apiece. Either the chips cluster and
+  (72 × 3.4 kW), ~300 m² of radiator apiece. Either the chips cluster and
   coolant crosses hinges (problem 14), or the in-module fabric goes optical
   (problem 12). The largest unresolved item.
 - **800 V DC rack bus in LEO plasma.** Arcing from ~200–300 V; ISS runs 160 V
@@ -158,6 +161,8 @@ percent more chips, twenty percent less of everything else.
   unverified. Everything in the power column scales with it.
 - **1T active / 30T tokens** is an assumption for closed frontier models.
 - **Compute mass 3.36 kg/kW** (12 kg per GPU here) is inherited and underived.
+- **Array wing at 5.5 MW per module is ~200× the largest flown** (SUNSTONE,
+  28 kW). Fewer modules is what light and simple asked for; this is the price.
 - **Heavy-lift to 650 km SSO at ~77 t per module** — assumed, not quoted.
 
 ## History, one line each
@@ -170,4 +175,4 @@ easy-to-build on structure. I sized at 40%, then 70% with clock 1.0, then a
 60 TB/s memory turned out not to exist (8 × HBM4E = 29 TB/s), the clock factor
 turned out to be bookkeeping (quote 15.2 PF sustained), and the 2.0× facility
 power rule turned out to be an H100-on-Earth number (3.4 kW derived). Settled
-at 0.55, 15.8 MW, ~230 t, three modules.
+at 0.55, 15.7 MW, 232 t, three modules; canon.py v6 rebuilt to print it.
