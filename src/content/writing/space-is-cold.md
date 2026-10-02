@@ -17,7 +17,7 @@ The number is real, and it doesn't matter.
 This post assumes what the series settles later: a 15.7 MW facility sized for
 one frontier training run per 60 days, a 650 km dawn-dusk orbit, a flat
 radiator edge-on to Earth with both faces radiating, GPU-class chips at about
-1.4 W per square millimetre of die, silicon capped at 85 °C, coolant boiling
+1.4 W per square millimeter of die, silicon capped at 85 °C, coolant boiling
 directly on the die, and a pumped two-phase loop from chip to panel.
 
 ## Why the 3 kelvin doesn't matter
@@ -28,7 +28,7 @@ $$
 q = n\,\varepsilon \sigma \left(T_{\text{rad}}^{4} - T_{\text{sink}}^{4}\right)
 $$
 
-$q$ is watts per square metre, $n$ the number of faces that see sky,
+$q$ is watts per square meter, $n$ the number of faces that see sky,
 $\varepsilon$ emissivity, $\sigma$ the Stefan–Boltzmann constant, and the two
 temperatures are the panel's and the sink's, in kelvin.
 
@@ -116,7 +116,7 @@ So this facility needs about **43 times the ISS's radiator planform area**.
 Cooling a data center in orbit is a temperature-and-area problem, and the cold
 of space is a boundary condition that has stopped being interesting. The
 biggest lever on the radiator's share of kilograms per kilowatt is whether
-there is a lid between the chip and the coolant — a millimetre of metal and
+there is a lid between the chip and the coolant — a millimeter of metal and
 paste every server on Earth has, and this one can't afford. The second is the
 chip's own heat density, which is why a chip built for orbit wants to spread
 the same work over more silicon.

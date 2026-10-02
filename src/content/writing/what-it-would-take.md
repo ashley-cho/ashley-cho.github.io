@@ -11,8 +11,8 @@ draft: true
 
 Nobody wants data centers in their backyard, and the climate argument against
 them keeps losing — the US has just [cut climate, debt and sustainability from
-the 2026 G20 programme](https://www.cfr.org/articles/us-g20-presidency-narrow-agenda-2026)
-in favour of energy supply chains and new technology.
+the 2026 G20 program](https://www.cfr.org/articles/us-g20-presidency-narrow-agenda-2026)
+in favor of energy supply chains and new technology.
 
 So why not put the data center in space, where there's room and the sunlight
 is stronger?
@@ -49,7 +49,7 @@ out to be, what it actually delivers over a year is problems 1 and 2.
 
 ## Three equations
 
-**Collecting.** Array area is the power you want over what a square metre of
+**Collecting.** Array area is the power you want over what a square meter of
 sunlight delivers:
 
 $$
@@ -57,7 +57,7 @@ A_{\text{array}} = \frac{P}{S \cdot \eta \cdot \cos\theta}
 $$
 
 **Rejecting.** Radiator area is the power you must shed over what a square
-metre radiates, net of what it absorbs:
+meter radiates, net of what it absorbs:
 
 $$
 A_{\text{rad}} = \frac{P}{n\,\varepsilon\sigma T_{\text{rad}}^{4} - q_{\text{parasitic}}}
@@ -101,27 +101,27 @@ trained model has to reach the ground, and the whole thing has to survive.
 **Heat out**
 
 4. **Rejecting it.** Radiation only. The panel absorbs sunlight and Earth infrared the whole time it sheds, and it has to run colder than the chips.
-5. **Moving it.** Conduction through metal doesn't reach far. Getting heat from a dense rack to a distant panel needs pumped loops at a scale nobody has flown, and every metre of loop can leak.
+5. **Moving it.** Conduction through metal doesn't reach far. Getting heat from a dense rack to a distant panel needs pumped loops at a scale nobody has flown, and every meter of loop can leak.
 6. **The ceiling.** Radiated power goes as $T^4$, so running the chips hotter looks like the strongest lever there is. Something stops you well short. What, and at what cost, is a whole post.
 
 **Survival**
 
 7. **Radiation.** Cumulative dose degrades chips slowly and shielding helps. Single-event upsets flip a bit instantly, come from cosmic rays you can't shield, and have to be absorbed in software.
-8. **Micrometeoroids and debris.** A 1 mm aluminium grain at a 10 km/s closing speed carries the energy of a 70 mph fastball into a 1 mm spot, and every square metre of array and radiator is thin surface to hit. [NASA's ORDEM](https://orbitaldebris.jsc.nasa.gov/modeling/ordem.html) gives the flux. What a hole costs depends on which surface it's in.
+8. **Micrometeoroids and debris.** A 1 mm aluminum grain at a 10 km/s closing speed carries the energy of a 70 mph fastball into a 1 mm spot, and every square meter of array and radiator is thin surface to hit. [NASA's ORDEM](https://orbitaldebris.jsc.nasa.gov/modeling/ordem.html) gives the flux. What a hole costs depends on which surface it's in.
 9. **Drag.** Huge area, low mass, atmosphere that hasn't quite ended. You burn propellant continuously. Higher orbits cost dose instead.
 10. **Obsolescence.** Three-year chips, fifteen-year spacecraft. Starlink builds for a short life and planned disposal; whether that transfers to hardware you can't cheaply replace is the question.
 
 **Data**
 
 11. **Ground bandwidth.** Lasers have [hit 200 Gbps](https://ntrs.nasa.gov/citations/20230000434), but a station is in view about 20% of the time and clouds end the link. [Sustained rate is a small fraction of peak](https://arxiv.org/pdf/2604.27197). For training the traffic is lopsided the other way from serving: the dataset goes up once, the trained weights come down once, and a bad week of weather delays a model rather than a user.
-12. **Links between satellites.** Lasers aimed with microradian precision between platforms kilometres apart.
+12. **Links between satellites.** Lasers aimed with microradian precision between platforms kilometers apart.
 13. **One job across many.** Lockstep training trades gradients between every chip every step and stalls on one dropped link. Whether lockstep is actually required is the question.
 
 **Structure**
 
 14. **Unfolding it.** Stowed volume, panels radiating into each other while folded, and every hinge on a coolant loop being a leak path that has to work first time.
 15. **Pointing it.** Arrays want the sun. Radiators want cold sky. Comms want a moving ground station. One orientation.
-16. **Mass.** Published estimates span [34–59 kg per kW](https://arxiv.org/pdf/2604.27197). It comes down to two numbers, [array watts per kilogram](https://www.nasa.gov/wp-content/uploads/2025/02/3-soa-power-2024.pdf) and radiator kilograms per square metre, where the [ISS radiator panels](https://www.nasa.gov/wp-content/uploads/2021/02/473486main_iss_atcs_overview.pdf) are 14.2 kg/m² against a [1994 NASA goal of 5 kg/m² or lower](https://ntrs.nasa.gov/api/citations/19940032314/downloads/19940032314.pdf). Every problem above ends up here, and much of the removable mass is margin: radiator thickness buys puncture tolerance, shielding buys dose tolerance, propellant buys years.
+16. **Mass.** Published estimates span [34–59 kg per kW](https://arxiv.org/pdf/2604.27197). It comes down to two numbers, [array watts per kilogram](https://www.nasa.gov/wp-content/uploads/2025/02/3-soa-power-2024.pdf) and radiator kilograms per square meter, where the [ISS radiator panels](https://www.nasa.gov/wp-content/uploads/2021/02/473486main_iss_atcs_overview.pdf) are 14.2 kg/m² against a [1994 NASA goal of 5 kg/m² or lower](https://ntrs.nasa.gov/api/citations/19940032314/downloads/19940032314.pdf). Every problem above ends up here, and much of the removable mass is margin: radiator thickness buys puncture tolerance, shielding buys dose tolerance, propellant buys years.
 
 ## Which ones exist at which size
 

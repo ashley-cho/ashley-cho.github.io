@@ -111,6 +111,10 @@ mass line.) The cost of fewer modules lands on the array: a 5.5 MW wing is
   external assertion gets a markdown link on the claim itself — not a source
   list at the bottom. If a claim can't be sourced, either cut it or say in the
   text that it's an estimate.
+- **American spelling, always.** Her site is American (see the Atlas commit
+  "American spelling and month-first dates"); the posts drifted to "metre",
+  "favour", "aluminium", "programme" in my rewrites and she asked why we were
+  British. meter, favor, aluminum, program, kilometer.
 - **Don't invent jargon in her posts.** "AM0" went into post 1 unexplained and
   she had to ask what it meant. If a term needs a sentence to explain, either
   write the sentence in the post that needs it or use plain words.
