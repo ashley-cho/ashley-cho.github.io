@@ -161,6 +161,16 @@
       "moved": false,
       "src": "FERC eLibrary",
       "url": "https://elibrary.ferc.gov/eLibrary/docinfo?accession_Number=20260929-3099"
+    },
+    {
+      "date": "2026-10-06",
+      "kind": "policy",
+      "title": "Pennsylvania proposes cutting data centers first in a supply pinch",
+      "detail": "At its Oct 1, 2026 public meeting the Pennsylvania PUC voted 4-0 to approve a Tentative Order, Docket M-2026-3064961, seeking comment on changes to how the state's electric distribution companies prepare for tight supply. New large loads that have not secured sufficient new capacity to cover their demand would be curtailed before other customers when PJM calls for load reductions under its proposed Interim Resource Adequacy Service, and data centers could no longer be classified as critical load exempt from curtailment in pre-emergency or emergency events. Utilities would also have to keep a registry of large loads in their territory. Comments run 30 days from publication in the Pennsylvania Bulletin, with 15 days for replies, and a Final Order is anticipated at the Jan 28, 2027 meeting. A separate Technical Conference on allocating the costs of large computational loads is set for Nov 17, 2026.",
+      "effect": "No figure moved. Curtailment priority and critical-load classification are not generation and not a measurement, so no capacity or consumption value on this page changes, and Pennsylvania has no mapped metro for anything to attach to. It is the item the Sep 22 entry said it was waiting for: that entry held the Pennsylvania set as it was until the tentative order arrived with a docket number, and it now has one. Added to the regulatory set as a fifth curtailment-or-cost instrument alongside Ohio, Oregon, Delaware and the Imperial Irrigation District. Recorded on the Commission's own release, which carries the docket, the vote and the four proposals; the executed order is now served on the docket as document 1952506 but its text could not be extracted here, so every statement rests on the release.",
+      "moved": false,
+      "src": "Pennsylvania PUC",
+      "url": "https://www.puc.pa.gov/press-release/2026/puc-advances-consumer-safeguards-as-data-center-growth-adds-new-demands-to-electric-grid-10-1-26"
     }
   ]
 }
