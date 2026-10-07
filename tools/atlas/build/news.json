@@ -171,6 +171,26 @@
       "moved": false,
       "src": "Pennsylvania PUC",
       "url": "https://www.puc.pa.gov/press-release/2026/puc-advances-consumer-safeguards-as-data-center-growth-adds-new-demands-to-electric-grid-10-1-26"
+    },
+    {
+      "date": "2026-10-07",
+      "kind": "policy",
+      "title": "Texas has paused data center grid approvals since Aug 3",
+      "detail": "Four directives from the Governor's office, read on his own releases rather than on an account of them: Jun 10, 2026, the PUCT to make data centers fully fund the electric infrastructure serving them; Aug 3, an audit of every data center in ERCOT's interconnection process, with no project advancing until it is finished; Sep 14, the TWDB to enforce water-use reporting under penalty; Sep 21, the TCEQ to issue no data center permits until the audit completes, with a compliance update due Oct 19, 2026. ERCOT is weighing about 474 GW of requests, roughly 90 percent of them data centers.",
+      "effect": "No figure moved. Recorded in the regulatory set as txgov_audit. The mapped Dallas-Fort Worth inventory and the two mapped Texas campuses are already energized or already announced, so a pause on new approvals changes nothing here, and the 474 GW is an interconnection queue rather than capacity and is not used anywhere on this page. Found on a gap check rather than published this fortnight: the set held Texas SB6, the statute, but none of the executive directives that have since paused approvals under it.",
+      "moved": false,
+      "src": "Office of the Texas Governor",
+      "url": "https://gov.texas.gov/news/post/governor-abbott-directs-comprehensive-data-center-audit"
+    },
+    {
+      "date": "2026-10-07",
+      "kind": "policy",
+      "title": "North Carolina refuses a gas turbine over unverified data center load",
+      "detail": "The North Carolina Utilities Commission on Sep 18, 2026 denied Duke Energy a certificate of public convenience and necessity for a sixth combustion turbine, 255 MW and about $584 million, at the Sherwood H. Smith Jr. Energy Complex in Richmond County. The commission held the application premature because staff has not yet vetted Duke's modeled load growth, about 70 percent of which it attributes to data centers, in the pending 2025 Carbon Plan and Integrated Resource Plan case, and because Duke had not shown how much of the turbine's output would serve data centers or how those customers would pay for it. The vote was 3-1.",
+      "effect": "No figure moved, and no North Carolina metro or campus is mapped on this page. Deliberately not added to the regulatory set this run, on sourcing: the order is linked from WUNC's report, but the Commission's document system sits behind a bot verification that was not cleared from here, so the order text was not read and every statement above rests on WUNC's account of it. Promote it to the regulatory set once the order itself can be retrieved and parsed. It would be the first entry in that set where data center load caused a generation permit to be refused rather than granted, which is why it is recorded now rather than left in a run summary.",
+      "moved": false,
+      "src": "WUNC, on the NCUC order",
+      "url": "https://www.wunc.org/environment/2026-09-21/nc-utilities-commission-denies-duke-energy-gas-plant"
     }
   ]
 }
