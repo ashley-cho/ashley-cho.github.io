@@ -191,6 +191,16 @@
       "moved": false,
       "src": "WUNC, on the NCUC order",
       "url": "https://www.wunc.org/environment/2026-09-21/nc-utilities-commission-denies-duke-energy-gas-plant"
+    },
+    {
+      "date": "2026-10-08",
+      "kind": "policy",
+      "title": "Michigan approves 1,600 MW of new generation for a single data center",
+      "detail": "The Michigan Public Service Commission on Oct 1, 2026 approved special contracts in Case No. U-22058 between DTE Electric and Google for a data center in Van Buren Township, Wayne County. Under a clean capacity accelerator agreement Google pays for DTE Electric to develop up to 1,600 MW of renewable energy and 480 MW of battery energy storage, developed, owned and operated by the utility, to help power the facility. The accompanying primary supply agreement runs 20 years, sets minimum billing demand at 80% against 50-65% in the general D11 large-load rate, and carries an early termination payment covering at least 15 years of minimum monthly charges. DTE Electric expects service to begin in December 2027 and maximum load by December 2028.",
+      "effect": "No figure moved. Added to the regulatory set as mpsc_dte. Michigan has no mapped metro, and the Van Buren Township site is not in the campus layer, which comes from Epoch AI, so nothing on the page attaches to it; the 1,600 MW is generation rather than IT capacity and is counted nowhere here. Recorded because it is the most explicit instance in the set of generation being built because of data center load, with a megawatt figure and a named payer, where the rest of the set either requires a data center to bring its own generation or sets the terms for connecting to the grid. Found on a gap check rather than in the fortnight's news. Read on the Commission's own release; the order itself was not retrieved.",
+      "moved": false,
+      "src": "Michigan Public Service Commission",
+      "url": "https://www.michigan.gov/mpsc/commission/news-releases/2026/10/01/mpsc-approves-dte-electric-google-data-center-and-contracts-protects-customers-from-project-cost"
     }
   ]
 }
