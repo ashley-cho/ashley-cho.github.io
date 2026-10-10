@@ -201,6 +201,16 @@
       "moved": false,
       "src": "Michigan Public Service Commission",
       "url": "https://www.michigan.gov/mpsc/commission/news-releases/2026/10/01/mpsc-approves-dte-electric-google-data-center-and-contracts-protects-customers-from-project-cost"
+    },
+    {
+      "date": "2026-10-09",
+      "kind": "policy",
+      "title": "Texas regulators take up Xcel's large-load tariff, and Staff files comments",
+      "detail": "Commission Staff filed comments on the application, the proposed notice and the proposed procedural schedule in Public Utility Commission of Texas Docket No. 60332, Southwestern Public Service Company's application for approval of large load customer tariff provisions, on Oct 9, 2026. Xcel Energy's Texas utility filed the application on Sep 25, 2026 and announced it on Sep 28. Under the proposed tariff, data centers and other large customers would carry the cost of the electric transmission, substations, interconnection upgrades and new generation needed to serve their projects, on commitments typically of 15 years or more backed by financial security, with minimum monthly payments while load ramps and termination charges if a customer leaves early. Texas Industrial Energy Consumers moved to intervene on Sep 29 and AXM on Oct 1, and the Commission's Order No. 1 of Oct 2 required the Staff comments.",
+      "effect": "No figure moved. Added to the regulatory set as puct_sps_llt, which the set was missing entirely, and found on a gap check rather than in the fortnight's news. SPS serves the Texas Panhandle and South Plains, where this page maps no metro, so nothing on the map attaches to it; Dallas-Fort Worth, the only mapped Texas metro, is outside its territory, and no capacity figure is involved. Read off the PUCT docket sheet and Xcel's own announcement; the filed documents themselves could not be retrieved from this session.",
+      "moved": false,
+      "src": "PUC Interchange, Docket No. 60332",
+      "url": "https://interchange.puc.texas.gov/search/filings/?ControlNumber=60332&ItemMatch=Equal&DocumentType=ALL&SortOrder=Ascending"
     }
   ]
 }
