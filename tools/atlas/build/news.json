@@ -211,6 +211,16 @@
       "moved": false,
       "src": "PUC Interchange, Docket No. 60332",
       "url": "https://interchange.puc.texas.gov/search/filings/?ControlNumber=60332&ItemMatch=Equal&DocumentType=ALL&SortOrder=Ascending"
+    },
+    {
+      "date": "2026-10-12",
+      "kind": "policy",
+      "title": "Texas finds Xcel's large-load tariff application complete and sets a schedule",
+      "detail": "The Public Utility Commission of Texas issued two orders in Docket 60332 on Oct 12, 2026. Order No. 2 granted a motion to intervene and addressed other procedural matters; Order No. 3 found Southwestern Public Service Company's large load customer tariff application administratively complete and its proposed notice sufficient, and entered a procedural schedule. The docket sheet now carries 12 filings, against 10 on Oct 9, 2026.",
+      "effect": "Nothing on the page moves. SPS serves the Texas Panhandle and South Plains, where this page maps no metro, and no capacity or consumption reading is involved; the existing Texas tariff entry is re-dated to Oct 12, 2026. The order documents themselves were not read, because the PUCT document server is unreachable from this session; the docket sheet is the source.",
+      "moved": false,
+      "src": "Public Utility Commission of Texas, Interchange docket sheet for Docket 60332",
+      "url": "https://interchange.puc.texas.gov/search/filings/?ControlNumber=60332&ItemMatch=Equal&DocumentType=ALL&SortOrder=Ascending"
     }
   ]
 }
