@@ -211,6 +211,36 @@
       "moved": false,
       "src": "PUC Interchange, Docket No. 60332",
       "url": "https://interchange.puc.texas.gov/search/filings/?ControlNumber=60332&ItemMatch=Equal&DocumentType=ALL&SortOrder=Ascending"
+    },
+    {
+      "date": "2026-10-14",
+      "kind": "policy",
+      "title": "Texas finds Xcel's large-load tariff application complete and sets a schedule",
+      "detail": "The Public Utility Commission of Texas issued two orders in Docket 60332 on Oct 12, 2026. Order No. 2 granted a motion to intervene and addressed other procedural matters; Order No. 3 found Southwestern Public Service Company's large load customer tariff application administratively complete and its proposed notice sufficient, and entered a procedural schedule. The docket sheet carries 12 filings, against 10 on Oct 9, 2026, and was unchanged when re-read on Oct 14, 2026.",
+      "effect": "Nothing on the page moves. SPS serves the Texas Panhandle and South Plains, where this page maps no metro, and no capacity or consumption reading is involved; the existing Texas tariff entry is re-dated to Oct 12, 2026. The order documents themselves were not read, because the PUCT document server is unreachable from this session; the docket sheet is the source.",
+      "moved": false,
+      "src": "Public Utility Commission of Texas, Interchange docket sheet for Docket 60332",
+      "url": "https://interchange.puc.texas.gov/search/filings/?ControlNumber=60332&ItemMatch=Equal&DocumentType=ALL&SortOrder=Ascending"
+    },
+    {
+      "date": "2026-10-14",
+      "kind": "policy",
+      "title": "Oregon suspends Pacific Power's data center rate class until the end of 2026",
+      "detail": "Docket UE 463 is PacifiCorp's Advice No. 25-015, Schedule 401, Service to New Large Energy Use Facilities, the Pacific Power counterpart to the Portland General Electric schedule the Commission approved in Order No. 26-239 on Jul 10, 2026. Chief Administrative Law Judge Alison Lackey issued Order No. 26-310 on Aug 31, 2026 suspending the tariff sheets' effective date until Dec 31, 2026, and the contested case is still in hearings: an intervention ruling on Oct 7, 2026, and Commission Staff's motion to admit pre-filed exhibits, with the declaration of Bret Stevens, on Oct 12, 2026.",
+      "effect": "No figure moved. Hillsboro / Portland's 491 MW, from CBRE's North America Data Center Trends H1 2026, is unchanged, and a rate class is cost allocation rather than generation or measurement. The existing Oregon entry already said Pacific Power's schedule was pending with a decision expected before the end of 2026; that expectation now rests on a dated suspension order rather than on inference, and the entry is extended to say so. Read on the Commission's own eDockets docket sheet, which carries the order numbers, dispositions and filing dates. Press accounts describing Pacific Power's data center rules as already approved do not match the docket, and the docket is what this rests on; the orders themselves were not retrieved.",
+      "moved": false,
+      "src": "Oregon Public Utility Commission, eDockets docket sheet for Docket UE 463",
+      "url": "https://apps.puc.state.or.us/edockets/DocketNoLayout.asp?DocketID=24856"
+    },
+    {
+      "date": "2026-10-14",
+      "kind": "data",
+      "title": "China Electricity Council's annual power report carries no data center figure",
+      "detail": "The China Electricity Council released its Annual Development Report on China's Power Industry 2026 at a press conference on Jul 14, 2026, announced Jul 15, its twenty-first consecutive annual edition and, on its own description, built on the power industry's statistical and survey data across thirteen areas including electricity consumption. The release reports that China's all-society electricity consumption passed 10 trillion kWh for the first time in 2025, up 5.0% year on year, and that installed generating capacity reached 3,896.64 GW at the end of 2025, up 16.2%. A scan of its text returns no figure for data centers, computing centers, intelligent computing or the internet data services industry.",
+      "effect": "No figure moved. China stays on 260 TWh (2024) with the scope mismatch declared. The council is one of the bodies that could settle whether telecom and 5G network rooms are inside the Chinese definition, and its flagship annual statistical report is the likeliest place a defined series would appear, so the checked route belongs in the ledger rather than in a run summary. It is not a negative result about the report itself: only the release announcing it could be read, the report is a priced publication, and cec.org.cn has timed out from this session on three separate runs, so this rests on the council's release as republished by the CCPIT Electric Power Industry Committee, which names the council as its source.",
+      "moved": false,
+      "src": "China Electricity Council, release of Jul 15, 2026, via the CCPIT Electric Power Industry Committee",
+      "url": "https://www.ccpitep.org.cn/cnt_22995.html"
     }
   ]
 }
