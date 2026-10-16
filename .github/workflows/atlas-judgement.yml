@@ -9,9 +9,17 @@
 # the shape already in the file, enforces Test 2 of the admission policy, and
 # refuses anything outside those four files.
 #
-# It stops at the pull request. It does not merge itself, and it holds no
-# permission to: the diff gets looked at by someone before it reaches the public
-# page, which is the one checkpoint worth keeping.
+# It merges its own pull request once ci.yml is green, the same way
+# atlas-refresh.yml does, and then dispatches the deploy. The checkpoint that
+# matters was never a human glance at a 350 KB generated diff: it is
+# apply_judgement.py, which writes only those four files, caps a run at eight
+# edits and enforces Test 2 on anything admitted as an anchor, plus ci.yml and
+# the anchor-residual check below. All three run before the merge, and any one
+# of them failing leaves main untouched and the work sitting in an open PR.
+#
+# Consequence worth knowing: there is no "open it, but wait for me" path any
+# more. A dispatched payload lands. A session that is not sure of an edit should
+# not dispatch it at all, and should say why in its run notes instead.
 #
 # Anything that moves a fitted number - calib.json, override.json, newload.json,
 # sites.py - is out of scope on purpose. Re-deriving a factor needs arithmetic in
@@ -37,6 +45,8 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  # Needed to dispatch deploy.yml after the merge. See "Republish the site".
+  actions: write
 
 # Shares the refresh's group so the two can never rewrite the same files at once.
 concurrency:
@@ -133,6 +143,7 @@ jobs:
       # argument, so the argument travels with the edit rather than living in a
       # chat log that expires.
       - name: Open a pull request
+        id: pr
         if: ${{ !inputs.dry_run }}
         env:
           GH_TOKEN: ${{ secrets.ATLAS_BOT_TOKEN }}
@@ -157,5 +168,42 @@ jobs:
           git add -A -- tools/atlas public/datacenters
           git commit -F /tmp/msg
           git push -u origin "$branch"
-          gh pr create --base main --head "$branch" \
-            --title "$(head -1 /tmp/msg)" --body-file /tmp/msg
+          url=$(gh pr create --base main --head "$branch" \
+                  --title "$(head -1 /tmp/msg)" --body-file /tmp/msg)
+          echo "$url"
+          echo "number=${url##*/}" >> "$GITHUB_OUTPUT"
+          echo "branch=$branch"    >> "$GITHUB_OUTPUT"
+
+      # Wait for ci.yml rather than merging blind, exactly as atlas-refresh.yml
+      # does. If the site stops building or a link breaks, the edits stay in the
+      # PR and main is untouched - the page then goes stale honestly, which is
+      # the failure mode we want. Skipped on a dry run, because the step above
+      # never ran and so set no number.
+      - name: Wait for CI, then merge
+        id: merge
+        if: steps.pr.outputs.number
+        env:
+          GH_TOKEN: ${{ secrets.ATLAS_BOT_TOKEN }}
+        run: |
+          n="${{ steps.pr.outputs.number }}"
+          # ci.yml registers its check a few seconds after the PR opens. If
+          # `gh pr checks` looks first it exits 1 on "no checks reported".
+          # Wait up to five minutes for a check to appear before watching.
+          for i in $(seq 1 30); do
+            c=$(gh pr checks "$n" --json name --jq 'length' 2>/dev/null || true)
+            if [ -n "$c" ] && [ "$c" != "0" ]; then break; fi
+            sleep 10
+          done
+          gh pr checks "$n" --watch --interval 10 --fail-fast
+          gh pr merge "$n" --merge --delete-branch
+          echo "merged=true" >> "$GITHUB_OUTPUT"
+
+      # A merge made with GITHUB_TOKEN does NOT trigger deploy.yml's `on: push`
+      # - GitHub suppresses it to stop workflows recursing. Without this step the
+      # commit lands on main, the run goes green, and the published page never
+      # changes. workflow_dispatch is the documented exception to that rule.
+      - name: Republish the site
+        if: steps.merge.outputs.merged == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.ATLAS_BOT_TOKEN }}
+        run: gh workflow run deploy.yml --ref main
