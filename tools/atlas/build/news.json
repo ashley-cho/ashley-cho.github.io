@@ -251,6 +251,26 @@
       "moved": false,
       "src": "IEA, Powering Artificial Intelligence, technology report published Oct 14, 2026",
       "url": "https://www.iea.org/reports/powering-artificial-intelligence"
+    },
+    {
+      "date": "2026-10-16",
+      "detail": "The Office of Public Utility Counsel, which represents Texas residential and small commercial consumers by statute, filed a motion to intervene in Public Utility Commission of Texas Docket No. 60332 on Oct 16, 2026, the Southwestern Public Service Company application for approval of large load customer tariff provisions. It is item 13 on the docket sheet, which stood at 12 filings from Oct 12, 2026 through re-reads on Oct 14 and Oct 15, 2026. The intervenors now on the docket are Texas Industrial Energy Consumers, AXM and OPUC; the Commission found the application administratively complete and entered a procedural schedule in Orders No. 2 and No. 3 of Oct 12, 2026.",
+      "effect": "No figure moved. A ratepayer advocate joining a contested tariff proceeding is a change in who is arguing, not a measurement: the docket decides who pays for generation built to serve large loads, and this page's capacity and consumption figures are untouched by it. SPS serves the Texas Panhandle and South Plains, where no metro is mapped, and Dallas-Fort Worth, the only mapped Texas metro, is outside its territory. Recorded because the existing regs entry claims a filing count and a last-read date, and both have now changed. Read on the Commission's own Interchange docket sheet; the filed motion itself was not retrieved, because the PUCT document server is unreachable from this session.",
+      "kind": "policy",
+      "moved": false,
+      "src": "Public Utility Commission of Texas, Interchange docket sheet for Control Number 60332",
+      "title": "Texas ratepayer counsel intervenes in Xcel's large-load tariff docket",
+      "url": "https://interchange.puc.texas.gov/search/filings/?ControlNumber=60332&ItemMatch=Equal&DocumentType=ALL&SortOrder=Ascending"
+    },
+    {
+      "date": "2026-10-15",
+      "detail": "Knight Frank's data centres research index carries a new report dated 15 October 2026, \"Ireland's Data Centre Market: Growth Beyond the Grid\", by Darren Mansfield, Partner and Head of Insight for UK Cities and Data Centres. It is the first item added to that index since the 25 June 2026 Data Centres Global Report, which remains the newest edition of the global series this page tracks. The report is published as a PDF behind a download link and was not retrieved: knightfrank.co.uk answers 000 from both shells available to this session, and the browser pane cannot parse a PDF, so nothing is claimed about its contents beyond its title, author and date as the index states them.",
+      "effect": "Nothing on the page moves, and nothing in it could move Ireland's anchor. Ireland rests on CSO Ireland's metered 7.66 TWh for 2025, re-read today at 7,663 GWh and 23% of metered consumption, and a Knight Frank figure is a consultancy estimate that fails Test 1 of the admission policy however widely it is cited. The report's possible value is to the separate problem of capacity vintage, where 7.1% of mapped metro capacity still rests on 2023 Cushman & Wakefield figures, but Knight Frank counts every operator's live IT capacity and so describes a different population rather than a newer vintage of the same one. Recorded as a checked route with an honest limit, not as a finding.",
+      "kind": "data",
+      "moved": false,
+      "src": "Knight Frank, data centres research index, report dated 15 October 2026",
+      "title": "Knight Frank publishes an Ireland data center market report",
+      "url": "https://www.knightfrank.co.uk/research/reports/irelands-data-centre-market-growth-beyond-the-grid"
     }
   ]
 }
