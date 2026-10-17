@@ -251,6 +251,16 @@
       "moved": false,
       "src": "IEA, Powering Artificial Intelligence, technology report published Oct 14, 2026",
       "url": "https://www.iea.org/reports/powering-artificial-intelligence"
+    },
+    {
+      "date": "2026-10-16",
+      "kind": "policy",
+      "moved": false,
+      "title": "Texas ratepayer counsel intervenes in Xcel's large-load tariff docket",
+      "src": "Public Utility Commission of Texas, Interchange docket sheet for Control Number 60332",
+      "url": "https://interchange.puc.texas.gov/search/filings/?ControlNumber=60332&ItemMatch=Equal&DocumentType=ALL&SortOrder=Ascending",
+      "detail": "The Office of Public Utility Counsel, which represents Texas residential and small commercial consumers by statute, filed a motion to intervene in Public Utility Commission of Texas Docket No. 60332 on Oct 16, 2026, the Southwestern Public Service Company application for approval of large load customer tariff provisions. It is item 13 on the docket sheet, which stood at 12 filings from Oct 12, 2026 through re-reads on Oct 14 and Oct 15, 2026, and was still 13 when re-read on Oct 17, 2026. The intervenors now on the docket are Texas Industrial Energy Consumers, AXM and OPUC; the Commission found the application administratively complete and entered a procedural schedule in Orders No. 2 and No. 3 of Oct 12, 2026.",
+      "effect": "No figure moved. A ratepayer advocate joining a contested tariff proceeding is a change in who is arguing, not a measurement: the docket decides who pays for generation built to serve large loads, and this page's capacity and consumption figures are untouched by it. SPS serves the Texas Panhandle and South Plains, where no metro is mapped, and Dallas-Fort Worth, the only mapped Texas metro, is outside its territory. Recorded because the existing regs entry claims a filing count and a last-read date, and both have now changed. Read on the Commission's own Interchange docket sheet; the filed motion itself was not retrieved, because the PUCT document server is unreachable from this session."
     }
   ]
 }
