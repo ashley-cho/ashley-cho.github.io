@@ -3,7 +3,7 @@ EPOCH = [
 ("Colossus 2",946,"xAI","USA","38109",None,1531,2027),
 ("Microsoft Fairwater Atlanta",636,"Microsoft","USA","30214",None,None,None),
 ("Google Pryor (North)",368,"Google","USA","74361",None,None,None),
-("Amazon–Anthropic New Carlisle (Project Rainier)",910,"Amazon","USA","46552",None,1925,2028),
+("Amazon–Anthropic New Carlisle (Project Rainier)",1037,"Amazon","USA","46552",None,1925,2028),
 ("Meta Prometheus (New Albany)",471,"Meta","USA","43054",None,None,None),
 ("Google New Albany",333,"Google","USA","43054",None,None,None),
 ("OpenAI Stargate Abilene",421,"Oracle / OpenAI","USA","79601",None,1200,2026),
