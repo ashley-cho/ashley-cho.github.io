@@ -251,6 +251,16 @@
       "moved": false,
       "src": "IEA, Powering Artificial Intelligence, technology report published Oct 14, 2026",
       "url": "https://www.iea.org/reports/powering-artificial-intelligence"
+    },
+    {
+      "date": "2026-10-19",
+      "kind": "data",
+      "title": "Epoch AI revises the Amazon–Anthropic New Carlisle campus up",
+      "detail": "Epoch AI's Frontier Data Centers dataset now gives Project Rainier at New Carlisle, Indiana 1,037 MW of operational IT capacity, against 910 MW before. The automated refresh picked the revision up in its 13:36 UTC run on Oct 19, 2026; it passed the bounds check and was the run's only edit, landing as commit 0142e39. Planned capacity for the campus is unchanged at 1,925 MW by 2028.",
+      "effect": "Mapped capacity for the campus goes from 910 MW to 1,037 MW, up 127 MW. The fitted national factor K is unchanged at 3.4164 and every anchor residual stayed inside the ±5% band.",
+      "moved": true,
+      "src": "Epoch AI Frontier Data Centers",
+      "url": "https://epoch.ai/data/data_centers/data_centers.csv"
     }
   ]
 }
