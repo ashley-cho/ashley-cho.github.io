@@ -251,6 +251,26 @@
       "moved": false,
       "src": "IEA, Powering Artificial Intelligence, technology report published Oct 14, 2026",
       "url": "https://www.iea.org/reports/powering-artificial-intelligence"
+    },
+    {
+      "date": "2026-10-20",
+      "kind": "data",
+      "moved": false,
+      "title": "An unmapped Epoch AI campus in Johor, Malaysia",
+      "src": "Epoch AI Frontier Data Centers",
+      "url": "https://epoch.ai/data/data_centers/data_centers.csv",
+      "detail": "Every daily refresh since Oct 14, 2026 has flagged the same unmatched row in Epoch AI's Frontier Data Centers CSV and declined to map it. Read directly from the CSV on Oct 20, 2026, it is 'Bridge Data Centres MY06', 243 MW of current IT capacity at Sedenak Tech Park, Johor, Malaysia, with the owner and user both given as ByteDance and both tagged '#likely' by Epoch rather than confirmed. The campus layer takes sites only from Epoch AI, so the row is eligible in principle; what it lacks is a coordinate. Epoch gives a park name and no latitude or longitude, and deriving one here would put an invented position on the map.",
+      "effect": "Nothing. Mapped campus capacity is unchanged at 86 named campuses, and the Johor / Nusajaya metro figure of 1,110 MW of live IT capacity from Knight Frank Q2 2026 is untouched; the two DayOne campuses already mapped in Johor are separate sites and are not affected. Recorded so a later run does not rediscover the same flag from scratch: it needs a coordinate, and adding a campus is outside what the judgement pass may write."
+    },
+    {
+      "date": "2026-10-21",
+      "kind": "policy",
+      "moved": false,
+      "title": "Colorado opens hearings on Xcel's large load tariff",
+      "src": "Colorado Public Utilities Commission, Proceeding 26AL-0137E",
+      "url": "https://www.dora.state.co.us/pls/efi/EFI.Show_Docket?p_session_id=&p_docket_id=26AL-0137E",
+      "detail": "Public Service Company of Colorado, Xcel's Colorado utility, filed Advice Letter No. 2018 on Apr 2, 2026 proposing a Tariff 8 large load schedule. The Commission suspended it and set it for hearing as Proceeding 26AL-0137E, whose status on the Commission's own e-filings system is still Suspended. The docket is heavily contested: the Data Center Coalition filed an affidavit for direct testimony on Oct 20, 2026, United Power moved the same week to revise its answer testimony, Ceres filed comments on the tariff and on its water implications, and public comment has arrived daily. A Commission Hearing Report stamped Oct 20, 2026 is the newest document on the sheet; press accounts put the evidentiary hearing across Oct 21, 22, 26, 27 and 28, 2026.",
+      "effect": "Nothing yet. Colorado has no measured national or state data center electricity series, so no anchor or capacity figure on this page depends on the outcome; Denver is mapped at 78 MW of live IT capacity, still on the 2023 Cushman & Wakefield vintage. Recorded as a filing in the regulatory set rather than as a figure, on the same footing as the Texas, Pennsylvania, Ohio and Oregon instruments."
     }
   ]
 }
