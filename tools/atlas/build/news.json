@@ -271,6 +271,26 @@
       "url": "https://www.dora.state.co.us/pls/efi/EFI.Show_Docket?p_session_id=&p_docket_id=26AL-0137E",
       "detail": "Public Service Company of Colorado, Xcel's Colorado utility, filed Advice Letter No. 2018 on Apr 2, 2026 proposing a Tariff 8 large load schedule. The Commission suspended it and set it for hearing as Proceeding 26AL-0137E, whose status on the Commission's own e-filings system is still Suspended. The docket is heavily contested: the Data Center Coalition filed an affidavit for direct testimony on Oct 20, 2026, United Power moved the same week to revise its answer testimony, Ceres filed comments on the tariff and on its water implications, and public comment has arrived daily. A Commission Hearing Report stamped Oct 20, 2026 is the newest document on the sheet; press accounts put the evidentiary hearing across Oct 21, 22, 26, 27 and 28, 2026.",
       "effect": "Nothing yet. Colorado has no measured national or state data center electricity series, so no anchor or capacity figure on this page depends on the outcome; Denver is mapped at 78 MW of live IT capacity, still on the 2023 Cushman & Wakefield vintage. Recorded as a filing in the regulatory set rather than as a figure, on the same footing as the Texas, Pennsylvania, Ohio and Oregon instruments."
+    },
+    {
+      "date": "2026-10-22",
+      "kind": "policy",
+      "moved": false,
+      "title": "Florida opens large load tariff dockets for three utilities",
+      "src": "Florida PSC Clerk's Office",
+      "url": "https://www.floridapsc.com/weekly-docket-details?startDate=September%2028,%202026&endDate=October%2002,%202026",
+      "detail": "A sweep for new state action turned up three Florida Public Service Commission dockets opened at the start of October 2026, all large load tariff filings: Tampa Electric's 20260146-EI on Sep 30, 2026, Florida Public Utilities' 20260148-EI and Florida Power & Light's 20260149-EI on Oct 1, 2026. FPL's docket title cites Section 366.043(8), Florida Statutes, the provision Florida press attributes to SB 484, which requires the Commission to ensure a large load customer bears its own full cost of service rather than shifting it to the general body of ratepayers. Read off the Clerk's Office Report of New Dockets Opened for the week of Sep 28 to Oct 2, 2026; the petitions themselves were not retrieved.",
+      "effect": "Nothing on the page moves. Florida enters the regulatory ledger as a new jurisdiction, recorded as flpsc_llt, but no Florida metro is mapped and Florida publishes no measured data center electricity series, so no capacity figure and no anchor is touched."
+    },
+    {
+      "date": "2026-10-22",
+      "kind": "data",
+      "moved": false,
+      "title": "France's data center electricity release is offline for an update",
+      "src": "SDES",
+      "url": "https://www.statistiques.developpement-durable.gouv.fr/la-consommation-delectricite-des-data-centers-en-2024",
+      "detail": "The SDES page carrying France's measured data center electricity figure answered « Maintenance en cours — Ce service est en cours de mise à jour » on every attempt today, after connection timeouts on Oct 21, 2026. That is the second consecutive day the source has been unreachable, and the wording says the service is being updated rather than merely down, so a new vintage may be coming and the page is worth watching for one.",
+      "effect": "Nothing moves. France stays at 4.3 TWh (2024) with its existing date, as the standing rule requires when a source cannot be reached. France is the out-of-sample check, never fitted to, and its residual is unchanged."
     }
   ]
 }
