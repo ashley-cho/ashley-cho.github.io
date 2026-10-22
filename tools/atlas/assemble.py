@@ -19,7 +19,8 @@ body = rd('parts/body.html')
 app  = rd('parts/app.js')
 data = json.load(open(os.path.join(ROOT, 'build/data.json'), encoding='utf-8'))
 
-built = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d')
+built = os.environ.get('ATLAS_BUILT') or datetime.datetime.now(
+    datetime.timezone.utc).strftime('%Y-%m-%d')
 data.setdefault('meta', {})['built'] = built
 
 blob = json.dumps(data, separators=(',', ':'), ensure_ascii=False)

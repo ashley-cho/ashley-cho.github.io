@@ -69,7 +69,8 @@ print('2024 Mt %.0f'%(sum(r['gw']*K*r['ci'] for r in REG)))
 for s in ent['sites']: s['b']='fac'
 for m in ent['metros']: m['b']='it'
 import datetime
-meta=dict(built=datetime.date.today().isoformat(), K=K)
+meta=dict(built=os.environ.get('ATLAS_BUILT')
+          or datetime.date.today().isoformat(), K=K)
 REGS=json.load(open(os.path.join(ROOT,'regs.json')))
 CAL=json.load(open(os.path.join(ROOT,'calib.json')))
 DISP=json.load(open(os.path.join(ROOT,'disputed.json')))
