@@ -291,36 +291,6 @@
       "url": "https://www.statistiques.developpement-durable.gouv.fr/la-consommation-delectricite-des-data-centers-en-2024",
       "detail": "The SDES page carrying France's measured data center electricity figure answered « Maintenance en cours — Ce service est en cours de mise à jour » on every attempt today, after connection timeouts on Oct 21, 2026. That is the second consecutive day the source has been unreachable, and the wording says the service is being updated rather than merely down, so a new vintage may be coming and the page is worth watching for one.",
       "effect": "Nothing moves. France stays at 4.3 TWh (2024) with its existing date, as the standing rule requires when a source cannot be reached. France is the out-of-sample check, never fitted to, and its residual is unchanged."
-    },
-    {
-      "date": "2026-10-23",
-      "kind": "data",
-      "title": "Eurostat publishes a mandatory data center electricity series for Europe",
-      "detail": "SDES's methodology note for France led to a source this page had not examined. The European energy statistics regulation requires member states to report the energy consumption of data centers above 1 MW to Eurostat every year, covering enterprise and colocation facilities alike. The resulting series is Eurostat's \"Data centres' electricity consumption\" (isoc_env_ict_nrg, NACE code DATAC), electricity in GWh, 2020 to 2024, last revised Jul 27, 2026. Read directly from the Eurostat dissemination API, not from the SDES summary. For 2024 it gives Germany 20,000 GWh, Ireland 6,969, the Netherlands 5,093, France 4,348, Sweden 2,640, Finland 2,347, Norway 2,027, Belgium 1,562, Spain 716, Poland 459, Czechia 330, Austria 207 and Romania 1.6. It reproduces the three national releases this page already uses to within 0.15 percent: Ireland 6,969 against the CSO's 6,973 GWh for 2024, the Netherlands 5,093 against CBS's 5,100, France 4,348 against SDES's 4.3 TWh. That agreement is evidence it carries the same measured national data rather than a parallel estimate, so it passes Test 1. Test 2 against mapped capacity: Finland 2.347 TWh / (0.417 GW x 8.76) = 0.642, Poland 0.610 and Spain 0.311 land inside the 0.30 to 0.85 band; Germany 20.0 / (1.199 x 8.76) = 1.904, Sweden 4.073 and Norway 2.571 fail it, the same scope mismatch China shows. Belgium, Czechia, Austria and Romania have no mapped capacity, so Test 2 cannot be applied to them at all.",
-      "effect": "Nothing moves today. Finland, Poland and Spain are the first countries to pass both tests on a source this page does not yet use, and Germany, Sweden and Norway would become scope-mismatch overrides rather than anchors. Admitting any of them means editing calib.json or override.json and re-deriving kNat, currently 0.70 and fitted to Ireland and the Netherlands alone; a fitted factor is outside what the judgment pass may write, so the decision is left to a human with the arithmetic above on the record. Spain at 0.311 sits close enough to the 0.30 floor that it should not be admitted on this reading alone.",
-      "moved": false,
-      "src": "Eurostat, Data centres' electricity consumption (isoc_env_ict_nrg)",
-      "url": "https://ec.europa.eu/eurostat/databrowser/view/isoc_env_ict_nrg/default/table?lang=en"
-    },
-    {
-      "date": "2026-10-23",
-      "kind": "data",
-      "title": "France's data center release is back after a three-day outage, unchanged",
-      "detail": "The SDES release carrying France's measured figure answered Maintenance en cours on Oct 21 and Oct 22, 2026, after connection timeouts on Oct 21. It is reachable again today and unchanged in substance: published Jul 2, 2026, 471 data centers above 1 GWh per year identified in metropolitan France, 4.3 TWh of electricity in 2024, up 7.1 percent on 2023, a 4.3 to 6 TWh range once smaller sites are allowed for, and Ile-de-France at 63 percent of the national total. No new vintage appeared, so the maintenance was not the 2025 release the Oct 22, 2026 item said to watch for. The page's European paragraph does not match Eurostat as now published: SDES lists Romania among the countries consuming more than 1 TWh in 2024, where Eurostat's own table gives Romania 1.624 GWh, and omits Finland at 2,347 GWh. SDES published Jul 2, 2026 and Eurostat last revised the table Jul 27, 2026, so a pre-revision extraction is the likely explanation. The figures used here are read from Eurostat directly.",
-      "effect": "Nothing moves. France stays at 4.3 TWh (2024) with its existing date, now confirmed against the live release rather than held over from an unreachable source, and remains the out-of-sample check that is never fitted to; its residual is unchanged at +6.38 percent.",
-      "moved": false,
-      "src": "SDES",
-      "url": "https://www.statistiques.developpement-durable.gouv.fr/la-consommation-delectricite-des-data-centers-en-2024"
-    },
-    {
-      "date": "2026-10-23",
-      "kind": "data",
-      "title": "A second unmapped Epoch AI row, at Ulanqab in Inner Mongolia",
-      "detail": "Run 40 of the daily refresh flagged a second unmatched row alongside the Johor one already recorded: Envision Galaxy Ulanqab, 0.0 MW of current IT capacity, reported by check_sources.py as new or renamed and lacking both a location and an AVERT region. epoch.ai could not be reached from this session today, blocked from both shells and refused in the browser pane, so this is the workflow's own parse of the CSV rather than a direct read, and the row's coordinates and operator are unconfirmed here. Ulanqab, in Inner Mongolia, already carries one mapped campus, VNET Bayin Ulanqab at 221 MW; the new row carries a different name and is not that site renamed on the evidence available from this session.",
-      "effect": "Nothing. The row carries 0.0 MW of current capacity, so it cannot move a capacity figure whatever its location turns out to be, and mapped campus capacity is unchanged. Recorded so a later run does not rediscover the same flag from scratch, and so the missing coordinate is on the record for when epoch.ai is reachable again.",
-      "moved": false,
-      "src": "Epoch AI Frontier Data Centers, via check_sources.py in refresh run 40",
-      "url": "https://epoch.ai/data/data_centers/data_centers.csv"
     }
   ]
 }
