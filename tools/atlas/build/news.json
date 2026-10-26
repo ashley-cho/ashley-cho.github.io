@@ -331,6 +331,26 @@
       "moved": false,
       "src": "Public Utilities Commission of Nevada",
       "url": "https://pucweb1.state.nv.us/puc2/PUCCalendar.aspx"
+    },
+    {
+      "date": "2026-10-26",
+      "kind": "data",
+      "title": "Epoch AI raises Meta's Los Lunas campus to 118 MW",
+      "detail": "Run 43 of the daily refresh, at 13:17 UTC on Oct 26, 2026, applied one power change from Epoch AI's Frontier Data Centers CSV: Meta Los Lunas, in Valencia County, New Mexico, from 87 to 118 MW of current IT capacity. Same source, newer estimate, no change of method. The figure was confirmed here against Epoch's own CSV rather than against the workflow's report of it: epoch.ai answered the browser pane on Oct 26, 2026, the first direct read of the file since Oct 20, having been refused in the pane on Oct 23 and Oct 24, 2026 and blocked from both shells throughout, and the row read directly gives 118 MW, owner Meta tagged '#confident', at 4250 Messenger Lp, Los Lunas, NM 87031. Epoch's file carries 95 records against the 93 campuses mapped here; the two unmatched rows are the subject of the separate item of today's date.",
+      "effect": "Meta Los Lunas 87 -> 118 MW. Mapped campus capacity 13,960 to 13,991 MW, up 31 MW, all of it in the United States. Country and metro layers are unaffected: New Mexico has no mapped metro, so the campus sits outside every metro polygon and nothing was double counted either way. No anchor moves and no fitted factor is touched, because the anchors calibrate against IEA installed capacity rather than against this page's mapped campuses. One caveat is worth stating against this figure: the vintage the page prints for every Epoch campus, 'Sep 2026', is a frozen literal in build.py and is not advanced when the refresh rewrites a figure, so this 118 MW reading is displayed under a vintage earlier than the dataset it was taken from. The label, not the figure, is what is wrong, and correcting it is outside what the judgement pass may write.",
+      "moved": true,
+      "src": "Epoch AI Frontier Data Centers",
+      "url": "https://epoch.ai/data/data_centers/data_centers.csv"
+    },
+    {
+      "date": "2026-10-26",
+      "kind": "data",
+      "title": "Epoch itself has no location for the Ulanqab row",
+      "detail": "The two rows the daily refresh has escalated and declined to map every day since Oct 14, 2026 were read directly from Epoch AI's CSV on Oct 26, 2026, the first direct read since Oct 20. The Oct 23 item recorded that the Ulanqab row's coordinates and operator were 'unconfirmed here' because epoch.ai could not be reached; that is now answered, and the answer is that Epoch publishes neither. 'Envision Galaxy Ulanqab' carries 0 MW of current power, an empty Address field and an empty Owner field in Epoch's own data, so there is nothing to geocode and nothing to attribute, and the row is not merely unread. 'Bridge Data Centres MY06' is unchanged from the Oct 20 reading: 243 MW, owner and user both given as ByteDance and both tagged '#likely', address 'Bridge Data Centres, Sedenak Tech Park, Johor, Malaysia' — a park name, with no latitude or longitude.",
+      "effect": "Nothing. Mapped campus capacity is unchanged by either row at 13,991 MW across 93 campuses, and the Johor / Nusajaya metro figure of 1,110 MW of live IT capacity from Knight Frank Q2 2026 is untouched. What each row still needs is now on the record from the source rather than from the workflow's report of it: Bridge Data Centres MY06 needs a coordinate for a named industrial park, which is a sourcing problem; Envision Galaxy Ulanqab needs Epoch to publish an address at all, which is not, so a future run should expect the escalation to repeat indefinitely and should not treat it as a reading failure. Adding a campus moves sites.py, which is outside what the judgement pass may write, so neither is mapped here.",
+      "moved": false,
+      "src": "Epoch AI Frontier Data Centers",
+      "url": "https://epoch.ai/data/data_centers/data_centers.csv"
     }
   ]
 }
