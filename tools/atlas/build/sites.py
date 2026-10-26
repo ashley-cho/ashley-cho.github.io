@@ -47,7 +47,7 @@ EPOCH = [
 ("Huawei Horinger",184.3,"Huawei","CHN",None,(40.42,111.80),None,None),
 ("Google Red Oak",77,"Google","USA","75154",None,None,None),
 ("Meta Gallatin",87,"Meta","USA","37066",None,None,None),
-("Meta Los Lunas",87,"Meta","USA","87031",None,None,None),
+("Meta Los Lunas",118,"Meta","USA","87031",None,None,None),
 ("CoreWeave Ellendale",68,"CoreWeave","USA","58436",None,None,None),
 ("Meta Sarpy",80,"Meta","USA","68059",None,None,None),
 ("CoreWeave Chester",82,"CoreWeave","USA","23836",None,None,None),
