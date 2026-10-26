@@ -351,6 +351,16 @@
       "moved": false,
       "src": "Epoch AI Frontier Data Centers",
       "url": "https://epoch.ai/data/data_centers/data_centers.csv"
+    },
+    {
+      "date": "2026-10-26",
+      "kind": "data",
+      "title": "A missing note: Epoch AI's New Carlisle revision of Oct 19",
+      "detail": "This records a figure change that has been on the page, unexplained, for a week. On Oct 19, 2026 the automated refresh picked up Epoch AI's revision of the Amazon–Anthropic New Carlisle campus (Project Rainier) in New Carlisle, Indiana from 910 to 1,037 MW of operational IT capacity, applied it as commit 0142e39, and wrote no news item, because check_sources.py never writes one. The judgement pass that would have explained it was opened the same day as pull request #118 and could never merge: every judgement pull request rewrites the single line of the built page that carries meta.built, the nightly refresh rewrites that same line, so a pull request held overnight conflicts with main the next morning and does not recover. #118 is being closed, so the note is re-landed here instead of being lost with it. Epoch's CSV was re-read directly on Oct 26, 2026 and still gives 1,037 MW, at 55001 Larrison Blvd, New Carlisle, IN 46552; Epoch now lists the row as 'Anthropic-Amazon New Carlisle', which epochmap.json already maps to the name used here. Planned capacity for the campus is unchanged at 1,925 MW by 2028.",
+      "effect": "No figure moves today. The campus went from 910 to 1,037 MW, up 127 MW, on Oct 19, 2026 and has been published at 1,037 MW since; what was missing was this explanation, not the number. The fitted national factor K is unchanged at 3.4164 and every anchor residual is inside the ±5% band. Dated today rather than Oct 19 because the finding is today's, on a gap check of what the closed pull requests were carrying — the same treatment the Pennsylvania model tariff and the Texas directives were given. The underlying revision date is stated above and is not restated as a publication date.",
+      "moved": false,
+      "src": "Epoch AI Frontier Data Centers",
+      "url": "https://epoch.ai/data/data_centers/data_centers.csv"
     }
   ]
 }
