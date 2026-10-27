@@ -24,6 +24,24 @@ Plain Python 3, no packages: geocoding and country codes come from committed
 caches (`zipcache.json`, `isocache.json`), so a rebuild needs nothing but the
 interpreter.
 
+### Reproducing an earlier build: `ATLAS_BUILT`
+
+Both commands stamp **today** into `meta.built`. That is a problem whenever you
+rebuild on a different day from the build you are trying to match — most often
+re-syncing the artifact to a page the daily job published yesterday. The two
+copies then differ by exactly one character and look like a real divergence.
+
+Set `ATLAS_BUILT` to pin the date instead:
+
+    ATLAS_BUILT=2026-10-21 ./tools/atlas/refresh.sh
+    ATLAS_BUILT=2026-10-21 python3 tools/atlas/artifact.py
+
+Unset, both stamp today, which is what every normal build wants. It is an
+escape hatch for reproducing a known build, not a way to make a page look
+fresher: **a page must never claim a build date it did not have.** If nothing
+moved, do not rebuild and do not republish to bump the date — a stale date that
+is true beats a fresh date that is not.
+
 ## Stages
 
 | file | does |
