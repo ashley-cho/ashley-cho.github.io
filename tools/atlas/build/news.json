@@ -361,6 +361,16 @@
       "moved": false,
       "src": "Epoch AI Frontier Data Centers",
       "url": "https://epoch.ai/data/data_centers/data_centers.csv"
+    },
+    {
+      "date": "2026-10-26",
+      "detail": "At a hearing on Oct 26, 2026 in NMED docket AQB 26-57(P), the hearing officer declined to dismiss Yucca Growth Infrastructure's air quality permit application for the YGI Microgrid as administratively incomplete, and called a change to the schedule premature. The application is for Bloom Energy solid oxide fuel cells totalling 2,462 MW about 3.6 miles south of Santa Teresa, Doña Ana County, requested as a Title V major source running 8,760 hours a year to serve a nearby data center - the Project Jupiter campus this page maps as OpenAI Stargate New Mexico (Doña Ana). The merits hearing is set for Dec 7, 2026 in Sunland Park and the permit decision is due Nov 23, 2026, possibly moving to Dec 18.",
+      "effect": "Nothing on the map moves. The 2,462 MW is generation nameplate, not IT capacity, and is counted nowhere on this page; the campus stays at 0 MW live with 1,750 MW planned for 2028, which is Epoch AI's figure and is untouched by a permit ruling. No New Mexico metro is mapped, and the United States anchor rests on Berkeley Lab's measured 192 TWh (2024), which an air permit cannot reach. Recorded because it is the largest behind-the-meter generation figure in any filing in this set, and New Mexico was not previously in it.",
+      "kind": "policy",
+      "moved": false,
+      "src": "New Mexico Environment Department",
+      "title": "New Mexico keeps the Project Jupiter microgrid permit alive",
+      "url": "https://www.env.nm.gov/opf/aqb-26-57p-yucca-growth-infrastructure-llc-ygi-microgrid/"
     }
   ]
 }
