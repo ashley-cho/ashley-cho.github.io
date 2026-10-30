@@ -371,6 +371,16 @@
       "src": "New Mexico Environment Department",
       "title": "New Mexico keeps the Project Jupiter microgrid permit alive",
       "url": "https://www.env.nm.gov/opf/aqb-26-57p-yucca-growth-infrastructure-llc-ygi-microgrid/"
+    },
+    {
+      "date": "2026-10-29",
+      "kind": "data",
+      "title": "Epoch AI raises OpenAI Stargate Abilene to 618 MW",
+      "detail": "Epoch AI's data_centers.csv now gives 618 MW of current power for the Oracle / OpenAI Stargate campus at Abilene, Texas, up from 421 MW. The daily refresh of Oct 29, 2026 rewrote sites.py and rebuilt the page; the campus keeps its 1,200 MW planned figure.",
+      "effect": "Mapped US campus capacity rises by 197 MW: Abilene 421 -> 618 MW.",
+      "moved": true,
+      "src": "Epoch AI, AI data centers database",
+      "url": "https://epoch.ai/data/ai-data-centers"
     }
   ]
 }
