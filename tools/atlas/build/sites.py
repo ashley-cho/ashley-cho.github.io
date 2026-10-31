@@ -58,7 +58,7 @@ EPOCH = [
 ("Core42 Lake Mariner",58,"Core42","USA","14012",None,None,None),
 ("Microsoft SAT40",75,"Microsoft","USA","78245",None,None,None),
 ("STACK NVA02 (Manassas)",85,"STACK","USA","20109",None,None,None),
-("Anthropic Lake Mariner",42,"Terawulf","USA","14012",None,None,None),
+("Anthropic Lake Mariner",210,"Terawulf","USA","14012",None,None,None),
 ("Microsoft–Nebius New Jersey",50,"Nebius","USA","08360",None,None,None),
 ("CoreWeave Norway (Øvrebø)",42,"CoreWeave","NOR",None,(58.32,7.96),None,None),
 ("Southgate Melbourne",41,"Firmus","AUS",None,(-37.83,144.96),None,None),
