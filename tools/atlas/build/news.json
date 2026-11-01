@@ -381,6 +381,16 @@
       "moved": true,
       "src": "Epoch AI, AI data centers database",
       "url": "https://epoch.ai/data/ai-data-centers"
+    },
+    {
+      "date": "2026-10-31",
+      "kind": "data",
+      "title": "Epoch AI raises Anthropic's Lake Mariner campus to 210 MW",
+      "detail": "Run 48 of the daily refresh, at 12:46 UTC on Oct 31, 2026, applied one power change from Epoch AI's Frontier Data Centers CSV: Anthropic Lake Mariner, at Terawulf's site in Barker, Niagara County, New York, from 42 to 210 MW of current IT capacity. Same source, newer estimate, no change of method. The figure was confirmed here against Epoch's own CSV rather than against the workflow's report of it: epoch.ai answered the browser pane on Nov 1, 2026, and the row read directly gives 210 MW at 7725 Lake Rd, Barker, NY 14012, owner 'AI XPV Platform' tagged '#confident' and user Anthropic tagged '#likely', chip type TPU v7. Epoch's file carries 96 records against the 93 campuses mapped here.",
+      "effect": "Anthropic Lake Mariner 42 -> 210 MW. Mapped campus capacity 14,188 to 14,356 MW, up 168 MW, all of it in the United States; the campus count is unchanged at 93. No anchor moves and no fitted factor is touched, because the anchors calibrate against IEA installed capacity rather than against this page's mapped campuses: residuals stand at World +2.66%, United States -2.49%, Ireland +0.35%, Netherlands -0.32%, France +6.38%, and K is unchanged at 3.4164. Barker is in Niagara County, far outside New York - N. New Jersey, the only mapped US metro in the state, so nothing is double counted between the campus and metro layers. One thing is worth recording against the figure: Epoch now carries two separate leases at this one Terawulf address, Core42 Lake Mariner at 58 MW and this row at 210 MW, so the page maps 268 MW at a single physical site as two campuses, following Epoch's own row structure rather than the site's.",
+      "moved": true,
+      "src": "Epoch AI Frontier Data Centers",
+      "url": "https://epoch.ai/data/data_centers/data_centers.csv"
     }
   ]
 }
