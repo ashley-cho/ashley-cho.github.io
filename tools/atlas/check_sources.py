@@ -32,11 +32,24 @@ BUILD = os.path.join(ROOT, 'build')
 UA = {'User-Agent': 'ashley-cho.github.io atlas daily refresh (+https://github.com/ashley-cho)'}
 
 EPOCH_CSV = 'https://epoch.ai/data/data_centers/data_centers.csv'
+# csvType=full, not filtered. The filtered export is not what it looks like:
+# `annual-co2-emissions-per-country` is filtered to the entities *selected on
+# the grapher page*, which on 2 Nov 2026 was seven of them (232 bytes) against
+# 247 rows for the same year in the full export - so 33 of the 40 CO2 figures
+# here had never been compared, and check_owid went on reporting "no change".
+# The two electricity graphers return all 192 countries but drop every
+# aggregate, which is why the world row was never checked in any series. Full
+# exports plus a latest-year-per-entity read is the only form that covers both.
 OWID = {
- 'ci':  'https://ourworldindata.org/grapher/carbon-intensity-electricity.csv?csvType=filtered&useColumnShortNames=true&time=latest',
- 'gen': 'https://ourworldindata.org/grapher/electricity-generation.csv?csvType=filtered&useColumnShortNames=true&time=latest',
- 'co2': 'https://ourworldindata.org/grapher/annual-co2-emissions-per-country.csv?csvType=filtered&useColumnShortNames=true&time=latest',
+ 'ci':  'https://ourworldindata.org/grapher/carbon-intensity-electricity.csv?csvType=full&useColumnShortNames=true',
+ 'gen': 'https://ourworldindata.org/grapher/electricity-generation.csv?csvType=full&useColumnShortNames=true',
+ 'co2': 'https://ourworldindata.org/grapher/annual-co2-emissions-per-country.csv?csvType=full&useColumnShortNames=true',
 }
+
+# gen.py keys the world row WLD; OWID codes it OWID_WRL. Without this the world
+# generation and CO2 figures - the ones feeding the global intensity the page
+# quotes - are skipped silently on every run.
+ALIAS = {'WLD': 'OWID_WRL'}
 
 notes, changes, escalations = [], [], []
 
@@ -150,15 +163,26 @@ def write_epoch(edits):
 # ------------------------------------------------------------ Our World in Data
 
 def owid_rows(text):
-    """entity/code -> (year, value) from a filtered OWID csv."""
-    lines = [l for l in text.splitlines() if l.strip()]
-    head = lines[0].split(',')
+    """code -> value at each entity's own latest year, from a full OWID csv.
+
+    Read with csv.reader rather than split(','): the full exports carry every
+    entity, and entity names there are not guaranteed comma-free the way a
+    seven-row filtered export happened to be.
+    """
+    try:
+        rows = list(csv.reader(io.StringIO(text)))
+    except csv.Error as e:
+        escalations.append(f'OWID: CSV would not parse ({e}). Left as committed.')
+        return {}, None
+    if not rows:
+        return {}, None
+    head = [h.strip() for h in rows[0]]
     try:
         ci, yi = head.index('code'), head.index('year')
     except ValueError:
         return {}, None
     # The value is not reliably the last column. OWID appends provenance
-    # columns such as co2_intensity__gco2_kwh__original_year to some filtered
+    # columns such as co2_intensity__gco2_kwh__original_year to some
     # exports, and reading that one wrote the year 2024 into the carbon
     # intensity of 93 countries on 18 Sep 2026. Take the first column that is
     # neither an identifier nor provenance.
@@ -167,36 +191,54 @@ def owid_rows(text):
     if not cand:
         return {}, None
     vi = cand[0]
-    out, year = {}, None
-    for l in lines[1:]:
-        p = l.split(',')
-        if len(p) <= vi or not p[ci]:
+    # A full export holds every year, so pick each entity's newest row rather
+    # than whichever happened to come last in the file.
+    best = {}
+    for r in rows[1:]:
+        if len(r) <= max(ci, yi, vi) or not r[ci]:
             continue
         try:
-            out[p[ci]] = float(p[vi])
+            yr, val = int(r[yi]), float(r[vi])
         except ValueError:
             continue
-        year = p[yi]
+        if r[ci] not in best or yr > best[r[ci]][1]:
+            best[r[ci]] = (val, yr)
+    out = {k: v for k, (v, _yr) in best.items()}
+    year = str(max(yr for _v, yr in best.values())) if best else None
     return out, year
 
 
-def check_owid(kind, text, current, tol, label, decimals):
+def check_owid(kind, text, current, tol, label, decimals, scale=1.0):
     live, year = owid_rows(text)
     if not live:
         escalations.append(f'OWID {kind}: could not parse the CSV; left as committed.')
         return {}
-    edits = {}
+    if scale != 1.0:
+        live = {k: v * scale for k, v in live.items()}
+    edits, checked, missing = {}, 0, []
     for iso, old in current.items():
-        if iso not in live:
+        key = iso if iso in live else ALIAS.get(iso)
+        if key is None or key not in live:
+            missing.append(iso)
             continue
-        new = round(live[iso], decimals)
+        checked += 1
+        new = round(live[key], decimals)
         if abs(new - old) > tol:
             edits[iso] = (old, new)
+    # Say what was actually compared. A run that silently skipped most of the
+    # file still appended "no change" before 2 Nov 2026, which is how 33 of the
+    # 40 CO2 figures and every world figure went unexamined for weeks. Reporting
+    # the count is what makes the next such narrowing visible on the day.
+    if missing:
+        escalations.append(
+            f'OWID {label}: {checked} of {len(current)} committed figures found in '
+            f'the export; not compared: {", ".join(sorted(missing))}')
     if edits:
         for iso, (o, n) in sorted(edits.items()):
             changes.append(f'OWID {label}: {iso} {o:g} -> {n:g}')
     else:
-        notes.append(f'OWID {label}: latest year {year}, {len(live)} entities, no change.')
+        notes.append(f'OWID {label}: latest year {year}, {len(live)} entities, '
+                     f'{checked} of {len(current)} committed figures checked, no change.')
     return edits
 
 
@@ -322,19 +364,11 @@ def main():
         elif kind == 'gen':
             owid_edits['gen'] = check_owid(kind, text, gen_now, 0.5, 'generation TWh', 1)
         else:
-            # OWID reports CO2 in tonnes; NAT holds Mt
-            live, year = owid_rows(text)
-            live = {k: v / 1e6 for k, v in live.items()}
-            edits = {}
-            for iso, old in co2_now.items():
-                if iso in live and abs(round(live[iso], 1) - old) > 0.5:
-                    edits[iso] = (old, round(live[iso], 1))
-            if edits:
-                for iso, (o, n) in sorted(edits.items()):
-                    changes.append(f'OWID CO2 Mt: {iso} {o:g} -> {n:g}')
-            else:
-                notes.append(f'OWID CO2: latest year {year}, no change.')
-            owid_edits['co2'] = edits
+            # OWID reports CO2 in tonnes; NAT holds Mt. This used to be its own
+            # inline comparison, which is precisely why it never gained the
+            # alias or the coverage report the other two now get.
+            owid_edits['co2'] = check_owid(kind, text, co2_now, 0.5, 'CO2 Mt', 1,
+                                           scale=1 / 1e6)
 
     epoch_edits, owid_edits = sanity_gate(epoch_edits, owid_edits)
     # the report has to describe what was written, not what was proposed
