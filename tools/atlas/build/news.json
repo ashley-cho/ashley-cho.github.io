@@ -381,6 +381,66 @@
       "moved": true,
       "src": "Epoch AI, AI data centers database",
       "url": "https://epoch.ai/data/ai-data-centers"
+    },
+    {
+      "date": "2026-10-31",
+      "kind": "data",
+      "moved": true,
+      "title": "Epoch AI raises Anthropic's Lake Mariner campus to 210 MW",
+      "detail": "Epoch AI's data_centers.csv gives 210 MW of current power for Anthropic Lake Mariner, at Terawulf's site at 7725 Lake Rd, Barker, Niagara County, New York, up from 42 MW. The daily refresh of Oct 31, 2026 rewrote sites.py and rebuilt the page, and the figure went live, but no ledger entry was written for it at the time. Read directly from Epoch's CSV rather than from the workflow's report of it: owner \"AI XPV Platform\" #confident, user Anthropic #likely, TPU v7. Logged a day late because the judgment PR raised for it on Nov 1 was built from the pre-refresh page and no longer merges.",
+      "effect": "Mapped campus capacity 14,188 to 14,356 MW, up 168 MW, all of it in the United States; the campus count is unchanged at 93. No anchor moves and K stays 3.4164. Barker is in Niagara County and far outside \"New York - N. New Jersey\", the only mapped US metro in that state, so nothing double counts. Epoch carries two separate leases at the one Terawulf address, Core42 Lake Mariner at 58 MW and this row at 210 MW, so the page maps 268 MW at a single physical site as two campuses, following Epoch's row structure rather than the site's.",
+      "src": "Epoch AI, AI data centers database",
+      "url": "https://epoch.ai/data/ai-data-centers"
+    },
+    {
+      "date": "2026-11-01",
+      "kind": "data",
+      "moved": true,
+      "title": "Epoch AI raises OpenAI Stargate Abilene to 824 MW",
+      "detail": "Epoch AI's data_centers.csv now gives 824 MW of current power for the Oracle / OpenAI Stargate campus at 5502 Spinks Rd, Abilene, Texas, up from 618 MW. The daily refresh of Nov 1, 2026 rewrote sites.py and rebuilt the page; the campus keeps its 1,200 MW planned figure for 2026. Read directly from Epoch's CSV rather than from the workflow's report of it: owner Oracle #confident, user OpenAI #confident, chips B200 and B300. This is the second Abilene revision in four days, after 421 to 618 MW on Oct 29.",
+      "effect": "Mapped campus capacity 14,356 to 14,604 MW across this run's two revisions; the Abilene share is 206 MW, 618 to 824, all of it in the United States, which goes 12,374 to 12,580 MW. The campus count is unchanged at 93. No anchor moves: the United States anchor rests on Berkeley Lab's measured 192 TWh (2024) against the IEA's 53.7 GW of installed capacity, neither of which a campus figure touches, and residuals and K=3.4164 are unchanged. Abilene is about 180 miles west of Dallas - Fort Worth and lies in no mapped US metro, so nothing double counts. Epoch now carries three rows at or beside this site, Stargate Abilene at 824 MW, Crusoe Abilene Expansion at 0 MW on the same address, and OpenAI Stargate Shackelford at 0 MW on Private Road 1604, all three already mapped.",
+      "src": "Epoch AI, AI data centers database",
+      "url": "https://epoch.ai/data/ai-data-centers"
+    },
+    {
+      "date": "2026-11-01",
+      "kind": "data",
+      "moved": true,
+      "title": "Epoch AI raises Huawei's Wuhu campus to 199 MW",
+      "detail": "Epoch AI's data_centers.csv now gives 199 MW of current power for Huawei's Wuhu campus in Anhui, China, up from 157 MW. The daily refresh of Nov 1, 2026 rewrote sites.py and rebuilt the page. Read directly from Epoch's CSV rather than from the workflow's report of it: owner Huawei #confident, no named user, Ascend 910C chips, location given only as \"Wuhu, China\", and the row's cited evidence is a Huawei Cloud event page and an archived Wuhu environmental review.",
+      "effect": "Mapped campus capacity in China 731 to 773 MW, Wuhu 157 to 199. Nothing else moves. China is counted on its own national statistics, 260 TWh (2024), and the declared scope mismatch is computed against the IEA's 31.9 GW of counted Chinese capacity rather than against this page's mapped campuses, so the implied load factor of 0.93 and the Test 2 failure behind it are untouched. No Chinese metro is mapped and no anchor is affected.",
+      "src": "Epoch AI, AI data centers database",
+      "url": "https://epoch.ai/data/ai-data-centers"
+    },
+    {
+      "date": "2026-11-01",
+      "kind": "data",
+      "moved": false,
+      "title": "Epoch AI gives the Ulanqab row a capacity, but still no location",
+      "detail": "Epoch AI's data_centers.csv now carries 118 MW of current power for \"Envision Galaxy Ulanqab\" in Inner Mongolia, where the row previously showed 0 MW. The refresh of Nov 1, 2026 raised it for review for a fourth consecutive run, alongside \"Bridge Data Centres MY06\" at 243 MW and \"YTL Johor\" at 113 MW. Read directly from Epoch's CSV: the row still has an empty Address field and an empty Owner field, and its only cited source is an archived Envision campus web page, so there is nothing to place it from. It is a different site from VNET Bayin Ulanqab, which this page already maps at 221 MW.",
+      "effect": "Nothing on the page changes. The row carries no coordinate and no AVERT region, so it cannot be mapped, and adding a campus moves sites.py, which this path may not write. Mapped capacity stays at 14,604 MW across 93 campuses against the 96 records in Epoch's file. Recorded because the capacity itself moved, 0 to 118 MW, while the reason the row is unmappable did not.",
+      "src": "Epoch AI, AI data centers database",
+      "url": "https://epoch.ai/data/ai-data-centers"
+    },
+    {
+      "date": "2026-11-02",
+      "kind": "data",
+      "title": "OWID CO2 series: the daily check only ever compared 7 of 40 countries",
+      "detail": "The daily refresh checks gen.py's CO2 figures against Our World in Data's annual-co2-emissions-per-country grapher, requested as csvType=filtered&time=latest. That export returns only the entities currently selected on the grapher page, which today are Brazil, China, France, Germany, India, the United Kingdom and the United States: 7 rows in 232 bytes. The unfiltered export of the same series carries 247 rows for 2024.",
+      "effect": "No figure changes. All 39 country CO2 values in gen.py were re-checked by hand today against the full 2024 export and every one matches, so nothing wrong was ever published. But 33 of them had never been compared at all, and check_sources.py reported no change without saying how little it had looked at. What moved is the verification coverage, not a number.",
+      "moved": false,
+      "src": "Our World in Data",
+      "url": "https://ourworldindata.org/grapher/annual-co2-emissions-per-country"
+    },
+    {
+      "date": "2026-11-02",
+      "kind": "data",
+      "title": "The world row in gen.py is not checked against OWID at all",
+      "detail": "gen.py holds a world generation figure of 31,772.4 TWh and a world CO2 figure of 38,598.6 Mt under the key WLD. Our World in Data codes its world aggregate OWID_WRL, and the filtered electricity-generation and carbon-intensity exports drop aggregates entirely: 192 country codes, no world row of any name. check_owid skips every key it cannot find in the live export, so both world figures pass unexamined on every run.",
+      "effect": "No figure changes. Both were verified by hand today against the unfiltered exports: generation OWID_WRL 2025 is 31,772.35 TWh, which rounds to the committed 31,772.4, and CO2 OWID_WRL 2024 is 38,598.6 Mt exactly. Worth recording because the world row feeds the global intensity the page quotes, which makes it the most used and least checked number in the build.",
+      "moved": false,
+      "src": "Our World in Data",
+      "url": "https://ourworldindata.org/grapher/electricity-generation"
     }
   ]
 }
