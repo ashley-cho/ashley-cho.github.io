@@ -188,8 +188,37 @@ jobs:
             sleep 10
           done
           gh pr checks "$n" --watch --interval 10 --fail-fast
-          gh pr merge "$n" --merge --delete-branch
-          echo "merged=true" >> "$GITHUB_OUTPUT"
+          # `gh pr merge` is one GraphQL call, and GitHub answers it with a 500
+          # often enough to matter. On Nov 2, 2026 run 50 watched CI go green at
+          # 16:16:03Z and then died fifteen seconds later on
+          #   GraphQL: Something went wrong while executing your query ...
+          #   0C00:336A3F:7BD045:194A12E:6AE8B74E
+          # leaving PR #151 open, nothing merged, deploy skipped and the
+          # published page a day behind. Unguarded, that failure also reads
+          # exactly like an expired token from the outside, which is the one
+          # thing the daily audit must not confuse. So: retry, and only call it
+          # a failure when GitHub has said no three times running.
+          for attempt in 1 2 3; do
+            if gh pr merge "$n" --merge --delete-branch; then
+              echo "merged=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            # The call can fail after the merge itself landed - a 500 on the
+            # branch delete, say. Ask before retrying, because a second
+            # `gh pr merge` on a merged PR fails for a different reason and
+            # would bury the fact that the work is done.
+            if [ "$(gh pr view "$n" --json merged --jq .merged 2>/dev/null)" = "true" ]; then
+              echo "attempt $attempt reported an error but the merge landed"
+              echo "merged=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "merge attempt $attempt failed; retrying in 15s"
+            sleep 15
+          done
+          echo "gh pr merge failed three times running. CI is green and PR #$n is"
+          echo "still open, so this is GitHub refusing the call, not the pull"
+          echo "request being unmergeable. Check the token only after ruling that out."
+          exit 1
 
       # A merge made with GITHUB_TOKEN does NOT trigger deploy.yml's `on: push`
       # — GitHub suppresses it to stop workflows recursing. Without this step the

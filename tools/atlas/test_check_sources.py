@@ -75,6 +75,47 @@ check('owid handles a plain four-column export',
       cs.owid_rows('entity,code,year,value\nIreland,IRL,2025,256.54\n')[0],
       {'IRL': 256.54})
 
+# --- OWID: a full export holds every year; take each entity's newest row
+rows, year = cs.owid_rows('''entity,code,year,total_generation__twh
+World,OWID_WRL,2023,29665.34
+World,OWID_WRL,2025,31772.35
+World,OWID_WRL,2024,30930.23
+Ireland,IRL,2024,30.1
+Ireland,IRL,2025,31.0
+''')
+check('owid takes the latest year per entity, not the last row',
+      rows, {'OWID_WRL': 31772.35, 'IRL': 31.0})
+check('owid reports the newest year seen', year, '2025')
+
+# --- OWID: the world row is keyed WLD here and OWID_WRL upstream
+cs.notes.clear(); cs.escalations.clear(); cs.changes.clear()
+edits = cs.check_owid('gen', 'entity,code,year,total_generation__twh\nWorld,OWID_WRL,2025,31772.35\n',
+                      {'WLD': 31772.4}, 0.5, 'generation TWh', 1)
+check('owid matches WLD against OWID_WRL', edits, {})
+check('owid counts the aliased world row as checked',
+      any('1 of 1 committed figures checked' in n for n in cs.notes), True)
+
+cs.notes.clear(); cs.escalations.clear(); cs.changes.clear()
+edits = cs.check_owid('gen', 'entity,code,year,total_generation__twh\nWorld,OWID_WRL,2025,31999.0\n',
+                      {'WLD': 31772.4}, 0.5, 'generation TWh', 1)
+check('owid reports a real move on the world row', edits, {'WLD': (31772.4, 31999.0)})
+
+# --- OWID: an export that covers almost nothing must say so, not say "no change"
+cs.notes.clear(); cs.escalations.clear(); cs.changes.clear()
+edits = cs.check_owid('co2', 'entity,code,year,emissions_total\nBrazil,BRA,2024,483011550\n',
+                      {'BRA': 483.0, 'IRL': 33.3, 'NLD': 114.8}, 0.5, 'CO2 Mt', 1, scale=1 / 1e6)
+check('owid still compares what it did find', edits, {})
+check('owid escalates the figures it never compared',
+      any('1 of 3 committed figures found' in e and 'IRL, NLD' in e for e in cs.escalations), True)
+check('owid does not claim a clean sweep when rows were missing',
+      any('3 of 3' in n for n in cs.notes), False)
+
+# --- OWID: tonnes in, megatonnes out
+cs.notes.clear(); cs.escalations.clear(); cs.changes.clear()
+edits = cs.check_owid('co2', 'entity,code,year,emissions_total\nChina,CHN,2024,12289037000\n',
+                      {'CHN': 12289.0}, 0.5, 'CO2 Mt', 1, scale=1 / 1e6)
+check('owid scales CO2 tonnes to Mt', edits, {})
+
 # --- the gate: a year in a g/kWh field is impossible and must be refused
 cs.escalations.clear()
 _, kept = cs.sanity_gate([], {'ci': {'AFG': (131, 2024)}, 'gen': {}, 'co2': {}})
