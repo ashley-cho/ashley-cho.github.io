@@ -441,6 +441,16 @@
       "moved": false,
       "src": "Our World in Data",
       "url": "https://ourworldindata.org/grapher/electricity-generation"
+    },
+    {
+      "date": "2026-11-03",
+      "kind": "policy",
+      "title": "Nevada's twenty-year resource plan closes its rebuttal round",
+      "detail": "Phase 3 rebuttal testimony in docket 26-05007, NV Energy's 2027-2046 Triennial Integrated Resource Plan, was filed on Nov 2, 2026: fourteen witness testimonies, a Nevada Power and Sierra Pacific transmittal letter filed under the same document type, a Reno Power NR I motion in public and confidential versions, a Nevada Power and Sierra Pacific response and a public comment, nineteen filings in all. Two more items follow on Nov 3, 2026, a confidential Nevada Power and Sierra Pacific testimony and a comment from Aquadrio, and are the docket's newest. Amazon Data Services, Google, Microsoft, Novva Holdings, Prologis and Powerhouse Reno Britain are among the parties that filed exhibit lists in the proceeding on Oct 22 and Oct 23, 2026.",
+      "effect": "No figure moved. An integrated resource plan decides what generation a utility builds, not how much IT capacity exists: Las Vegas / Reno stays mapped at 173 MW of live IT capacity on its 2023 Cushman & Wakefield vintage, and Nevada publishes no measured data center electricity series, so no anchor depends on the outcome. It is recorded because the regulatory entry had carried the Nov 2, 2026 rebuttal date as a forward-looking claim and that claim has now resolved, and because the docket could not be reached on Nov 3, 2026; it was read on Nov 4, 2026 through the Commission's OnBase document search.",
+      "moved": false,
+      "src": "Public Utilities Commission of Nevada",
+      "url": "https://puc-onbase.nv.gov/"
     }
   ]
 }
