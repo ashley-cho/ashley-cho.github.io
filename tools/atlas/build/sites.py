@@ -34,7 +34,7 @@ EPOCH = [
 ("Meta Cheyenne",152,"Meta","USA","82007",None,None,None),
 ("Amazon Ridgeland",228,"Amazon","USA","39157",None,None,None),
 ("Meta Huntsville",146,"Meta","USA","35773",None,None,None),
-("Meta Aiken",69,"Meta","USA","29847",None,None,None),
+("Meta Aiken",129,"Meta","USA","29847",None,None,None),
 ("CoreWeave Helios",132,"CoreWeave","USA","79220",None,None,None),
 ("Google Arcola (Sterling)",77,"Google","USA","20166",None,None,None),
 ("Microsoft Project Osmium",190,"Microsoft","USA","50061",None,None,None),
