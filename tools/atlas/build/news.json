@@ -441,6 +441,36 @@
       "moved": false,
       "src": "Our World in Data",
       "url": "https://ourworldindata.org/grapher/electricity-generation"
+    },
+    {
+      "date": "2026-11-04",
+      "kind": "policy",
+      "title": "Project Jupiter's December merits hearing goes under a joint motion to vacate",
+      "detail": "In AQB 26-57(P), the New Mexico air quality permit docket for the YGI Microgrid that would generate 2,462 MW of Bloom Energy fuel cells to serve the Project Jupiter campus in Dona Ana County, the applicant Yucca Growth Infrastructure and the New Mexico Environment Department filed a joint motion on Nov 3, 2026 asking the hearing officer to vacate the Dec 7, 2026 hearing date and its associated pre-hearing deadlines. On Nov 4, 2026 intervenor Nicholas Maxwell responded in partial opposition and moved for a further extension of the permit-decision deadline for good cause, the Department's Air Quality Bureau supplemented its motion on witness disclosures, and New Energy Economy renewed its Oct 14, 2026 motion to dismiss the application without prejudice, opposing the joint motion insofar as it would vacate the hearing without dismissing, and asked for an expedited ruling. A Notice of Hearing on Various Outstanding Motions issued the same day, to be held over Cisco Webex with no date stated in the notice. New Energy Economy's filing states the joint movants also seek to waive the statutory decision deadline and that the Department has admitted it cannot complete its technical review, prepare a revised draft permit or give the required public notice before Dec 7, 2026.",
+      "effect": "No figure moved. The 2,462 MW is generation nameplate rather than IT capacity and is counted nowhere on this page; the campus stands at 0 MW live with 1,750 MW planned for 2028 on Epoch AI's reading, no New Mexico metro is mapped, and New Mexico publishes no measured data center electricity series. What changes is the regulatory entry's own reliability: both forward-looking dates it carried, the Dec 7, 2026 merits hearing and the Nov 23, 2026 permit decision, are now contested rather than settled, and the entry has been corrected to say so.",
+      "moved": false,
+      "src": "New Mexico Environment Department, Office of Public Facilitation, docket AQB 26-57(P)",
+      "url": "https://www.env.nm.gov/opf/aqb-26-57p-yucca-growth-infrastructure-llc-ygi-microgrid/"
+    },
+    {
+      "date": "2026-11-04",
+      "kind": "policy",
+      "title": "Oregon's large-load tariff docket, unreachable for three runs, is suspended to Dec 31, 2026",
+      "detail": "Docket UE 463, PacifiCorp Advice No. 25-015, Schedule 401, Service to New Large Energy Use Facilities, is DocketID 24856 on the Oregon Public Utility Commission's eDockets system, the sheet three earlier readings of this page could not locate. The summary gives the tariff's proposed effective date as Jan 1, 2027, its expiration as Dec 31, 2026 and its status as SUSPENDED, which is the suspension Chief Administrative Law Judge Alison Lackey ordered on Aug 31, 2026 in Order No. 26-310. The contested case has run on without a decision: law judge rulings on Oct 19 and Oct 21, 2026, Funding Order No. 26-419 on Oct 29, 2026, and newest on the sheet an erratum of Nov 4, 2026 to the Environmental Intervenors' opening testimony and exhibits correcting an exhibit number.",
+      "effect": "No figure moved. A rate class is cost allocation rather than generation or measurement, Hillsboro / Portland stays mapped at 491 MW on its CBRE H1 2026 vintage, and Oregon publishes no measured data center electricity series. What improves is the entry's own wording: a decision expected before the end of 2026 was an inference when it was written, and it is now the suspension date printed on the Commission's own docket header.",
+      "moved": false,
+      "src": "Oregon Public Utility Commission eDockets, docket UE 463",
+      "url": "https://apps.puc.state.or.us/edockets/docket.asp?DocketID=24856"
+    },
+    {
+      "date": "2026-11-05",
+      "kind": "policy",
+      "title": "Nevada's twenty-year resource plan finishes its rebuttal briefing",
+      "detail": "Phase 3 rebuttal testimony in docket 26-05007, NV Energy's 2027-2046 Triennial Integrated Resource Plan, was filed on Nov 2, 2026: nineteen filings that day, fourteen of document type TESTIMONY under individual witness names, a fifteenth filed under the same type as a Nevada Power and Sierra Pacific transmittal letter, a Reno Power NR I motion in public and confidential versions, a Nevada Power and Sierra Pacific response and a public comment. A confidential Nevada Power and Sierra Pacific testimony and a comment from Aquadrio followed on Nov 3, 2026, a Reno Power NR I reply on Nov 4, 2026, and a public comment from Mormon Women for Ethical Government on Nov 5, 2026, the last two being the newest of the docket's 399 rows. Amazon Data Services, Google, Microsoft, Novva Holdings, Prologis and Powerhouse Reno Britain are among the parties that filed exhibit lists on Oct 22 and Oct 23, 2026. No order or decision appears on the sheet.",
+      "effect": "No figure moved. An integrated resource plan decides what generation a utility builds, not how much IT capacity exists: Las Vegas / Reno stays mapped at 173 MW of live IT capacity on its 2023 Cushman & Wakefield vintage, and Nevada publishes no measured data center electricity series, so no anchor depends on the outcome.",
+      "moved": false,
+      "src": "Public Utilities Commission of Nevada, OnBase public document search, docket 26-05007",
+      "url": "https://puc-onbase.nv.gov/"
     }
   ]
 }
