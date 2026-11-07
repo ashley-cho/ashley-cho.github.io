@@ -441,6 +441,36 @@
       "moved": false,
       "src": "Our World in Data",
       "url": "https://ourworldindata.org/grapher/electricity-generation"
+    },
+    {
+      "date": "2026-11-06",
+      "kind": "policy",
+      "title": "New Mexico decides the Project Jupiter motions and vacates the December hearing",
+      "detail": "In AQB 26-57(P), the application of Yucca Growth Infrastructure, LLC for air quality permit No. 10883 for the YGI microgrid, Hearing Officer Hon. James Browning issued an Order on Nov 6, 2026 disposing of the five motions outstanding since the start of the month. The joint motion by YGI and the Department's Air Quality Bureau to vacate the Dec 7, 2026 hearing is granted on terms: YGI immediately and expressly waives the decision deadline for the application under NMSA 1978, Section 74-2-7(B)(2)(a) and 20.2.72.207(B)-(C) NMAC; the hearing date and its pre-hearing deadlines are vacated; and the hearing will not be rescheduled until the Air Quality Bureau puts its revised recommendation into the Administrative Record, which, if it recommends issuance, must come with an amended Draft Permit, Statement of Basis and Modeling Report. New Energy Economy's renewed motion to dismiss and the Center for Biological Diversity's motion to dismiss are both denied, and the Department's motion for protective order is denied without prejudice. The Department must supplement the record at least weekly, and status conferences will run roughly every two weeks, the first on Nov 19, 2026 at 11:00 A.M. M.T. The Order was read in full from the Bureau's posted copy; the underlying stipulated agreement of Nov 3, 2026 was not retrieved.",
+      "effect": "No figure moved. An air quality permit for on-site generation is neither mapped IT capacity nor a measured electricity series, so no site, metro or anchor depends on it. What changes is this page's own forward schedule: the Dec 7, 2026 hearing and the permit decision deadline it ran against have both gone, the first vacated and the second waived by the applicant, so the proceeding now has no scheduled end and is gated on a Bureau recommendation that has not issued.",
+      "moved": false,
+      "src": "New Mexico Environment Department, Office of the Secretary, docket AQB 26-57(P), Order of Nov 6, 2026",
+      "url": "https://www.env.nm.gov/opf/aqb-26-57p-yucca-growth-infrastructure-llc-ygi-microgrid/"
+    },
+    {
+      "date": "2026-11-06",
+      "kind": "policy",
+      "title": "Nevada's resource plan reaches post-hearing briefs, with the data centers briefing in their own names",
+      "detail": "Docket 26-05007, NV Energy's 2027-2046 Triennial Integrated Resource Plan and 2027-2029 Energy Supply Plan, took fifteen filings of document type BRIEF on Nov 6, 2026, under the names Western Power Association, Amazon Data Services, Reno Power NR I, Google, Nevada Power and Sierra Pacific, FLEET, Microsoft, the Bureau of Consumer Protection, Solar Energy and Solar United, Redwood Materials, MECP 1 Reno, Prologis and North Las Vegas, Novva Holdings, Walmart, and Advanced Energy and SWEEP, with a public comment and a Bureau of Consumer Protection response the same day. That is the post-hearing briefing round following the Oct 26-29, 2026 hearing. A separate item of document type ORDER, Procedural Order No. 8 dated Nov 5, 2026, also now appears with its own service list, which corrects a statement this page's docket entry had carried since Oct 25, 2026 that no order of any kind appeared in the proceeding. The docket stands at 419 rows. Neither the briefs nor the order were retrieved, so nothing is asserted about what any party argued or what the order directs.",
+      "effect": "No figure moved. A resource plan decides what generation a utility builds, not how much IT capacity exists: Las Vegas / Reno stays mapped at 173 MW of live IT capacity on its 2023 Cushman & Wakefield vintage, and Nevada publishes no measured data center electricity series, so no anchor depends on the outcome. The correction is to the docket entry's own wording, not to a number.",
+      "moved": false,
+      "src": "Public Utilities Commission of Nevada, OnBase public document search, docket 26-05007",
+      "url": "https://puc-onbase.nv.gov/"
+    },
+    {
+      "date": "2026-11-07",
+      "kind": "data",
+      "title": "Epoch AI revises two Huawei campuses down",
+      "detail": "The daily source check found two capacity revisions in Epoch AI's Frontier Data Centers dataset, both in China and both downward. Huawei Horinger, in Inner Mongolia, goes from 184.3 MW to 169.9 MW, and Huawei Wuhu, in Anhui, from 199 MW to 197 MW. The Wuhu figure had itself been revised up to 199 MW on Nov 1, 2026, so this is the second change to that row in a week. Both rows keep their coordinates, operator and operational status; only the capacity field moved. The change was applied by the automated refresh under its own bounds check and is live on the page.",
+      "effect": "Mapped capacity falls by 16.4 MW in all, from 184.3 to 169.9 MW at Horinger and from 199 to 197 MW at Wuhu. Both sites sit in China, whose national total is carried on China's own statistics rather than on the mapped fleet, so the national figure of 260 TWh (2024) and the declared scope mismatch are untouched. The world anchor residual is unchanged at +2.66%.",
+      "moved": true,
+      "src": "Epoch AI, Frontier Data Centers",
+      "url": "https://epoch.ai/data/data-centers"
     }
   ]
 }
