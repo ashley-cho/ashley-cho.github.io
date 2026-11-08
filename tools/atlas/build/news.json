@@ -441,6 +441,16 @@
       "moved": false,
       "src": "Our World in Data",
       "url": "https://ourworldindata.org/grapher/electricity-generation"
+    },
+    {
+      "date": "2026-11-07",
+      "kind": "data",
+      "title": "Epoch AI revises two Huawei campuses down",
+      "detail": "The daily source check found two capacity revisions in Epoch AI's Frontier Data Centers dataset, both in China and both downward. Huawei Horinger, in Inner Mongolia, goes from 184.3 MW to 169.9 MW, and Huawei Wuhu, in Anhui, from 199 MW to 197 MW. The Wuhu figure had itself been revised up to 199 MW on Nov 1, 2026, so this is the second change to that row in a week. Both rows keep their coordinates, operator and operational status; only the capacity field moved. The change was applied by the automated refresh under its own bounds check and is live on the page.",
+      "effect": "Mapped capacity falls by 16.4 MW in all, from 184.3 to 169.9 MW at Horinger and from 199 to 197 MW at Wuhu. Both sites sit in China, whose national total is carried on China's own statistics rather than on the mapped fleet, so the national figure of 260 TWh (2024) and the declared scope mismatch are untouched. The world anchor residual is unchanged at +2.66%.",
+      "moved": true,
+      "src": "Epoch AI, Frontier Data Centers",
+      "url": "https://epoch.ai/data/data-centers"
     }
   ]
 }
