@@ -441,6 +441,16 @@
       "moved": false,
       "src": "Our World in Data",
       "url": "https://ourworldindata.org/grapher/electricity-generation"
+    },
+    {
+      "date": "2026-11-09",
+      "kind": "policy",
+      "title": "Nevada docket 26-05007 takes four more filings after briefing closed",
+      "detail": "The Public Utilities Commission of Nevada's OnBase sheet for docket 26-05007, the NV Energy resource plan whose data center load this page tracks, grew from 419 filings to 424. Four are dated Nov 9, 2026: briefs from Redwood Materials and from Nevada Power and Sierra Pacific, both marked confidential, a Staff response, and a corrected Nevada Power and Sierra Pacific motion. Post-hearing briefing had closed on Nov 6, 2026. The newest order in the proceeding is still Procedural Order No. 8 of Nov 5, 2026, and no decision on the resource plan has issued. The filings themselves were not retrieved.",
+      "effect": "Nothing on the map moves. A resource plan is generation rather than IT capacity, and Nevada publishes no measured data center electricity series, so no figure on this page depends on it. Recorded because this page's Nevada entry had said the briefing round was finished, and it is not.",
+      "moved": false,
+      "src": "PUCN OnBase document search",
+      "url": "https://puc-onbase.nv.gov/"
     }
   ]
 }
