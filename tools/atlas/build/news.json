@@ -441,6 +441,36 @@
       "moved": false,
       "src": "Our World in Data",
       "url": "https://ourworldindata.org/grapher/electricity-generation"
+    },
+    {
+      "date": "2026-11-10",
+      "kind": "policy",
+      "title": "New Mexico docket sets a status conference in the Project Jupiter permit case",
+      "detail": "The New Mexico Environment Department's Office of Public Facilitation docketed Item 161 in AQB 26-57(P), a Notice of Status Conference, on Nov 10, 2026. It is the first entry on the sheet since Item 160, the Order of Nov 6, 2026 that disposed of the joint motion to vacate the December 7, 2026 hearing, the motion for a protective order and the motions to dismiss. The notice is posted as a scanned image whose text could not be extracted in this environment, so the date it sets is not asserted here; the Order of Nov 6 had set bi-weekly status conferences beginning Nov 19, 2026.",
+      "effect": "No figure changes. An air quality permit docket for on-site generation is neither mapped IT capacity nor a measured electricity series, and the Air Quality Bureau's revised recommendation has not yet entered the record.",
+      "moved": false,
+      "src": "New Mexico Environment Department, Office of Public Facilitation",
+      "url": "https://www.env.nm.gov/opf/aqb-26-57p-yucca-growth-infrastructure-llc-ygi-microgrid/"
+    },
+    {
+      "date": "2026-11-10",
+      "kind": "policy",
+      "title": "Oregon UE 463 takes a funding order, the first filing since the record closed",
+      "detail": "The Oregon PUC's eDockets sheet for DocketID 24856 carries 170 filings, one more than the 169 it held from Nov 5 through Nov 10. The addition is an action of type FUNDING ORDER dated Nov 10, 2026. Only the sheet's one-line action was read, so nothing is asserted about whom it funds or in what amount. The newest substantive action is still the LAW JUDGE RULING/MEMORANDA of Nov 5, 2026 that closed the record, and the filing status is still SUSPENDED.",
+      "effect": "No figure changes. Pacific Power's large load rate class is still pending and not approved, against a suspension expiring Dec 31, 2026 and a proposed effective date of Jan 1, 2027, so Hillsboro and Portland stay at 491 MW on the CBRE H1 2026 figure.",
+      "moved": false,
+      "src": "Public Utility Commission of Oregon, eDockets",
+      "url": "https://apps.puc.state.or.us/edockets/docket.asp?DocketID=24856"
+    },
+    {
+      "date": "2026-11-10",
+      "kind": "policy",
+      "title": "Nevada's closed briefing round takes four more filings",
+      "detail": "The PUCN OnBase docket sheet for 26-05007 carries 428 filings, four more than the 424 of Nov 10. One is dated Nov 10, 2026, a Nevada Power and Sierra Pacific response of document type MOTION/RESPONSE/REPLY/WITHDRAW. The other three are dated Nov 9, 2026 and were absent from the Nov 10 reading, so they were indexed after it: a Reno Power NR I brief and an MECP 1 Reno brief, both marked CONFIDENTIAL, and a Reno Power NR I reply. Post-hearing briefing had closed on Nov 6, 2026, so the round is still taking filings five days after it was shown as finished.",
+      "effect": "No figure changes. The newest document of type ORDER is still Procedural Order No. 8 of Nov 5, 2026, no decision on the resource plan has issued, and a resource plan is generation rather than mapped IT capacity.",
+      "moved": false,
+      "src": "Public Utilities Commission of Nevada, OnBase document search",
+      "url": "https://puc-onbase.nv.gov/"
     }
   ]
 }
