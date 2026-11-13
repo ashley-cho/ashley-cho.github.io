@@ -441,6 +441,36 @@
       "moved": false,
       "src": "Our World in Data",
       "url": "https://ourworldindata.org/grapher/electricity-generation"
+    },
+    {
+      "date": "2026-11-12",
+      "kind": "policy",
+      "title": "Nevada's resource-plan docket takes 21 filings in a day as the data center parties brief it",
+      "detail": "The OnBase sheet for Nevada docket 26-05007, NV Energy's 2027-2046 triennial integrated resource plan, carries 21 filings dated Nov 12, 2026. Fourteen are of document type BRIEF: thirteen marked RESPONSIVE, from Nevada Power and Sierra Pacific (two), Western Power Association, Reno Power NR I, Google, Fleet, Microsoft, Prologis and North Las Vegas Power, MECP 1 Reno 1, the Bureau of Consumer Protection, Redwood Materials, Commission Staff, and Advanced Energy United and SWEEP, plus a Walmart letter of the same type. Four are exhibit lists and the rest a Nevada Conservation League comment, a Staff response and a second corrected D. Glick testimony. Read off the Commission's public document search; none of the filings was retrieved.",
+      "effect": "No figure changes. An integrated resource plan decides what generation a utility builds, not how much IT capacity exists, and Nevada publishes no measured data center electricity series, so no anchor moves. Las Vegas / Reno stays at 173 MW of live IT capacity on a 2023 Cushman & Wakefield vintage. Recorded because the responsive round names the data center customers as parties in their own right, and because the newest order in the docket is still Procedural Order No. 8 of Nov 5, 2026 with no decision on the plan.",
+      "moved": false,
+      "src": "Public Utilities Commission of Nevada",
+      "url": "https://pucweb1.state.nv.us/puc2/Dktinfo.aspx?Util=All"
+    },
+    {
+      "date": "2026-11-12",
+      "kind": "policy",
+      "title": "Denver files a statement of position in Colorado's large load tariff case",
+      "detail": "The City and County of Denver filed a Statement of Position in Proceeding No. 26AL-0137E, Public Service Company of Colorado's Advice Letter No. 2018 proposing a Tariff 8 large load schedule, submitted Nov 12, 2026 at 1:49 pm and typed Briefs/Statement Of Position on the Commission's e-filings sheet. It is the first filing in the proceeding since Oct 30, 2026 and moves the case past hearing exhibits and public comment into post-hearing briefing. The statement itself was not retrieved.",
+      "effect": "No figure changes. This is a cost-allocation tariff and it sets no megawatt figure; Denver stays mapped at 78 MW of live IT capacity on a 2023 Cushman & Wakefield vintage, and Colorado publishes no measured data center electricity series, so no anchor depends on it. The proceeding's status is still Suspended and no Commission decision has issued since C26-0697 of Oct 26, 2026.",
+      "moved": false,
+      "src": "Colorado Public Utilities Commission",
+      "url": "https://www.dora.state.co.us/pls/efi/EFI.Show_Docket?p_session_id=&p_docket_id=26AL-0137E"
+    },
+    {
+      "date": "2026-11-13",
+      "kind": "data",
+      "title": "The IEA's Energy and AI page is reachable again, and still reads 415 TWh for 2024",
+      "detail": "On Nov 11, 2026 the IEA's Energy demand from AI page answered HTTP 403 behind a Cloudflare bot check on four attempts, so the anchor it carries could not be re-verified that day. The page served normally on Nov 13, 2026 and its text still gives around 415 terawatt hours, about 1.5% of global electricity consumption, for 2024, growing 12% a year over the last five years, with the Base Case doubling to around 945 TWh by 2030. It still publishes no 2025 capacity figure.",
+      "effect": "No figure changes. The world anchor stays at the IEA's 415 TWh (2024) and kIea stays at 0.398. The IEA's own 485 TWh for 2025, from Key Questions on Energy and AI of Apr 2026, stays held back in policy.json on vintage: the whole capacity basis here is IEA 2024, so adopting a 2025 energy figure against 2024 capacity would move kIea on a year mismatch rather than on evidence. The watch is unchanged and is for an IEA 2025 capacity figure, which still does not exist.",
+      "moved": false,
+      "src": "IEA, Energy and AI",
+      "url": "https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai"
     }
   ]
 }
