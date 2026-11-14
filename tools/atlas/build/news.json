@@ -471,6 +471,36 @@
       "moved": false,
       "src": "IEA, Energy and AI",
       "url": "https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai"
+    },
+    {
+      "date": "2026-11-13",
+      "kind": "policy",
+      "title": "Oregon's PUC adopts a stipulation in Pacific Power's large load tariff docket",
+      "detail": "The Public Utility Commission of Oregon's eDockets sheet for UE 463, PacifiCorp dba Pacific Power Advice No. 25-015, Schedule 401 - Service to New Large Energy Use Facilities, now carries Order No. 26-443, signed Nov 13, 2026 by Commissioners Letha Tawney, Les Perkins and Karin Power, disposition STIPULATION ADOPTED, copies served the same day. It is the first order on the rate class since ALJ Katharine Mapes closed the record on Nov 5, 2026. The order was not retrieved, so nothing is said here about the terms of the stipulation or which parties signed it.",
+      "effect": "No figure on this page changes. Oregon publishes no measured data center electricity series, and a tariff that sets who pays for new large load sets no megawatt or terawatt-hour figure, so neither the 192 TWh United States anchor nor any mapped campus moves. What changes is the regs.json record: Pacific Power's large load rate class had been recorded as pending and not approved against a Dec 31, 2026 suspension expiry, and an order adopting a stipulation has now issued.",
+      "moved": false,
+      "src": "Oregon PUC, eDockets UE 463",
+      "url": "https://apps.puc.state.or.us/edockets/docket.asp?DocketID=24856"
+    },
+    {
+      "date": "2026-11-13",
+      "kind": "policy",
+      "title": "Nevada's data center resource plan docket closes its responsive round",
+      "detail": "Fourteen further documents dated Nov 13, 2026 appear in Docket 26-05007, NV Energy's 2027-2046 Triennial Integrated Resource Plan: four responsive briefs, from Amazon Data Services, Reno Power NR I, MECP 1 Reno 1 and a corrected BCP filing, one further Reno Power NR I response, and nine exhibit lists from NV Power and Sierra Pacific, Staff, Reno Power NR I, Redwood Materials, Prologis and North Las Vegas Power, BCP, Walmart, Sierra Club and Powerhouse Reno Britain. Amazon Data Services had not filed in the Nov 12 round. None of the filings was retrieved.",
+      "effect": "No figure changes. A resource plan is generation rather than IT capacity, and Nevada publishes no measured data center electricity series, so nothing on the map or in calib.json moves. The newest order in the docket is still Procedural Order No. 8 of Nov 5, 2026 and no decision has issued; the record here is that the responsive round is now complete and the next thing to watch for is a Commission decision.",
+      "moved": false,
+      "src": "PUCN document search, Docket 26-05007",
+      "url": "https://puc-onbase.nv.gov/"
+    },
+    {
+      "date": "2026-11-13",
+      "kind": "policy",
+      "title": "Colorado's large load tariff draws a second and third statement of position",
+      "detail": "Proceeding 26AL-0137E, Public Service Company of Colorado's Advice Letter 2018, Tariff 8 - Large Load, took two more filings of type Briefs/Statement Of Position on Fri Nov 13, 2026: Black Hills Colorado Electric, LLC at 12:28 pm and GreenLatinos at 4:59 pm, both non-confidential. They follow the City and County of Denver's statement of Nov 12, 2026. Titles, dates, times and parties are read off the Commission's e-filings sheet; none of the statements was retrieved.",
+      "effect": "No figure changes. A cost-allocation tariff sets no megawatt figure, and Colorado publishes no measured data center electricity series. The proceeding's status is still Suspended and no Commission decision has issued since C26-0697 of Oct 26, 2026. Three statements of position in two days is recorded because it marks a briefing round rather than the isolated Nov 12 filing the previous entry described.",
+      "moved": false,
+      "src": "Colorado PUC e-filings, Proceeding 26AL-0137E",
+      "url": "https://www.dora.state.co.us/pls/efi/EFI.Show_Docket?p_session_id=&p_docket_id=26AL-0137E"
     }
   ]
 }
