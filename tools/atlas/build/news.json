@@ -501,6 +501,36 @@
       "moved": false,
       "src": "Colorado PUC e-filings, Proceeding 26AL-0137E",
       "url": "https://www.dora.state.co.us/pls/efi/EFI.Show_Docket?p_session_id=&p_docket_id=26AL-0137E"
+    },
+    {
+      "date": "2026-11-15",
+      "kind": "data",
+      "title": "CBS has the Netherlands' 2025 data center figure down for Nov 18",
+      "detail": "Statistics Netherlands' publication calendar carries, in week 47, an entry for Wed 18 Nov 2026 at 06:30 titled \"Electricity consumption by data centres\", described on the calendar as the consumption of electricity by data centres in 2025, their share of total electricity consumption, and how that compares with other European countries, and marked available under embargo. The release this page uses, of 15/12/2025, was re-read today and is unchanged: 5,100 GWh for 2024, 4.6 percent of Dutch electricity consumption. Only the calendar entry was read; no 2025 figure is published yet, and nothing is asserted here about what it will say.",
+      "effect": "Nothing on the page changes today. The Netherlands anchor stays at CBS's 5.10 TWh (2024) in calib.json and in policy.json's admitted list. What changes is an expectation this page was carrying: the next edition had been recorded as due around week 51, on the Dec 15, 2025 pattern, and CBS has it scheduled for Nov 18, 2026, a month earlier and three days from now. The Netherlands is one of the two metered national series the metro-basis factor is fitted to, so a 2025 figure is the kind of thing that moves a residual and it gets the anchor check rather than a straight swap.",
+      "moved": false,
+      "src": "CBS, publication calendar",
+      "url": "https://www.cbs.nl/en-gb/publication-calendar"
+    },
+    {
+      "date": "2026-11-15",
+      "kind": "policy",
+      "title": "Oregon's adopted stipulation was signed by four parties, and opposed by the data center trade group",
+      "detail": "The Commission's eDockets sheet for UE 463, DocketID 24856, names the stipulation that Order No. 26-443 adopted on Nov 13, 2026. It was filed Sep 16, 2026 and executed by Betsy Bridge for Commission Staff, Cole Souder for the Environmental Intervenors, Rick Link for PacifiCorp and Claire Valentine-Fossum for the Oregon Citizens' Utility Board, with PacifiCorp's motion to admit it and joint supporting testimony of Robert Meredith, Bret Stevens, Ryan Tran and Jeremy Fisher filed the same day. Not every party signed: on Oct 1, 2026 the Data Center Coalition filed a Notice of Opposition of Stipulation, and Amazon Data Services and NewSun Energy filed comments on the stipulation. The filing header now also carries Order: 26-443 and Order Signed: 11/13/2026 beside a status still reading SUSPENDED. Nothing has been filed since the order, and neither it nor the stipulation was retrieved.",
+      "effect": "No figure changes. Oregon publishes no measured data center electricity series, and a cost-allocation tariff sets no megawatt or terawatt-hour figure, so neither the 192 TWh United States anchor nor any mapped campus moves. What changes is the regs record: the Nov 14 entry said plainly that nothing could be asserted about which parties signed the stipulation the Commission adopted, and the docket sheet names them.",
+      "moved": false,
+      "src": "Oregon PUC, eDockets UE 463",
+      "url": "https://apps.puc.state.or.us/edockets/docket.asp?DocketID=24856"
+    },
+    {
+      "date": "2026-11-15",
+      "kind": "policy",
+      "title": "Switch appears on Nevada's resource plan docket as five more Nov 12 filings are indexed",
+      "detail": "Docket 26-05007, NV Energy's 2027-2046 Triennial Integrated Resource Plan, has taken nothing dated Nov 14 or Nov 15, 2026. The Commission's OnBase document search returns 469 rows for the docket, of which 26 are dated Nov 12, five more than the 21 the Nov 14 reading saw: exhibit lists under the names Switch, Nevada Gold Mines et al and SNGG et al, a corrected D. Chairez testimony, and a further Reno Power NR I response. They were indexed after that reading rather than filed late, the pattern this docket showed on Nov 9 and Nov 10 as well, and the Nov 13 column is unchanged at 14. Nothing is asserted here about the filer named Switch beyond that name on the sheet, or about what any party argued; none of the filings was retrieved.",
+      "effect": "No figure changes. A resource plan decides what generation a utility builds rather than how much IT capacity exists, and Nevada publishes no measured data center electricity series, so Las Vegas / Reno stays mapped at 173 MW of live IT capacity on a 2023 Cushman & Wakefield vintage and no anchor moves. The newest document of type ORDER in the proceeding is still Procedural Order No. 8 of Nov 5, 2026, and no decision on the resource plan has issued.",
+      "moved": false,
+      "src": "PUCN document search, Docket 26-05007",
+      "url": "https://puc-onbase.nv.gov/"
     }
   ]
 }
