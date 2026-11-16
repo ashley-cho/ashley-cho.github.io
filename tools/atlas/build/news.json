@@ -531,6 +531,16 @@
       "moved": false,
       "src": "PUCN document search, Docket 26-05007",
       "url": "https://puc-onbase.nv.gov/"
+    },
+    {
+      "date": "2026-11-16",
+      "kind": "policy",
+      "title": "New Mexico's Project Jupiter docket records a week with nothing added to the record",
+      "detail": "The AQB 26-57(P) sheet goes from 161 to 162 entries. Item 162, dated Nov 13, 2026 and indexed since the Nov 15 read, is the Air Quality Bureau's Notice of No Administrative Record Supplement as of November 13, 2026 - a negative return against the Nov 6 Order's requirement that the Department supplement the record at least weekly. The revised recommendation that Order makes a precondition for rescheduling the vacated Dec 7 hearing has still not entered the record. The first bi-weekly status conference is Nov 19, 2026.",
+      "effect": "Nothing moves. The proceeding that would permit the YGI microgrid is still without a hearing date, and no figure on this page depends on its outcome.",
+      "moved": false,
+      "src": "New Mexico Environment Department, AQB 26-57(P)",
+      "url": "https://www.env.nm.gov/opf/aqb-26-57p-yucca-growth-infrastructure-llc-ygi-microgrid/"
     }
   ]
 }
