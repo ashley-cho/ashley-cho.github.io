@@ -541,6 +541,26 @@
       "moved": false,
       "src": "New Mexico Environment Department, AQB 26-57(P)",
       "url": "https://www.env.nm.gov/opf/aqb-26-57p-yucca-growth-infrastructure-llc-ygi-microgrid/"
+    },
+    {
+      "date": "2026-11-16",
+      "kind": "policy",
+      "title": "Twenty statements of position land in Colorado's large load tariff case, Google and the Data Center Coalition among them",
+      "detail": "Proceeding No. 26AL-0137E, Public Service Company of Colorado's Advice Letter No. 2018 establishing a Tariff 8 large load schedule, took twenty filings on Mon Nov 16, 2026, all of document type Briefs/Statement Of Position on the Commission's e-filings proceeding sheet. The filers are the utility itself, Google LLC, Climax Molybdenum Company, United Power, Inc., Commission Staff - docketed as Hearing Exhibit 1306 and styled a Post-Hearing Statement of Position - the Colorado Energy Consumers Group, the City of Boulder, Wal-Mart Stores and Sam's West, the Data Center Coalition, Energy Outreach Colorado, the Sierra Club Environmental Law Program for a conservation coalition, CORE Electric Cooperative, Monarch Energy Development LLC, Advanced Energy United, Western Resource Advocates, the Southwest Energy Efficiency Project with Rewiring America, the Colorado Energy Office, the Colorado Solar and Storage Association with the Solar Energy Industries Association, the Office of Utility Consumer Advocate, and the Corporate Energy Buyers Association. Three isolated statements had been filed on Nov 12 and Nov 13, 2026; this is the round proper. None of the statements was retrieved, so nothing is asserted here about what any party argued.",
+      "effect": "No figure changes. A cost-allocation tariff decides who pays for shared generation rather than how much IT capacity exists, and Colorado publishes no measured data center electricity series, so Denver stays mapped at 78 MW of live IT capacity on its 2023 Cushman & Wakefield vintage and neither the 192 TWh United States anchor nor any mapped campus moves. The proceeding's status is still Suspended and no Commission decision has issued since C26-0697 of Oct 26, 2026.",
+      "moved": false,
+      "src": "Colorado PUC, e-filings proceeding 26AL-0137E",
+      "url": "https://www.dora.state.co.us/pls/efi/EFI.Show_Docket?p_session_id=&p_docket_id=26AL-0137E"
+    },
+    {
+      "date": "2026-11-16",
+      "kind": "policy",
+      "title": "Commission Staff files the first motion since Nevada's resource plan briefing closed",
+      "detail": "Docket 26-05007, NV Energy's 2027-2046 Triennial Integrated Resource Plan, carries one filing dated Nov 16, 2026: a Commission Staff motion of document type MOTION/RESPONSE/REPLY/WITHDRAW. It is the only item the docket has taken since the responsive round closed on Nov 13, 2026. The Commission's OnBase document search now returns 472 rows for the docket, three more than the 469 of Nov 15; the other two additions sit in the Nov 13 column, which has gone from 14 filings to 16 - an L. Maxfield errata of document type TESTIMONY and a Reno Power NR I reply - and were indexed after the previous reading rather than filed late, the pattern this docket showed on Nov 9, Nov 10 and Nov 12 as well. The Nov 12 column is unchanged at 26. The motion itself was not retrieved, so nothing is asserted here about what Staff asks.",
+      "effect": "No figure changes. A resource plan decides what generation a utility builds rather than how much IT capacity exists, and Nevada publishes no measured data center electricity series, so Las Vegas / Reno stays mapped at 173 MW of live IT capacity on a 2023 Cushman & Wakefield vintage and no anchor moves. The newest document of type ORDER in the proceeding is still Procedural Order No. 8 of Nov 5, 2026, and no decision on the resource plan has issued.",
+      "moved": false,
+      "src": "Public Utilities Commission of Nevada, OnBase docket search 26-05007",
+      "url": "https://pucweb1.state.nv.us/puc2/Dktinfo.aspx?Util=All"
     }
   ]
 }
