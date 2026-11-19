@@ -561,6 +561,26 @@
       "moved": false,
       "src": "Public Utilities Commission of Nevada, OnBase docket search 26-05007",
       "url": "https://pucweb1.state.nv.us/puc2/Dktinfo.aspx?Util=All"
+    },
+    {
+      "date": "2026-11-18",
+      "kind": "data",
+      "title": "CBS publishes the Netherlands' 2025 data center electricity figure",
+      "detail": "Statistics Netherlands (CBS) reported on Nov 18, 2026 that data centers in the Netherlands were supplied 5,664 GWh of electricity in 2025, or 5.0% of national electricity consumption, up from 5,060 GWh and 4.6% in 2024 — a rise of 12% in one year. The figures are provisional. Around 200 data centers are counted; the roughly 50 that use 10 GWh or more a year account for about 90% of the total, and 142 GWh of own-use capacity at organizations such as universities and hospitals is excluded from the headline. Only Ireland has a higher share within the European Union.",
+      "effect": "Held, not adopted, and the national anchor stays at 5.10 TWh (2024). The figure passes Test 1 and, on its own, Test 2: 5.664 TWh / (0.829 GW x 8.76) implies a load factor of 0.780, inside the 0.30-0.85 band. What it does not survive is the joint fit. Ireland's 7.663 TWh (2025) against 1.254 GW implies 0.698, so a +/-5% band admits a single metro factor only in [0.663, 0.732]; the Dutch reading admits [0.741, 0.819]. The two ranges do not intersect — the readings now differ by 11.8% where a shared factor tolerates at most 10.5%. Re-derived as the mean of the two, kNat = 0.739 would put Ireland at +5.9% and the Netherlands at -5.3%, both outside the band, so re-deriving does not rescue it either. Knight Frank has published no capacity reading newer than Q2 2026, so the mapped 829 MW for Amsterdam cannot be refreshed to close the gap today. Resolving this means either splitting the metro basis into per-country factors or establishing that the mapped metro capacity understates the Dutch national fleet, and it moves calib.json, which this path does not carry.",
+      "moved": false,
+      "src": "CBS Netherlands",
+      "url": "https://www.cbs.nl/en-gb/news/2026/47/data-centres-consume-5-percent-of-the-netherlands-electricity"
+    },
+    {
+      "date": "2026-11-18",
+      "kind": "policy",
+      "title": "Nevada's resource plan docket closes its reply-brief round",
+      "detail": "Docket 26-05007 took fifteen filings of document type BRIEF dated Nov 18, 2026, all replies: NV Power and Sierra Pacific, the Bureau of Consumer Protection, Commission Staff, Google, Amazon Data Services, Microsoft, Novva Holdings, Prologis with North Las Vegas Power, Reno Power NR I, Fleet, MECP 1 Reno 1, Redwood Materials, Walmart, the Western Power Association, and Advanced Energy with SWEEP. Seven entries of document type PROCEEDING TRANSCRIPT for the Nov 16, 2026 hearing were indexed alongside them, four public volumes and three confidential. The index went from 472 rows to 495.",
+      "effect": "Nothing on the map moves: a resource plan is generation rather than IT capacity, and Nevada publishes no measured data center electricity series, so Reno stays on its existing vintage. Recorded because Google, Amazon Data Services and Microsoft have each now briefed a twenty-year utility resource plan in their own names rather than through a trade association. None of the briefs was retrieved, so nothing is asserted about what any party argued.",
+      "moved": false,
+      "src": "Public Utilities Commission of Nevada, Docket 26-05007",
+      "url": "https://pucweb1.state.nv.us/puc2/Dktinfo.aspx?Util=All"
     }
   ]
 }
